@@ -40,8 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="134dp"
+                android:layout_marginBottom="300dp"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
 
@@ -49,20 +51,23 @@
                 android:id="@+id/etPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/etUserName"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="55dp"
+                android:layout_marginBottom="200dp"
                 android:ems="10"
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/bLogIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etPassword"
-                android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:text="Login" />
+                android:layout_marginStart="-30dp"
+                android:layout_marginTop="-180dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="70dp"
+                android:text="Ingresar" />
 
         </RelativeLayout>
 
