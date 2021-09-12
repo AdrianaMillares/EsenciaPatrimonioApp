@@ -12,9 +12,9 @@ class ParseApplication : Application() {
         // set applicationId, and server server based on the values in the back4app settings.
         Parse.initialize(
             Parse.Configuration.Builder(this)
-                .applicationId("VHDJU5sMranwvEskz5dBcEgygPkXtk3mnj7jSrb9")
-                .clientKey("n3YqII94rqfjdvQHuEbl37HTQkHXwCBuAWrfM0RN")
-                .server("https://parseapi.back4app.com")
+                .applicationId(getString(R.string.back4app_application_id))
+                .clientKey(getString(R.string.back4app_client_key))
+                .server(getString(R.string.back4app_server_url))
                 .build()
         )
     }
