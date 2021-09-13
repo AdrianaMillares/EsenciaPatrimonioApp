@@ -125,6 +125,7 @@
 
             <View
                 android:id="@+id/lineReg"
+                android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_below="@+id/btnRegistro"
                 android:layout_alignParentStart="true"
