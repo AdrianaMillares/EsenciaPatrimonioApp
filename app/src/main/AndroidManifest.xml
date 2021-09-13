@@ -31,7 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".Activities.LoginActivity2"
+            android:name=".Activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,23 +1,17 @@
 package com.example.escenciapatrimoniotramites.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseUser
-import android.widget.Toast
-import com.parse.LogInCallback
-import com.parse.ParseException
-import com.parse.ParseObject
-import android.content.Intent
 
 
-
-
-class LoginActivity2 : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     val TAG = "LoginActivity"
     lateinit var etUsername:EditText
