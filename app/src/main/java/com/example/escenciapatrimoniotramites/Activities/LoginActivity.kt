@@ -36,7 +36,7 @@ class LoginActivity2 : AppCompatActivity() {
         // Se encuentran los componentes del layout
         etUsername = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
-        btnLogin = findViewById(R.id.btnLogin)
+        btnLogin = findViewById(R.id.btnLogIn)
 
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{

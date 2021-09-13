@@ -7,13 +7,25 @@
     tools:context=".Activities.LoginActivity2"
     android:background="@color/ep_white" >
 
+    <!-- TODO: Poner el logo bien de nuestra app -->
+    <ImageView
+        android:id="@+id/ivLogoEP"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/cvLoginCard"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@drawable/logoep_transparent" />
+
     <ImageView
         android:id="@+id/ivCurvita"
         android:layout_width="match_parent"
         android:layout_height="405dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
         app:srcCompat="@drawable/ic_curvita"
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="330dp" />
@@ -35,44 +47,109 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/etUserName"
+            <TextView
+                android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="134dp"
-                android:layout_marginBottom="300dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/ep_yellow"
+                android:text="LOGIN"
+                android:textSize="35sp" />
+
+            <EditText
+                android:id="@+id/etUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_below="@+id/tvLogin"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:paddingHorizontal="10dp"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:fontFamily="@font/raleway"
+                android:hint="Username"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edit_text_border"
+                />
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_height="45dp"
+                android:layout_below="@+id/etUserName"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="200dp"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="10dp"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:fontFamily="@font/raleway"
+                android:background="@drawable/edit_text_border"
+                />
 
-            <Button
-                android:id="@+id/bLogIn"
+            <TextView
+                android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etPassword"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="-30dp"
-                android:layout_marginTop="-180dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/ep_yellow"
+                android:textSize="11sp"
+                android:text="Forgot password?"
+                android:fontFamily="@font/raleway"
+                />
+
+            <Button
+                android:id="@+id/btnLogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvForgotPassword"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="70dp"
-                android:text="Ingresar" />
+                android:text="Ingresar"
+                android:fontFamily="@font/raleway"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnLogIn"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvHaveAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Don't have an account?"
+                    android:textColor="@color/light_gray"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/raleway"
+                    />
+
+                <TextView
+                    android:id="@+id/tvSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@+id/tvHaveAccount"
+                    android:text="Sign up"
+                    android:textColor="@color/ep_yellow"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/raleway"
+                    />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-
-
 
     </androidx.cardview.widget.CardView>
 
