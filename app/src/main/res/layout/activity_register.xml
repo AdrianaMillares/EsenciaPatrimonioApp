@@ -39,7 +39,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="Nuevo usuario"
-                android:textColor="@color/ep_yellow"/>
+                android:textColor="@color/ep_yellow"
+                android:textSize="50dp"
+                android:textAlignment="center"
+                android:textStyle="bold" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
