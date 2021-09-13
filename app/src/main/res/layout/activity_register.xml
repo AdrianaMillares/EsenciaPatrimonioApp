@@ -30,6 +30,7 @@
         app:cardElevation="10dp"
 
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -39,87 +40,89 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/raleway_bold"
                 android:text="Nuevo usuario"
                 android:textAlignment="center"
                 android:textColor="@color/ep_yellow"
                 android:textSize="50dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/raleway_bold"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edNombreReg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/tvRegistro"
-                android:layout_marginTop="40dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nombre de usuario"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
                 android:fontFamily="@font/raleway"
+                android:inputType="textPersonName"
                 android:paddingHorizontal="10dp"
-                android:background="@drawable/edit_text_border"/>
+                android:text="Nombre de usuario" />
 
             <EditText
                 android:id="@+id/etCorreoReg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/edNombreReg"
-                android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:text="Correo Electronico"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
                 android:ems="10"
                 android:fontFamily="@font/raleway"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="10dp"
-                android:background="@drawable/edit_text_border"/>
+                android:text="Correo Electronico" />
 
             <EditText
                 android:id="@+id/etContraseñaReg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/etCorreoReg"
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="10dp"
-                android:ems="10"
-                android:inputType="textPassword"
                 android:layout_centerHorizontal="true"
-                android:text="Contraseña"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
                 android:fontFamily="@font/raleway"
-                android:background="@drawable/edit_text_border"/>
+                android:inputType="textPassword"
+                android:paddingHorizontal="10dp"
+                android:text="Contraseña" />
+
             <EditText
                 android:id="@+id/etConfContraseñaReg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/etContraseñaReg"
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="10dp"
-                android:ems="10"
-                android:inputType="textPassword"
                 android:layout_centerHorizontal="true"
-                android:text="Confirmar contraseña"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
                 android:fontFamily="@font/raleway"
-                android:background="@drawable/edit_text_border"/>
+                android:inputType="textPassword"
+                android:paddingHorizontal="10dp"
+                android:text="Confirmar contraseña" />
 
             <Button
                 android:id="@+id/btnRegistro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etConfContraseñaReg"
-                android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:text="Registrarse"
-                android:fontFamily="@font/raleway"/>
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/raleway"
+                android:text="Registrarse" />
 
             <TextView
                 android:id="@+id/tvReg2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnRegistro"
-                android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:text="O ingresa con"
-                android:textColor="@color/light_gray"/>
+                android:textColor="@color/light_gray" />
+
             <View
                 android:id="@+id/lineReg"
                 android:layout_height="1dp"
@@ -128,11 +131,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="203dp"
-                android:background="@color/light_gray"
-                />
+                android:layout_marginBottom="122dp"
+                android:background="@color/light_gray" />
 
             <ImageView
                 android:id="@+id/bGoogleReg"
@@ -141,7 +143,7 @@
                 android:layout_below="@+id/lineReg"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="-300dp"
+                android:layout_marginTop="-160dp"
                 app:srcCompat="@drawable/google" />
 
             <ImageView
@@ -150,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lineReg"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-245dp"
+                android:layout_marginTop="-155dp"
                 android:layout_marginEnd="70dp"
                 app:srcCompat="@drawable/fb" />
 
@@ -161,7 +163,7 @@
                 android:layout_below="@+id/btnRegistro"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="110dp"
                 android:text="Si ya tienes una cuenta" />
 
             <TextView
@@ -170,11 +172,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnRegistro"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginEnd="35dp"
                 android:text="Inicia sesión"
                 android:textColor="@color/ep_yellow"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
