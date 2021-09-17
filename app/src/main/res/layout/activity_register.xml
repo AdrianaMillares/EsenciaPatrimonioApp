@@ -28,7 +28,6 @@
         app:cardCornerRadius="15dp"
         app:cardBackgroundColor="@color/ep_white"
         app:cardElevation="10dp"
-
         >
 
         <RelativeLayout
@@ -48,9 +47,9 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edNombreReg"
+                android:id="@+id/etNombreReg"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_below="@+id/tvRegistro"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
@@ -64,8 +63,8 @@
             <EditText
                 android:id="@+id/etCorreoReg"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_below="@+id/edNombreReg"
+                android:layout_height="48dp"
+                android:layout_below="@+id/etNombreReg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
@@ -78,7 +77,7 @@
             <EditText
                 android:id="@+id/etContraseñaReg"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_below="@+id/etCorreoReg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
@@ -92,7 +91,7 @@
             <EditText
                 android:id="@+id/etConfContraseñaReg"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_below="@+id/etContraseñaReg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
@@ -138,7 +137,7 @@
                 android:background="@color/light_gray" />
 
             <ImageView
-                android:id="@+id/bGoogleReg"
+                android:id="@+id/ivGoogleReg"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lineReg"
@@ -148,7 +147,7 @@
                 app:srcCompat="@drawable/google" />
 
             <ImageView
-                android:id="@+id/bFBReg"
+                android:id="@+id/ivFBReg"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lineReg"
@@ -180,6 +179,7 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
