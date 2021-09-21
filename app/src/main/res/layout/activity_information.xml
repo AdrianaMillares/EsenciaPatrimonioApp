@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ep_white">
+
+    <ImageView
+        android:id="@+id/ivInformation"
+        android:layout_width="236dp"
+        android:layout_height="215dp"
+        app:srcCompat="@drawable/ic_baseline_image_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:id="@+id/ivArrowInf"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+    <Button
+        android:id="@+id/btnCompartirInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:background=""
+        android:fontFamily="@font/raleway_bold"
+        android:text="Compartir"
+        android:textColor="@color/ep_blue" />
+
+    <TextView
+        android:id="@+id/tvTituloInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivInformation"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="Título"
+        android:fontFamily="@font/raleway_bold"
+        android:textSize="35dp"
+        android:textColor="@color/black"
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/tvSubtitInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTituloInf"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Subtítulo"
+        android:textAlignment="textStart"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/tvInfoInf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSubtitInf"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]" />
+
+    <Button
+        android:id="@+id/btnConsultarFormato"
+        android:layout_width="276dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp"
+        android:backgroundTint="@color/ep_green"
+        android:text="CONSULTAR FORMATO"
+        android:textColor="@color/ep_white"
+        android:textSize="15dp"/>
+
+
+</RelativeLayout>
