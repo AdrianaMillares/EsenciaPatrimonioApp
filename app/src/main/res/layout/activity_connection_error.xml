@@ -26,7 +26,7 @@
         />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvNoInternet2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvNoInternet1"
@@ -37,7 +37,7 @@
         android:text="Por favor revisa tu conexión y vuelva a intentarlo" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnNoInternet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPerro"
