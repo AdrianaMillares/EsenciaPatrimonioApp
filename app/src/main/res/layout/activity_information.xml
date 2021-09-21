@@ -73,6 +73,7 @@
         android:layout_marginTop="40dp"
         android:textAlignment="textStart"
         android:textColor="@color/black"
+        android:fontFamily="@font/raleway_bold"
         android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]" />
 
     <Button
@@ -85,6 +86,7 @@
         android:backgroundTint="@color/ep_green"
         android:text="CONSULTAR FORMATO"
         android:textColor="@color/ep_white"
+        android:fontFamily="@font/raleway_bold"
         android:textSize="15dp"/>
 
 
