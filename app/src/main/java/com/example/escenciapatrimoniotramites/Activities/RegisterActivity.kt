@@ -47,23 +47,31 @@ class RegisterActivity : AppCompatActivity() {
 
 
             Log.i(TAG, "username: $username mail: $mail password: $password password v: $passwordv")
-            if (password==passwordv){
-                if (verifmail.containsMatchIn(mail)){
-                    if (verifpass.containsMatchIn(password)){
-                        Log.i(TAG, "Ya jalo tu registro")
-                        registerUser(username, mail, password)
+
+            if(username!="" && mail!="" && password!="" && passwordv!=""){
+                if (password==passwordv){
+                    if (verifmail.containsMatchIn(mail)){
+                        if (verifpass.containsMatchIn(password)){
+                            Log.i(TAG, "Ya jalo tu registro")
+                            registerUser(username, mail, password)
+                        } else {
+                            Log.i(TAG, "Acaso quieres que te hacken?")
+                            Toast.makeText(this, "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Log.i(TAG, "Acaso quieres que te hacken?")
-                        Toast.makeText(this, "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial", Toast.LENGTH_SHORT).show()
+                        Log.i(TAG, "Ingresa un correo valido plz")
+                        Toast.makeText(this, "Debes de ingresar un correo valido", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.i(TAG, "Ingresa un correo valido plz")
-                    Toast.makeText(this, "Debes de ingresar un correo valido", Toast.LENGTH_SHORT).show()
+                    Log.i(TAG, "las contras deben de ser iguales")
+                    Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Log.i(TAG, "las contras deben de ser iguales")
-                Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT).show()
+                Log.i(TAG, "Debes de llenar todo")
+                Toast.makeText(this, "Debes de llenar todos los campos", Toast.LENGTH_SHORT).show()
             }
+
+
 
 
         }
