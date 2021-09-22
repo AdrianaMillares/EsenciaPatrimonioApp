@@ -1,13 +1,22 @@
 package com.example.escenciapatrimoniotramites
 
 import android.app.Application
+import com.example.escenciapatrimonioinstitutos.Modelos.Contactos
+import com.example.escenciapatrimoniotramites.Modelos.*
 import com.parse.Parse
+import com.parse.ParseObject
 
 class ParseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         // Register your parse models
-        //ParseObject.registerSubclass(User.class);
+        ParseObject.registerSubclass(Comentar::class.java)
+        ParseObject.registerSubclass(Contactos::class.java)
+        ParseObject.registerSubclass(Documentos::class.java)
+        ParseObject.registerSubclass(Instituto::class.java)
+        ParseObject.registerSubclass(Rol::class.java)
+        ParseObject.registerSubclass(Seguir::class.java)
+        ParseObject.registerSubclass(Tramite::class.java)
 
         // set applicationId, and server server based on the values in the back4app settings.
         Parse.initialize(
