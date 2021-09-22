@@ -133,7 +133,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="122dp"
+                android:layout_marginBottom="110dp"
                 android:background="@color/light_gray" />
 
             <ImageView
