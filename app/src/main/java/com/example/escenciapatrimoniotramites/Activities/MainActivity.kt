@@ -1,14 +1,15 @@
 package com.example.escenciapatrimoniotramites.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.escenciapatrimoniotramites.Fragmentos.HomeFragment
+import com.example.escenciapatrimoniotramites.Fragmentos.ProfileFragment
 import com.example.escenciapatrimoniotramites.R
-import com.parse.ParseUser
-import android.content.Intent
-
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,17 +17,56 @@ class MainActivity : AppCompatActivity() {
     val TAG : String = "MainActivity"
 
     lateinit var btnLogOut : Button
+    lateinit var bottomNav : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Se encuentran los componentes de la pantalla
-        btnLogOut = findViewById(R.id.btnLogOut)
+        // define your fragments here
+        //val home: Fragment = FirstFragment()
+        //val profile: Fragment = ProfileFragment()
+        //val fragment3: Fragment = ThirdFragment()
 
-        btnLogOut.setOnClickListener {
+        // Se encuentran los componentes de la pantalla
+        //btnLogOut = findViewById(R.id.btnLogOut)
+        bottomNav = findViewById(R.id.bottom_navigation)
+
+        /*btnLogOut.setOnClickListener {
             ParseUser.logOut()
             goLoginActivity()
+        }*/
+
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            //var fragment : Fragment
+            when (item.itemId) {
+                R.id.action_home ->{
+                    val fragment = HomeFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }         // do something here
+                R.id.action_search ->{
+                    val fragment = ProfileFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }       // do something here
+                R.id.action_contacts -> {
+                    val fragment = ProfileFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }      // do something here
+                R.id.action_profile ->{
+                    val fragment = ProfileFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }    // do something here
+                R.id.action_donation ->{
+                    val fragment = ProfileFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }         // do something here
+                else -> true
+            }
         }
     }
 
@@ -35,5 +75,12 @@ class MainActivity : AppCompatActivity() {
         val i = Intent(this, LoginActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

@@ -35,7 +35,6 @@
             android:layout_width="236dp"
             android:layout_height="215dp"
             app:srcCompat="@drawable/ic_baseline_image_24"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
 
         <TextView
