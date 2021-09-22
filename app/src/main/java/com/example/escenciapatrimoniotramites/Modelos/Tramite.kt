@@ -1,8 +1,10 @@
 package com.example.escenciapatrimoniotramites.Modelos
 
+import com.parse.ParseClassName
 import com.parse.ParseObject
 import com.parse.ParseUser
 
+@ParseClassName("Tramite")
 class Tramite : ParseObject() {
     val LLAVE_NOMBRE : String = "nombre"
     val LLAVE_DESCRIPCION : String = "descripcion"

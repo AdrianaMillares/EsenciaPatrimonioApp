@@ -1,7 +1,9 @@
 package com.example.escenciapatrimonioinstitutos.Modelos
 
+import com.parse.ParseClassName
 import com.parse.ParseObject
 
+@ParseClassName("Contactos")
 class Contactos : ParseObject() {
     val LLAVE_NOMBRE : String = "nombre"
     val LLAVE_INSTITUTO : String = "instituto"

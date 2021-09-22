@@ -1,7 +1,9 @@
 package com.example.escenciapatrimoniotramites.Modelos
 
+import com.parse.ParseClassName
 import com.parse.ParseObject
 
+@ParseClassName("Rol")
 class Rol : ParseObject() {
     val LLAVE_ROL : String = "nombreRol"
 
