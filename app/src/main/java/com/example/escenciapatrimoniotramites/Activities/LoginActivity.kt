@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
@@ -17,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var etUsername:EditText
     lateinit var etPassword:EditText
     lateinit var btnLogin:Button
+    lateinit var tvSignUp:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         etUsername = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogIn)
+        tvSignUp = findViewById(R.id.tvSignUp)
 
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
@@ -39,6 +42,10 @@ class LoginActivity : AppCompatActivity() {
             var password = etPassword.text.toString()
             Log.i(TAG, "username: $username password: $password")
             loginUser(username, password)
+        }
+
+        tvSignUp.setOnClickListener{
+            goRegisterActivity()
         }
     }
 
@@ -68,5 +75,12 @@ class LoginActivity : AppCompatActivity() {
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
+    }
+
+    // Lleva al usuario a la pantalla de registro
+    private fun goRegisterActivity() {
+        Log.i(TAG, "goRegisterActivity: Entered")
+        val i = Intent(this, RegisterActivity::class.java)
+        startActivity(i)
     }
 }

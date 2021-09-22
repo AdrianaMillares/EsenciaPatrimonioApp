@@ -14,6 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscenciaPatrimonioTramites">
         <activity
+            android:name=".Activities.RegisterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.InformationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.ConnectionErrorActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.MainActivity"
             android:exported="true" />
 
