@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     val TAG : String = "MainActivity"
 
     lateinit var btnLogOut : Button
-    lateinit var bottomNav : BottomNavigationView
+    private lateinit var bottomNav : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             goLoginActivity()
         }*/
 
-        bottomNav.setOnNavigationItemSelectedListener { item ->
+        bottomNav.setOnItemSelectedListener { item ->
             //var fragment : Fragment
             when (item.itemId) {
                 R.id.action_home ->{
