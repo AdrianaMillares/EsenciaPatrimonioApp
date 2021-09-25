@@ -15,18 +15,6 @@
         android:textColor="@color/black"
         android:textSize="40dp" />
 
-    <View
-        android:id="@+id/lineProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_below="@+id/tvProfile"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="647dp"
-        android:background="@color/light_gray" />
-
     <ImageView
         android:id="@+id/ivFlechaProfile"
         android:layout_width="53dp"
@@ -69,20 +57,6 @@
         android:textSize="20sp"
         android:text="Nombre de usuario" />
 
-    <View
-        android:id="@+id/lineProfile1"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_below="@+id/tvProfile1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="375dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:background="@color/light_gray" />
-
     <TextView
         android:id="@+id/tvUserProfile"
         android:layout_width="wrap_content"
@@ -103,20 +77,6 @@
         android:textColor="@color/ep_pink"
         android:textSize="20sp"
         android:text="Correo" />
-
-    <View
-        android:id="@+id/lineProfile2"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_below="@+id/tvProfile2"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="296dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:background="@color/light_gray" />
 
     <TextView
         android:id="@+id/tvEmailProfile"
@@ -139,5 +99,33 @@
         android:layout_marginBottom="190dp"
         android:backgroundTint="@color/ep_green"
         android:text="Cambiar contraseña" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/tvProfile2"
+        android:layout_marginBottom="-32dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="?android:attr/listDivider" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@+id/ivProfile"
+        android:layout_marginBottom="0dp"
+        android:background="?android:attr/listDivider" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/tvEmailProfile"
+        android:layout_marginBottom="-5dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="?android:attr/listDivider" />
 
 </RelativeLayout>
