@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.escenciapatrimoniotramites.Fragmentos.HomeFragment
 import com.example.escenciapatrimoniotramites.Fragmentos.ProfileFragment
+import com.example.escenciapatrimoniotramites.Fragmentos.SearchFragment
 import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         // Se definen los fragmentos de las pestañas
         val homeFragment = HomeFragment()
         val profileFragment = ProfileFragment()
+        val searchFragment = SearchFragment()
 
 
         // Se encuentran los componentes de la pantalla
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_search ->{
-                    openFragment(homeFragment)
+                    openFragment(searchFragment)
                     true
                 }
                 R.id.action_contacts -> {
