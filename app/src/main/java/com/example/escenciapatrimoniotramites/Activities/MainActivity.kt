@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.escenciapatrimoniotramites.Fragmentos.HomeFragment
-import com.example.escenciapatrimoniotramites.Fragmentos.ProfileFragment
-import com.example.escenciapatrimoniotramites.Fragmentos.SearchFragment
+import com.example.escenciapatrimoniotramites.Fragmentos.*
 import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -30,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()
+        val contactsFragment = ContactsFragment()
+        val donationsFragment = DonationsFragment()
 
 
         // Se encuentran los componentes de la pantalla
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_contacts -> {
-                    openFragment(homeFragment)
+                    openFragment(contactsFragment)
                     true
                 }
                 R.id.action_profile ->{
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_donation ->{
-                    openFragment(homeFragment)
+                    openFragment(donationsFragment)
                     true
                 }
                 else -> {
