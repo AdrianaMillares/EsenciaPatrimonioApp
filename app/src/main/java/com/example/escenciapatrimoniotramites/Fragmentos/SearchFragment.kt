@@ -15,25 +15,20 @@ import com.example.escenciapatrimoniotramites.R
 
 class SearchFragment : Fragment() {
 
+    lateinit var searchView: SearchView
+    lateinit var listView: ListView
+    lateinit var list: ArrayList<String>
+    lateinit var adapter: ArrayAdapter<*>
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
-    companion object {
-        fun newInstance(): ProfileFragment = ProfileFragment()
-    }
-    // TODO ARREGLAR SEARCH
-/*
-    lateinit var searchView: SearchView
-    lateinit var listView: ListView
-    lateinit var list: ArrayList<String>
-    lateinit var adapter: ArrayAdapter<*>
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        searchView = View.findViewById(R.id.searchView)
-        listView = View.findViewById(R.id.listView)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        searchView = view.findViewById(R.id.searchView)
+        listView = view.findViewById(R.id.listView)
         list = ArrayList()
         list.add("Apple")
         list.add("Banana")
@@ -52,7 +47,7 @@ class SearchFragment : Fragment() {
                 if (list.contains(query)) {
                     adapter.filter.filter(query)
                 } else {
-                    Toast.makeText(this@SearchFragment, "No Match found", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "No Match found", Toast.LENGTH_LONG).show()
                 }
                 return false
             }
@@ -61,6 +56,18 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    companion object {
+        fun newInstance(): ProfileFragment = ProfileFragment()
+    }
+    // TODO ARREGLAR SEARCH
+/*
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
     }
  */
 
