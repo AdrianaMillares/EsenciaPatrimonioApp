@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
 
 
@@ -40,7 +39,8 @@ class SearchFragment : Fragment() {
         list.add("Melon")
         list.add("Watermelon")
         list.add("Papaya")
-        adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list)
+        val appContext = requireContext().applicationContext
+        adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
         listView.adapter = adapter
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -61,7 +61,7 @@ class SearchFragment : Fragment() {
     companion object {
         fun newInstance(): ProfileFragment = ProfileFragment()
     }
-    // TODO ARREGLAR SEARCH
+
 /*
 
     override fun onCreate(savedInstanceState: Bundle?) {
