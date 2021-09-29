@@ -84,7 +84,8 @@ class LoginActivity : AppCompatActivity() {
     // Lleva al usuario a la pantalla principal
     private fun goMainActivity() {
         Log.i(TAG, "goMainActivity: Entered")
-        val i = Intent(this, MainActivity::class.java)
+//        val i = Intent(this, MainActivity::class.java)
+        val i = Intent(this, InformationActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
     }
