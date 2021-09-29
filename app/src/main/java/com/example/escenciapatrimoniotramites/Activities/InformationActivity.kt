@@ -28,7 +28,7 @@ class InformationActivity : AppCompatActivity() {
         btnPublish.setOnClickListener{
             Log.i(TAG, "onClick login button")
             var comentario = etComment.text.toString()
-            var usuario = ParseUser.getCurrentUser().toString()
+            var usuario = ParseUser.getCurrentUser().username.toString()
             var idTramite ="1" // todo: definir como obtener el idtramitec
             Log.i(TAG, "username: $usuario comentario: $comentario")
             saveNewComment(comentario, usuario, idTramite)
@@ -39,7 +39,7 @@ class InformationActivity : AppCompatActivity() {
 
     fun saveNewComment(comentario:String, usuario:String, idTramite:String ) {
 
-        val comentar = ParseObject("Comentar")
+        val comentar = ParseObject.create("Comentar")
         comentar.put("idComentario", "id");
         comentar.put("idTramite", idTramite);
         comentar.put("idUsario", usuario)

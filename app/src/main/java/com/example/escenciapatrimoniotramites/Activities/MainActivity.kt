@@ -25,14 +25,14 @@ class MainActivity : AppCompatActivity() {
         btnLogOut = findViewById(R.id.btnLogOut)
 
         btnLogOut.setOnClickListener {
-            ParseUser.logOut()
+          //  ParseUser.logOut()
             goLoginActivity()
         }
     }
 
     private fun goLoginActivity() {
         Log.i(TAG, "Entered goMainActivity")
-        val i = Intent(this, LoginActivity::class.java)
+        val i = Intent(this, InformationActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
     }
