@@ -10,4 +10,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <!-- Change the following strings as required -->
+    <string name="back4app_application_id">mrT4vV61XoeD755aMM6ln9jKlBFekooMvd6IfZfK
+</string>
+    <string name="back4app_client_key">D7bcBaaPK9lto4QqovP2DnakLvIspORLctwgcw0v
+</string>
 </resources>

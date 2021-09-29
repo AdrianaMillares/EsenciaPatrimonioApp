@@ -75,18 +75,45 @@
         android:fontFamily="@font/raleway_bold"
         android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]" />
 
-    <Button
+                 <Button
         android:id="@+id/btnConsultarFormato"
         android:layout_width="276dp"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="110dp"
         android:backgroundTint="@color/ep_green"
+        android:fontFamily="@font/raleway_bold"
         android:text="CONSULTAR FORMATO"
         android:textColor="@color/ep_white"
-        android:fontFamily="@font/raleway_bold"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/etComentario"
+        android:layout_width="294dp"
+        android:layout_height="46dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:fontFamily="@font/raleway"
+        android:hint="Escribe tu comentario"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="5dp" />
+
+    <Button
+        android:id="@+id/btnComentar"
+        android:textSize="11dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/etComentario"
+        android:text="Comentar" />
 
 
 </RelativeLayout>
