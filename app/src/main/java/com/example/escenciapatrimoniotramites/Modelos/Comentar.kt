@@ -10,6 +10,7 @@ class Comentar : ParseObject() {
     val LLAVE_COMENTARIO : String = "comentario"
     val LLAVE_TRAMITE : String = "tramite"
     val LLAVE_USUARIO : String = "usuario"
+    val LLAVE_IDUSUARIO : String = "idUsario"
 
     /***************************
      * Setters and Getters
@@ -25,6 +26,10 @@ class Comentar : ParseObject() {
     var usuario: ParseUser?
         get() = getParseUser(LLAVE_USUARIO)
         set(usuario) = put(LLAVE_USUARIO, usuario!!)
+
+    var idUsario: String?
+        get() = getString(LLAVE_IDUSUARIO)
+        set(idUsario) = put(LLAVE_IDUSUARIO, idUsario!!)
 
 
 }
