@@ -10,9 +10,9 @@
         android:id="@+id/ivInformation"
         android:layout_width="236dp"
         android:layout_height="215dp"
-        app:srcCompat="@drawable/ic_baseline_image_24"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_baseline_image_24" />
 
     <ImageView
         android:id="@+id/ivArrowInf"
@@ -43,11 +43,11 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
-        android:text="Título"
         android:fontFamily="@font/raleway_bold"
-        android:textSize="35dp"
+        android:text="Título"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textAlignment="textStart"/>
+        android:textSize="35dp" />
 
     <TextView
         android:id="@+id/tvSubtitInf"
@@ -55,8 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTituloInf"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="11dp"
         android:fontFamily="@font/raleway_bold"
         android:text="Subtítulo"
         android:textAlignment="textStart"
@@ -64,24 +64,28 @@
 
     <TextView
         android:id="@+id/tvInfoInf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvSubtitInf"
+        android:layout_width="352dp"
+        android:layout_height="73dp"
+        android:layout_above="@+id/btnConsultarFormato"
+        android:layout_below="@+id/ivInformation"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="98dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:fontFamily="@font/raleway_bold"
-        android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]" />
+        android:visibility="invisible" />
 
-                 <Button
+    <Button
         android:id="@+id/btnConsultarFormato"
         android:layout_width="276dp"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="89dp"
         android:backgroundTint="@color/ep_green"
         android:fontFamily="@font/raleway_bold"
         android:text="CONSULTAR FORMATO"

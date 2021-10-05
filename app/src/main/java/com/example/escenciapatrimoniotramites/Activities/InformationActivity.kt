@@ -8,27 +8,61 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.example.escenciapatrimoniotramites.R
+import com.parse.Parse
 import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.parse.ParseClassName
+import android.widget.Toast
+
+import com.parse.FindCallback
+import org.w3c.dom.Text
+
 
 class InformationActivity : AppCompatActivity() {
 
-    val TAG = "InformtionActivity"
+    val TAG = "InformationActivity"
      lateinit var etComment: EditText
     lateinit var btnPublish: Button
-    lateinit var etTramiteId: TextView
-
-
+    lateinit var etTitulo: TextView
+    lateinit var etDescripcion: TextView
+     var nombreTramite = "Impermeabilizar"
+     lateinit var tramiteActualNombre: String
+      lateinit var tramiteActualDescripcion :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
         btnPublish = findViewById(R.id.btnComentar)
         etComment = findViewById(R.id.etComentario)
+        etTitulo = findViewById(R.id.tvTituloInf)
+        etDescripcion = findViewById(R.id.tvSubtitInf)
         val tramiteTemp = ParseObject.create("Tramite")
         //ParseQuery <Tramite> query = ParseQuery.getQuery(Tramite.class);
 
+    //   ParseObject.registerSubclass(Tramite.class)
+        // Define the class we would like to query
+        val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
+// Define our query conditions
+        query.whereEqualTo("nombre", nombreTramite)
+// Execute the find asynchronously
+        Log.d(TAG, "realizando query en bg")
+        query.findInBackground { itemList, e ->
+            if (e == null) {
+                // Access the array of results here
+                 tramiteActualNombre = itemList[0].nombre.toString() ;
+                 tramiteActualDescripcion = itemList[0].descripcion.toString();
+                Log.i(TAG ,"nombre $tramiteActualNombre ");
+                etTitulo.text = tramiteActualNombre
+                etDescripcion.text = tramiteActualDescripcion
+                Log.i(TAG ,"descripcion $tramiteActualDescripcion ");
+
+            } else {
+                Log.d("item", "Error: " )
+            }
+
+
+        }
         btnPublish.setOnClickListener{
             Log.i(TAG, "onClick login button")
             var comentario = etComment.text.toString()
@@ -44,7 +78,7 @@ class InformationActivity : AppCompatActivity() {
 
 
 
-    fun saveNewComment(comentario:String, usuario:String, idTramite:String, idUsuario:String ) {
+    fun saveNewComment(comentario:String, usuario:String, idTramite:String, idUsuario:String  ) {
         val usuarioParse = ParseObject.create("User")
         usuarioParse.put("username", usuario);
         val comentar = ParseObject.create("Comentar")
@@ -61,6 +95,7 @@ class InformationActivity : AppCompatActivity() {
             }
 
         }
+
     }
 
 }
