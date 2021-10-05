@@ -9,6 +9,7 @@ class Tramite : ParseObject() {
     val LLAVE_NOMBRE : String = "nombre"
     val LLAVE_DESCRIPCION : String = "descripcion"
 
+
     /***************************
      * Setters and Getters
      ***************************/
