@@ -77,14 +77,12 @@
         android:text="paulinacardoso11@gmail.com" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnCambiarPass"
         android:layout_width="249dp"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfile"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="242dp"
-        android:layout_marginBottom="190dp"
         android:backgroundTint="@color/ep_green"
         android:text="Cambiar contraseña" />
 
