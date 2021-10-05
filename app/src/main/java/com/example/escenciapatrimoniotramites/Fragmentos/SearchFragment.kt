@@ -13,14 +13,14 @@ import android.widget.Toast
 import com.example.escenciapatrimoniotramites.R
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.parse.ParseQuery
-import kotlinx.coroutines.CoroutineStart
+
 
 
 class SearchFragment : Fragment() {
 
     lateinit var searchView: SearchView
     lateinit var listView: ListView
-    lateinit var list: ArrayList<String>
+    var list: ArrayList<String> = ArrayList()
     lateinit var adapter: ArrayAdapter<*>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,14 +32,19 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchView = view.findViewById(R.id.searchView)
         listView = view.findViewById(R.id.listView)
-        list = ArrayList()
+
 
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
         // Execute the find asynchronously
         query.findInBackground { itemList, e ->
             if (e == null) {
                 for (tramite in itemList) {
-                    list.add(tramite.nombre.toString())
+
+                    // Revisa que el tramite no esté en la lista
+                    if(tramite.nombre.toString() !in list){
+                        list.add(tramite.nombre.toString())
+                    }
+                    else{ continue }
                 }
             } else {
                 Log.d("SearchFragment", "Error: " )

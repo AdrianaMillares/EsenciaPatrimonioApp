@@ -36,12 +36,6 @@
         android:textColor="@color/ep_blue" />
 
 
-
-
-
-
-
-
     <TextView
         android:id="@+id/tvTituloInf"
         android:layout_width="wrap_content"
