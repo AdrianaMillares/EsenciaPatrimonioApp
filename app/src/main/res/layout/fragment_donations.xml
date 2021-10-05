@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragmentos.DonationsFragment"
-    android:background="@color/ep_white">
+    android:background="#ffffff">
 
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginStart="40dp"
-    android:textSize="30dp"
-    android:textColor="@color/black"
-    android:fontFamily="@font/montserrat"
-    android:text="Donaciones" />
+        android:id="@+id/tvDonation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Donaciones"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="40dp"/>
 
-</FrameLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/tvDonation"
+        android:layout_marginTop="0dp"
+        android:background="?android:attr/listDivider" />
+
+
+    <WebView
+        android:id="@+id/wvPaypal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvDonation"
+        android:layout_centerHorizontal="true"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="0dp" />
+
+
+</RelativeLayout>

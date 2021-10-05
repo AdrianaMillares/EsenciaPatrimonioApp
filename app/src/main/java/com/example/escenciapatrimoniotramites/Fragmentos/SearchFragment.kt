@@ -1,6 +1,7 @@
 package com.example.escenciapatrimoniotramites.Fragmentos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
 import com.example.escenciapatrimoniotramites.R
+import com.example.escenciapatrimoniotramites.Modelos.Tramite
+import com.parse.ParseQuery
+import kotlinx.coroutines.CoroutineStart
 
 
 class SearchFragment : Fragment() {
@@ -29,16 +33,20 @@ class SearchFragment : Fragment() {
         searchView = view.findViewById(R.id.searchView)
         listView = view.findViewById(R.id.listView)
         list = ArrayList()
-        list.add("Apple")
-        list.add("Banana")
-        list.add("Pineapple")
-        list.add("Orange")
-        list.add("Mango")
-        list.add("Grapes")
-        list.add("Lemon")
-        list.add("Melon")
-        list.add("Watermelon")
-        list.add("Papaya")
+
+        val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
+        // Execute the find asynchronously
+        query.findInBackground { itemList, e ->
+            if (e == null) {
+                for (tramite in itemList) {
+                    list.add(tramite.nombre.toString())
+                }
+            } else {
+                Log.d("SearchFragment", "Error: " )
+            }
+
+        }
+
         val appContext = requireContext().applicationContext
         adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
         listView.adapter = adapter
