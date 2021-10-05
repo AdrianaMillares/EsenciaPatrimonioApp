@@ -33,17 +33,15 @@ class DonationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         val myWebView: WebView = view.findViewById(R.id.wvPaypal)
         myWebView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(
-                view: WebView,
-                url: String
+            override fun shouldOverrideUrlLoading(view: WebView, url: String
             ): Boolean {
-                view.loadUrl("https://www.paypal.com/donate?hosted_button_id=T6FJA2T992HPS")
+                view.loadUrl(url)
                 Log.i("DonationFragment","entre")
                 return true
             }
         }
 
-        myWebView.loadUrl("https://google.com")
+        myWebView.loadUrl("https://www.paypal.com/donate?hosted_button_id=T6FJA2T992HPS")
         myWebView.settings.javaScriptEnabled = true
         myWebView.settings.allowContentAccess = true
         myWebView.settings.domStorageEnabled = true
