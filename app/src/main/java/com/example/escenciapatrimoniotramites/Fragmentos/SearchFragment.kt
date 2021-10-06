@@ -40,7 +40,7 @@ class SearchFragment : Fragment() {
         list.add("Watermelon")
         list.add("Papaya")
         val appContext = requireContext().applicationContext
-        adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
+        adapter = ArrayAdapter<String>(appContext, R.layout.list_item_theme, list)
         listView.adapter = adapter
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
