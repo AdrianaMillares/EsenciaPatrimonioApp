@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity2"
+    tools:context=".Activities.LoginActivity"
     android:background="@color/ep_white" >
 
-    <!-- TODO: Poner el logo bien de nuestra app -->
+
     <ImageView
         android:id="@+id/ivLogoEP"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_above="@+id/cvLoginCard"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
         app:srcCompat="@drawable/logoep_transparent" />
 
     <ImageView
@@ -34,14 +34,12 @@
         android:id="@+id/cvLoginCard"
         android:layout_width="300dp"
         android:layout_height="480dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ivLogoEP"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="50dp"
         app:cardCornerRadius="15dp"
         app:cardBackgroundColor="@color/ep_white"
-        app:cardElevation="10dp"
-        >
+        app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -96,7 +94,7 @@
                 android:layout_marginTop="15dp"
                 android:textColor="@color/ep_yellow"
                 android:textSize="11sp"
-                android:text="Forgot password?"
+                android:text="@string/olvidaste_tu_contrasena"
                 android:fontFamily="@font/raleway"
                 />
 
@@ -109,7 +107,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="Ingresar"
+                android:text="@string/ingresar"
                 android:fontFamily="@font/raleway"
                 />
 
@@ -125,11 +123,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Don't have an account?"
-                    android:textColor="@color/light_gray"
-                    android:textSize="14sp"
                     android:fontFamily="@font/raleway"
-                    />
+                    android:text="@string/no_tienes_cuenta"
+                    android:textColor="@color/light_gray"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvSignUp"
@@ -138,7 +135,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="15dp"
                     android:layout_toEndOf="@+id/tvHaveAccount"
-                    android:text="Sign up"
+                    android:text="@string/registrate"
                     android:textColor="@color/ep_yellow"
                     android:textSize="14sp"
                     android:fontFamily="@font/raleway"

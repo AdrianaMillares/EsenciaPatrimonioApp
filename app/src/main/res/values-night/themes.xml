@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/ep_white</item>
         <item name="backgroundColor">@color/ep_black</item>
+        <item name="android:textColorHint">@color/light_gray</item>
+
     </style>
 </resources>
