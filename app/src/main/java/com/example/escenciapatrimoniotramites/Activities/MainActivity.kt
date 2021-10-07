@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home ->{
+                    Log.i("openfragment","cargando homefragment")
                     openFragment(homeFragment)
                     true
                 }
