@@ -16,7 +16,6 @@ import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseQuery
 
 class HomeFragment : Fragment() {
-    lateinit var listView: ListView
     lateinit var recyclerView1: RecyclerView
     var list: ArrayList<String> = ArrayList()
     lateinit var adapter: ArrayAdapter<*>
@@ -52,11 +51,13 @@ class HomeFragment : Fragment() {
                     // Revisa que el tramite no esté en la lista
                     if(tramite.nombre.toString() !in list){
                         list.add(tramite.nombre.toString())
+                        Log.i("tramite", "$tramite.nombre.toString()" )
+
                     }
                     else{ continue }
                 }
             } else {
-                Log.i("HomeFragment", "Error: " )
+                Log.d("HomeFragment", "Error: " )
             }
 
         }
@@ -66,14 +67,16 @@ class HomeFragment : Fragment() {
         //listView.adapter = adapter
         //val rview: RecyclerView = view.findViewById(R.id.recyclerView1)
         //rview.adapter = customAdapter
-        var testArray = Array(1){"hola"}
-
+       // var testArray = Array(1){"hola"}
+       list.add("hola")
+       list.add("si")
+       list.add("no")
         recyclerView1 = view.findViewById(R.id.recyclerView1)
          val manager = LinearLayoutManager(requireContext())
         manager.orientation = LinearLayoutManager.HORIZONTAL
         manager.scrollToPosition(0)
         recyclerView1.setLayoutManager(manager)
-        customAdapter = CustomAdapter(testArray, requireContext())
+        customAdapter = CustomAdapter(list, requireContext())
         recyclerView1.setHasFixedSize(true)
 
         recyclerView1.setAdapter(customAdapter)
@@ -88,7 +91,7 @@ class HomeFragment : Fragment() {
 }
 
 
-class CustomAdapter(private val dataSet: Array<String>, private val contexto: Context) :
+class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto: Context) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
