@@ -8,7 +8,7 @@ import com.parse.ParseUser
 class Tramite : ParseObject() {
     val LLAVE_NOMBRE : String = "nombre"
     val LLAVE_DESCRIPCION : String = "descripcion"
-
+    val LLAVE_TRAMITE : String ="tramite"
 
     /***************************
      * Setters and Getters
@@ -20,4 +20,9 @@ class Tramite : ParseObject() {
     var descripcion: String?
         get() = getString(LLAVE_DESCRIPCION)
         set(descripcion) = put(LLAVE_DESCRIPCION, descripcion!!)
+
+    var esTramite : Boolean?
+        get() = getBoolean(LLAVE_TRAMITE)
+        set(esTramite) = put(LLAVE_TRAMITE, esTramite!!)
+
 }

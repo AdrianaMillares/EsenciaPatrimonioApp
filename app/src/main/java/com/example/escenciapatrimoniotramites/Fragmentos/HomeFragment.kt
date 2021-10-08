@@ -17,14 +17,18 @@ import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseObject
 
-
+val listaTramites : ArrayList<String> = ArrayList()
+val listaLeyes : ArrayList<String> = ArrayList()
 
 
 class HomeFragment : Fragment() {
     lateinit var recyclerView1: RecyclerView
+    lateinit var recyclerView2: RecyclerView
+
     var list: ArrayList<String> = ArrayList()
     lateinit var adapter: ArrayAdapter<*>
-    lateinit var customAdapter: CustomAdapter
+    lateinit var adapterLeyes: CustomAdapter
+    lateinit var adapterTramites: CustomAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,6 +37,8 @@ class HomeFragment : Fragment() {
 
         var vista = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView1=vista.findViewById(R.id.recyclerView1)
+        recyclerView2=vista.findViewById(R.id.recyclerView2)
+
         var tempLayoutMan = LinearLayoutManager(activity)
         Log.i("rv","${recyclerView1.toString()}")
         Log.i("context","${activity.toString()}")
@@ -45,38 +51,26 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         //listView = view.findViewById(R.id.listView)
-        customAdapter = CustomAdapter(list, requireContext())
+        adapterTramites = CustomAdapter(listaTramites, requireContext())
+        adapterLeyes = CustomAdapter(listaLeyes, requireContext())
 
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
-        // Execute the find asynchronously
-/*        query.findInBackground { itemList, e ->
-            if (e == null) {
-                for (tramite in itemList) {
 
-                    // Revisa que el tramite no esté en la lista
-                    if(tramite.nombre.toString() !in list){
-                        list.add(tramite.nombre.toString())
-
-                        Log.i("tramite", "$tramite.nombre.toString()" )
-
-                    }
-                    else{ continue }
-                }
-            } else {
-                Log.d("HomeFragment", "Error: " )
-            }
-            //customAdapter.updateList(list)
-        }
-        // Fetches data synchronously
-        // Fetches data synchronously
-*/
         try {
             val itemList: List<Tramite> = query.find()
             for (tramite in itemList) {
 
                 // Revisa que el tramite no esté en la lista
                 if(tramite.nombre.toString() !in list){
+                    if(tramite.esTramite == true){
+                        listaTramites.add(tramite.nombre.toString())
+                    }
+                    else{
+                        listaLeyes.add(tramite.nombre.toString())
+                    }
                     list.add(tramite.nombre.toString())
 
                     Log.i("tramite", "$tramite.nombre.toString()" )
@@ -102,16 +96,34 @@ class HomeFragment : Fragment() {
        // var testArray = Array(1){"hola"}
 
         recyclerView1 = view.findViewById(R.id.recyclerView1)
-         val manager = LinearLayoutManager(requireContext())
+        recyclerView2 = view.findViewById(R.id.recyclerView2)
+
+
+        val manager = LinearLayoutManager(requireContext())
+        val manager2 = LinearLayoutManager(requireContext())
+
         manager.orientation = LinearLayoutManager.HORIZONTAL
         manager.scrollToPosition(0)
+
+        manager2.orientation = LinearLayoutManager.HORIZONTAL
+        manager2.scrollToPosition(0)
+
         recyclerView1.setLayoutManager(manager)
        // customAdapter = CustomAdapter(list, requireContext())
         recyclerView1.setHasFixedSize(true)
 
-        recyclerView1.setAdapter(customAdapter)
+        recyclerView1.setAdapter(adapterTramites)
         recyclerView1.itemAnimator= DefaultItemAnimator()
         //recyclerView1.adapter= customAdapter
+
+
+        recyclerView2.setLayoutManager(manager2)
+        // customAdapter = CustomAdapter(list, requireContext())
+        recyclerView2.setHasFixedSize(true)
+
+        recyclerView2.setAdapter(adapterLeyes)
+        recyclerView2.itemAnimator= DefaultItemAnimator()
+
     }
     //////////////
     companion object {
