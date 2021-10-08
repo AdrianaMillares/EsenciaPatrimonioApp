@@ -13,7 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.example.escenciapatrimoniotramites.R
+import com.parse.ParseException
 import com.parse.ParseQuery
+import com.parse.ParseObject
+
+
+
 
 class HomeFragment : Fragment() {
     lateinit var recyclerView1: RecyclerView
@@ -41,16 +46,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //listView = view.findViewById(R.id.listView)
+        customAdapter = CustomAdapter(list, requireContext())
 
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
         // Execute the find asynchronously
-        query.findInBackground { itemList, e ->
+/*        query.findInBackground { itemList, e ->
             if (e == null) {
                 for (tramite in itemList) {
 
                     // Revisa que el tramite no esté en la lista
                     if(tramite.nombre.toString() !in list){
                         list.add(tramite.nombre.toString())
+
                         Log.i("tramite", "$tramite.nombre.toString()" )
 
                     }
@@ -59,8 +66,33 @@ class HomeFragment : Fragment() {
             } else {
                 Log.d("HomeFragment", "Error: " )
             }
-
+            //customAdapter.updateList(list)
         }
+        // Fetches data synchronously
+        // Fetches data synchronously
+*/
+        try {
+            val itemList: List<Tramite> = query.find()
+            for (tramite in itemList) {
+
+                // Revisa que el tramite no esté en la lista
+                if(tramite.nombre.toString() !in list){
+                    list.add(tramite.nombre.toString())
+
+                    Log.i("tramite", "$tramite.nombre.toString()" )
+
+
+                }
+                else{ continue }
+            }
+           // customAdapter.updateList(list)
+
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        //Thread.sleep(2_000)  // wait for 1 second
+
+
         val appContext = requireContext().applicationContext
        // customAdapter = CustomAdapter(testArray)
         //adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
@@ -68,22 +100,19 @@ class HomeFragment : Fragment() {
         //val rview: RecyclerView = view.findViewById(R.id.recyclerView1)
         //rview.adapter = customAdapter
        // var testArray = Array(1){"hola"}
-       list.add("hola")
-       list.add("si")
-       list.add("no")
+
         recyclerView1 = view.findViewById(R.id.recyclerView1)
          val manager = LinearLayoutManager(requireContext())
         manager.orientation = LinearLayoutManager.HORIZONTAL
         manager.scrollToPosition(0)
         recyclerView1.setLayoutManager(manager)
-        customAdapter = CustomAdapter(list, requireContext())
+       // customAdapter = CustomAdapter(list, requireContext())
         recyclerView1.setHasFixedSize(true)
 
         recyclerView1.setAdapter(customAdapter)
         recyclerView1.itemAnimator= DefaultItemAnimator()
         //recyclerView1.adapter= customAdapter
     }
-
     //////////////
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
@@ -94,6 +123,18 @@ class HomeFragment : Fragment() {
 class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto: Context) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
+    public fun updateList( items:ArrayList<String> ){
+        if (items!= null && items.size > 0){
+           // dataSet.clear()
+            //dataSet.addAll(items)
+
+            for (tramite in items ){
+                dataSet.add(tramite)
+            }
+
+            notifyDataSetChanged()
+        }
+    }
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
