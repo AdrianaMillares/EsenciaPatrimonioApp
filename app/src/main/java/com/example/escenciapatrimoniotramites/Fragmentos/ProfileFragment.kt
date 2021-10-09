@@ -164,19 +164,17 @@ class ProfileFragment : Fragment() {
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
 
-            val data: Intent? = result.data
-            val selectedImageUri: Uri? = data!!.data
+            var data: Intent? = result.data
+            var selectedImageUri: Uri? = data!!.data
 
-            // val selectedImageUri: Uri = attr.data
+            // var selectedImageUri: Uri = attr.data
             selectedImagePath = selectedImageUri!!.path.toString()
-            System.out.println("Image Path : $selectedImagePath")
-            Log.d(TAG, "path $selectedImagePath")
 
             // Load the image located at photoUri into selectedImage
-            val selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
-            val stream = ByteArrayOutputStream()
+            var selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
+            var stream = ByteArrayOutputStream()
             selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val byteArray: ByteArray = stream.toByteArray()
+            var byteArray: ByteArray = stream.toByteArray()
 
             changeProfilePicture(byteArray)
         }
@@ -245,12 +243,11 @@ class ProfileFragment : Fragment() {
      */
     private fun changeProfilePicture(newProfilePic: ByteArray) {
 
-        var parseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
+        var parseFile : ParseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
         parseFile.saveInBackground { e: ParseException? ->
             if (e == null) {
                 //Save successfull
                 Log.i(TAG, "Saved file successful")
-                refreshPicture()
             } else {
                 // Something went wrong while saving
                 Log.e(TAG, e.message!!)
@@ -261,6 +258,7 @@ class ProfileFragment : Fragment() {
         currentUser.saveInBackground { e: ParseException? ->
             if (e == null) {
                 // Save successful
+                refreshPicture()
                 Log.i(TAG, "Saved profile picture successful")
                 Toast.makeText(context, "Save Successful", Toast.LENGTH_SHORT).show()
             } else {
