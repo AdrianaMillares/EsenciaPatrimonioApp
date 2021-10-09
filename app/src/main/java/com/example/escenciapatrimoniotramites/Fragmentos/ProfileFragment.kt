@@ -1,7 +1,6 @@
 package com.example.escenciapatrimoniotramites.Fragmentos
 
 import android.Manifest
-import android.R.attr
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
@@ -17,9 +16,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -27,20 +23,16 @@ import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseUser
 import java.io.File
 import java.io.IOException
-import android.widget.Toast
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.parse.ParseException
 import com.parse.ParseFile
-import android.os.Environment
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.single.PermissionListener
-import android.R.attr.data
-import androidx.fragment.app.FragmentTransaction
+import android.widget.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.ByteArrayOutputStream
 
 
@@ -50,7 +42,6 @@ class ProfileFragment : Fragment() {
     private val LLAVE_PROFILE_PICTURE = "profilePicture"
     protected val currentUser : ParseUser = ParseUser.getCurrentUser()
 
-    val PICK_PHOTO_CODE = 1046 // Codigo unico para onActivityResult
     var photoFileName = "photo.jpg"
     lateinit var selectedImagePath: String
 
@@ -87,13 +78,49 @@ class ProfileFragment : Fragment() {
 
         // Funcionalidad de cambiar contrasena
         btnCambiarPass.setOnClickListener {
-            Log.i(TAG, "Entered btnCambiarPass")
+            // La vista que sera inflada dentro del alert dialog
+            val viewNewPass = View.inflate(context, R.layout.change_password, null)
+
+            // Los componentes dentro de la alerta
+            val btnCancelar : Button = viewNewPass.findViewById(R.id.btnCancelar)
+            val btnAceptar : Button = viewNewPass.findViewById(R.id.btnAceptar)
+            val etNewPassword : TextView = viewNewPass.findViewById(R.id.etNewPassword)
+            val etNewPasswordVerif : TextView = viewNewPass.findViewById(R.id.etNewPasswordVerif)
+
+
+            val builder = MaterialAlertDialogBuilder(requireContext()).setView(viewNewPass)
+            val dialog = builder.create()
+            dialog.show()
+
+            btnCancelar.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnAceptar.setOnClickListener {
+                var newPass : String = etNewPassword.text.toString()
+                var newPassVerif : String = etNewPasswordVerif.text.toString()
+                dialog.dismiss()
+                cambiarContrasena(newPass, newPassVerif)
+            }
         }
 
         ivProfile.setOnClickListener {
             cameraCheckPermissions()
         }
     }
+
+
+    private fun cambiarContrasena(newPass: String, newPassVerif: String) {
+        if (newPass == newPassVerif) {
+            currentUser.setPassword(newPass)
+            currentUser.saveInBackground {
+                Toast.makeText(requireContext(), "Éxito! Tu contraseña ha sido cambiada", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     fun loadFromUri(photoUri: Uri?): Bitmap? {
         var image: Bitmap? = null
@@ -131,8 +158,10 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Respuesta cuando un usuario elige una foto de la galeria
+     */
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        Log.d(TAG, "Entre a for activity result")
         if (result.resultCode == Activity.RESULT_OK) {
 
             val data: Intent? = result.data
@@ -216,7 +245,7 @@ class ProfileFragment : Fragment() {
      */
     private fun changeProfilePicture(newProfilePic: ByteArray) {
 
-        var parseFile : ParseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
+        var parseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
         parseFile.saveInBackground { e: ParseException? ->
             if (e == null) {
                 //Save successfull
