@@ -203,6 +203,7 @@ class CustomAdapter(private val dataSet: ArrayList<Tramite>, private val context
             view.setOnClickListener(this)
         }
         override fun onClick(view: View) {
+
             val textView: TextView = view.findViewById(R.id.textView4)
             val strTramite = textView.text.toString()
             val i = Intent(view.context, LoginActivity::class.java)
