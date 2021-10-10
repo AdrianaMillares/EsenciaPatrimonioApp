@@ -19,8 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var btnLogOut : Button
     lateinit var bottomNav : BottomNavigationView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -84,6 +83,9 @@ class MainActivity : AppCompatActivity() {
         val frag = supportFragmentManager.beginTransaction()
         frag.replace(R.id.flContainer, fragmnt)
         frag.commit()
+    }
+    private fun onListItemClick(position: Int) {
+        Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show()
     }
 }
 

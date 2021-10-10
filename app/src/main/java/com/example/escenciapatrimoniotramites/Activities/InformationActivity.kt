@@ -55,6 +55,8 @@ class InformationActivity : AppCompatActivity() {
         etTitulo = findViewById(com.example.escenciapatrimoniotramites.R.id.tvTituloInf)
         etDescripcion = findViewById(com.example.escenciapatrimoniotramites.R.id.tvSubtitInf)
         val tramiteTemp = ParseObject.create("Tramite")
+        val intent = getIntent()
+        nombreTramite = intent.extras?.getString("nombreTramite").toString();
        // rvComentarios = findViewById(com.example.escenciapatrimoniotramites.R.id.rvComentarios)
         //ParseQuery <Tramite> query = ParseQuery.getQuery(Tramite.class);
 

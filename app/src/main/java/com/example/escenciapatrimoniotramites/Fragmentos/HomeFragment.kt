@@ -1,6 +1,7 @@
 package com.example.escenciapatrimoniotramites.Fragmentos
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,20 +9,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
+
+//import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.escenciapatrimoniotramites.Activities.InformationActivity
+import com.example.escenciapatrimoniotramites.Activities.LoginActivity
+import com.example.escenciapatrimoniotramites.Activities.MainActivity
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.example.escenciapatrimoniotramites.R
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseObject
 
-val listaTramites : ArrayList<String> = ArrayList()
-val listaLeyes : ArrayList<String> = ArrayList()
 
 
-class HomeFragment : Fragment() {
+
+val listaTramites : ArrayList<Tramite> = ArrayList()
+val listaLeyes : ArrayList<Tramite> = ArrayList()
+
+
+class HomeFragment : Fragment()  {
+
     lateinit var recyclerView1: RecyclerView
     lateinit var recyclerView2: RecyclerView
 
@@ -45,7 +58,17 @@ class HomeFragment : Fragment() {
         Log.i("templayoutmanager","${tempLayoutMan.toString()}")
         //
 //        recyclerView1.setLayoutManager(tempLayoutMan)
+
+
+
+
+
         return vista
+
+
+
+
+
     }
     //////////////
 
@@ -54,38 +77,46 @@ class HomeFragment : Fragment() {
 
 
         //listView = view.findViewById(R.id.listView)
-        adapterTramites = CustomAdapter(listaTramites, requireContext())
-        adapterLeyes = CustomAdapter(listaLeyes, requireContext())
+
+        adapterTramites = CustomAdapter(listaTramites, requireContext(),
+            { position -> onListItemClick(position) } )
+        adapterLeyes = CustomAdapter(listaLeyes, requireContext(),
+            { position -> onListItemClick(position) } )
 
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
 
-        try {
-            val itemList: List<Tramite> = query.find()
-            for (tramite in itemList) {
+        if (listaTramites.size == 0 || listaLeyes.size == 0 ) {
+            try {
+                val itemList: List<Tramite> = query.find()
+                for (tramite in itemList) {
 
-                // Revisa que el tramite no esté en la lista
-                if(tramite.nombre.toString() !in list){
-                    if(tramite.esTramite == true){
-                        listaTramites.add(tramite.nombre.toString())
+                    // Revisa que el tramite no esté en la lista
+
+
+                    if (tramite.nombre.toString() !in list) {
+                        if (tramite.esTramite == true) {
+                            //listaTramites.add(tramite.nombre.toString())
+                            listaTramites.add(tramite)
+                        } else {
+                            //listaLeyes.add(tramite.nombre.toString())
+                            listaLeyes.add(tramite)
+                        }
+                        list.add(tramite.nombre.toString())
+
+                        Log.i("tramite", "$tramite.nombre.toString()")
+
+
+                    } else {
+                        continue
                     }
-                    else{
-                        listaLeyes.add(tramite.nombre.toString())
-                    }
-                    list.add(tramite.nombre.toString())
-
-                    Log.i("tramite", "$tramite.nombre.toString()" )
-
-
                 }
-                else{ continue }
+                // customAdapter.updateList(list)
+
+            } catch (e: ParseException) {
+                e.printStackTrace()
             }
-           // customAdapter.updateList(list)
-
-        } catch (e: ParseException) {
-            e.printStackTrace()
+            //Thread.sleep(2_000)  // wait for 1 second
         }
-        //Thread.sleep(2_000)  // wait for 1 second
-
 
         val appContext = requireContext().applicationContext
        // customAdapter = CustomAdapter(testArray)
@@ -125,17 +156,27 @@ class HomeFragment : Fragment() {
         recyclerView2.itemAnimator= DefaultItemAnimator()
 
     }
+
+    private fun onListItemClick(strTramite: String) {
+        //Toast.makeText(requireContext(), strTramite, Toast.LENGTH_SHORT).show()
+
+
+
+
+    }
+
+
     //////////////
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
     }
+
 }
 
-
-class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto: Context) :
+class CustomAdapter(private val dataSet: ArrayList<Tramite>, private val contexto: Context,private val onItemClicked: (strTramite: String) -> Unit) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
-    public fun updateList( items:ArrayList<String> ){
+    public fun updateList( items:ArrayList<Tramite> ){
         if (items!= null && items.size > 0){
            // dataSet.clear()
             //dataSet.addAll(items)
@@ -151,9 +192,28 @@ class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.textView4)
+    class ViewHolder(
+        view: View,
+        private val onItemClicked: (strTramite: String) -> Unit
 
+
+    ) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        val textView: TextView = view.findViewById(R.id.textView4)
+        init {
+            view.setOnClickListener(this)
+        }
+        override fun onClick(view: View) {
+            val textView: TextView = view.findViewById(R.id.textView4)
+            val strTramite = textView.text.toString()
+            val i = Intent(view.context, LoginActivity::class.java)
+
+            val intent = Intent(view.context , InformationActivity::class.java )
+            intent.putExtra("nombreTramite", strTramite)
+
+            (view.context as MainActivity?)!!.startActivity(intent)
+
+             onItemClicked(strTramite)
+         }
          fun bind(str: String, contexto: Context) {
              textView.setText(str)
          }
@@ -167,7 +227,7 @@ class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto
         //    .inflate(R.layout.text_row_item, viewGroup, false)
         Log.i("oncreateviewholder","a punto de hacer return")
 
-        return ViewHolder(layoutInflater.inflate( R.layout.text_row_item, viewGroup, false)   )
+        return ViewHolder(layoutInflater.inflate( R.layout.text_row_item, viewGroup, false) , onItemClicked   )
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -176,12 +236,14 @@ class CustomAdapter(private val dataSet: ArrayList<String>, private val contexto
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.bind(dataSet[position], contexto )
-        viewHolder.textView.text = dataSet[position]
+        viewHolder.bind(dataSet[position].nombre.toString(), contexto )
+        viewHolder.textView.text = dataSet[position].nombre.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+
 
 }
 class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
@@ -189,21 +251,4 @@ var data =  listOf<String>()
 
 
 
-/*
-class SleepNightAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
-    override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
-        val item = data[position]
-        holder.textView.text = item.sleepQuality.toString()
-
-
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextItemViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater
-            .inflate(R.layout.text_item_view, parent, false) as TextView
-        return TextItemViewHolder(view)
-    }
-
-}*/
