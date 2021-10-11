@@ -13,6 +13,19 @@ import android.widget.Toast
 import com.example.escenciapatrimoniotramites.R
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.parse.ParseQuery
+import androidx.core.content.ContextCompat.startActivity
+
+import android.content.Intent
+
+import android.widget.AdapterView
+import androidx.core.content.ContextCompat
+import com.example.escenciapatrimoniotramites.Activities.InformationActivity
+import com.example.escenciapatrimoniotramites.Activities.MainActivity
+import android.widget.TextView
+
+import android.widget.AdapterView.OnItemClickListener
+
+
 
 
 
@@ -55,6 +68,18 @@ class SearchFragment : Fragment() {
         val appContext = requireContext().applicationContext
         adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
         listView.adapter = adapter
+        //listView.onItemClickListener = onItemClick()
+
+        listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+            val mTextView = view as TextView
+            val newActivity = Intent(context, InformationActivity::class.java)
+            newActivity.putExtra("nombreTramite", list[position])
+            ( context as MainActivity?)!!.startActivity(newActivity)
+
+
+        })
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (list.contains(query)) {
@@ -83,6 +108,17 @@ class SearchFragment : Fragment() {
 
     }
  */
+fun onItemClick(
+    parent: AdapterView<*>?, view: View?,
+    position: Int, id: Long
+) {
+    val newActivity = Intent(context, InformationActivity::class.java)
+    newActivity.putExtra("nombreTramite", list[position])
+    ( context as MainActivity?)!!.startActivity(newActivity)
+
 
 
 }
+
+}
+
