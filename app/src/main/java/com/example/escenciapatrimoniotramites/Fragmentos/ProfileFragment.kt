@@ -242,7 +242,7 @@ class ProfileFragment : Fragment() {
      * @param newProfilePic - Archivo de la nueva foto de perfil
      */
     private fun changeProfilePicture(newProfilePic: ByteArray) {
-
+        Toast.makeText(context, "Guardando tu nueva foto de perfil...", Toast.LENGTH_LONG).show()
         var parseFile : ParseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
         parseFile.saveInBackground { e: ParseException? ->
             if (e == null) {
@@ -260,10 +260,10 @@ class ProfileFragment : Fragment() {
                 // Save successful
                 refreshPicture()
                 Log.i(TAG, "Saved profile picture successful")
-                Toast.makeText(context, "Save Successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "¡Tu nueva foto se ha guardado!", Toast.LENGTH_SHORT).show()
             } else {
                 Log.e(TAG, e.message!!)
-                Log.i(TAG, "Save profile pic unsuccessful")
+                Log.i(TAG, "Vuelve a intentar más tarde, por favor.")
             }
         }
     }

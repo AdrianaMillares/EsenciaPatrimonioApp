@@ -5,30 +5,30 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home" />
+        android:title="Inicio" />
 
     <item
         android:id="@+id/action_search"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search" />
+        android:title="Buscar" />
 
     <item
         android:id="@+id/action_contacts"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_contacts_24"
-        android:title="Contacts" />
+        android:title="Directorio" />
 
     <item
         android:id="@+id/action_profile"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile" />
+        android:title="Perfil" />
 
     <item
         android:id="@+id/action_donation"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_monetization_on_24"
-        android:title="Donations" />
+        android:title="Donaciones" />
 
 </menu>

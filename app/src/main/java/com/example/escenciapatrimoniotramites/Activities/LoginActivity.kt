@@ -63,11 +63,22 @@ class LoginActivity : AppCompatActivity() {
                     Log.i(TAG, "loginUser: Wuwuwuw estoy loggeado")
 
                     goMainActivity();
-                    Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
-                    Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                    if (e.message == "username/email is required."){
+                        Toast.makeText(this, "Se deben ingresar nombre de usuario/email", Toast.LENGTH_SHORT).show()
+                    }
+                    else if (e.message == "password is required."){
+                        Toast.makeText(this, "Se debe ingresar la contraseña", Toast.LENGTH_SHORT).show()
+                    }
+                    else if (e.message == "Invalid username/password."){
+                        Toast.makeText(this, "El nombre de usuario o la contraseña no son correctos", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             })
         )
