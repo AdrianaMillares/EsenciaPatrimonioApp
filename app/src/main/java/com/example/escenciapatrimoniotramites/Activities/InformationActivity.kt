@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 import android.R
 import android.content.Intent
+import android.net.Uri
 
 import android.view.LayoutInflater
 import android.view.View
@@ -31,19 +32,22 @@ class InformationActivity : AppCompatActivity() {
     val TAG = "InformationActivity"
      lateinit var etComment: EditText
     lateinit var btnPublish: Button
+    lateinit var btnConsultarFormato: Button
     lateinit var etTitulo: TextView
     lateinit var etDescripcion: TextView
      var nombreTramite = "Impermeabilizar"
      lateinit var tramiteActualNombre: String
       lateinit var tramiteActualDescripcion :String
       lateinit var TramiteParseObject: ParseObject
-    lateinit var rvComentarios : RecyclerView
+    lateinit var tramiteActualUrl :String
+      lateinit var rvComentarios : RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var ivArrowInf : ImageView
     lateinit var listView: ListView
     lateinit var list: ArrayList<String>
     lateinit var adapter: ArrayAdapter<*>
     lateinit var btnCompartirInf: Button
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +59,8 @@ class InformationActivity : AppCompatActivity() {
         etTitulo = findViewById(com.example.escenciapatrimoniotramites.R.id.tvTituloInf)
         etDescripcion = findViewById(com.example.escenciapatrimoniotramites.R.id.tvSubtitInf)
         ivArrowInf = findViewById(com.example.escenciapatrimoniotramites.R.id.ivArrowInf)
+        btnConsultarFormato = findViewById(com.example.escenciapatrimoniotramites.R.id.btnConsultarFormato)
+
         val tramiteTemp = ParseObject.create("Tramite")
         val intent = getIntent()
         nombreTramite = intent.extras?.getString("nombreTramite").toString();
@@ -92,9 +98,12 @@ class InformationActivity : AppCompatActivity() {
                     TramiteParseObject = itemList[0];
                     tramiteActualNombre = itemList[0].nombre.toString() ;
                     tramiteActualDescripcion = itemList[0].descripcion.toString();
+
+                    tramiteActualUrl = itemList[0].url.toString();
                     Log.i(TAG ,"nombre $tramiteActualNombre ");
                     etTitulo.text = tramiteActualNombre
                     etDescripcion.text = tramiteActualDescripcion
+
                     Log.i(TAG ,"descripcion $tramiteActualDescripcion ");
 
                 }
@@ -105,7 +114,15 @@ class InformationActivity : AppCompatActivity() {
             }
             //Thread.sleep(2_000)  // wait for 1 second
 
+        btnConsultarFormato.setOnClickListener{
 
+            val url = tramiteActualUrl
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+
+
+        }
 
         ivArrowInf.setOnClickListener{
             val i = Intent(this, MainActivity::class.java)

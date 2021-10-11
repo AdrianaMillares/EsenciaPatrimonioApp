@@ -12,7 +12,7 @@ class Tramite  : ParseObject(), Parcelable {
     val LLAVE_NOMBRE : String = "nombre"
     val LLAVE_DESCRIPCION : String = "descripcion"
     val LLAVE_TRAMITE : String ="tramite"
-
+    val LLAVE_URL :String = "url"
     /***************************
      * Setters and Getters
      ***************************/
@@ -28,4 +28,7 @@ class Tramite  : ParseObject(), Parcelable {
         get() = getBoolean(LLAVE_TRAMITE)
         set(esTramite) = put(LLAVE_TRAMITE, esTramite!!)
 
+    var url : String?
+        get() = getString(LLAVE_URL)
+        set(url) = put(LLAVE_URL, url!!)
 }
