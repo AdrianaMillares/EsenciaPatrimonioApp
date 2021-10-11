@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import org.w3c.dom.Text
 import android.R
+import android.content.Intent
 
 import android.view.LayoutInflater
 import android.view.View
@@ -38,22 +39,26 @@ class InformationActivity : AppCompatActivity() {
       lateinit var TramiteParseObject: ParseObject
     lateinit var rvComentarios : RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
-
+    lateinit var ivArrowInf : ImageView
     lateinit var listView: ListView
     lateinit var list: ArrayList<String>
     lateinit var adapter: ArrayAdapter<*>
+    lateinit var btnCompartirInf: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.escenciapatrimoniotramites.R.layout.activity_information)
         btnPublish = findViewById(com.example.escenciapatrimoniotramites.R.id.btnComentar)
+        btnCompartirInf = findViewById(com.example.escenciapatrimoniotramites.R.id.btnCompartirInf)
         etComment = findViewById(com.example.escenciapatrimoniotramites.R.id.etComentario)
         etTitulo = findViewById(com.example.escenciapatrimoniotramites.R.id.tvTituloInf)
         etDescripcion = findViewById(com.example.escenciapatrimoniotramites.R.id.tvSubtitInf)
+        ivArrowInf = findViewById(com.example.escenciapatrimoniotramites.R.id.ivArrowInf)
         val tramiteTemp = ParseObject.create("Tramite")
         val intent = getIntent()
         nombreTramite = intent.extras?.getString("nombreTramite").toString();
+
        // rvComentarios = findViewById(com.example.escenciapatrimoniotramites.R.id.rvComentarios)
         //ParseQuery <Tramite> query = ParseQuery.getQuery(Tramite.class);
 
@@ -102,7 +107,24 @@ class InformationActivity : AppCompatActivity() {
 
 
 
+        ivArrowInf.setOnClickListener{
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+            finishAffinity() // Cierra todas las ventanas anteriores
+        }
 
+        btnCompartirInf.setOnClickListener{
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "¡Hola! Revisa la información que encontré sobre $tramiteActualNombre: $tramiteActualDescripcion")
+                type = "text/plain"
+
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+
+        }
 
 
         btnPublish.setOnClickListener{
@@ -126,7 +148,7 @@ class InformationActivity : AppCompatActivity() {
 
         try {
             val itemList2: List<Comentar> = query2.find()
-            if (list.isEmpty()){
+            if (itemList2.isEmpty()){
                 list.add("Comentarios")
 
                 list.add ("Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ")
@@ -201,7 +223,15 @@ class InformationActivity : AppCompatActivity() {
             if (error == null){
                 Toast.makeText(this, "¡Tu comentario ha sido publicado!", Toast.LENGTH_SHORT).show()
                 etComment.text.clear()
+                if (list[1] == "Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? "){
+                    list[1] = "$usuario: $comentario"
+                }
+                else {
+                    list.add("$usuario: $comentario")
+                }
+                adapter.notifyDataSetChanged()
                 Log.d("Salida","Guardado Correctamente")
+
             }
 
         }
