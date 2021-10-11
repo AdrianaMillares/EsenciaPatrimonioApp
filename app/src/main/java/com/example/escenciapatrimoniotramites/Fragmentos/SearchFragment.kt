@@ -71,9 +71,17 @@ class SearchFragment : Fragment() {
         //listView.onItemClickListener = onItemClick()
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+
+
+          /*  fun onItemClick(adapter : ArrayAdapter<*>, v: View, pos: Int) {
+                val currentName= listView.selectedItem.toString()
+            }*/
+
             val mTextView = view as TextView
             val newActivity = Intent(context, InformationActivity::class.java)
-            newActivity.putExtra("nombreTramite", list[position])
+            newActivity.putExtra("nombreTramite", listView.getItemAtPosition(position).toString())
+
+            // newActivity.putExtra("nombreTramite", list[position])
             ( context as MainActivity?)!!.startActivity(newActivity)
 
 

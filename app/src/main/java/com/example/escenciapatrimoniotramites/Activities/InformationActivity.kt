@@ -111,6 +111,7 @@ class InformationActivity : AppCompatActivity() {
 
             } catch (e: ParseException) {
                 e.printStackTrace()
+                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             }
             //Thread.sleep(2_000)  // wait for 1 second
 
