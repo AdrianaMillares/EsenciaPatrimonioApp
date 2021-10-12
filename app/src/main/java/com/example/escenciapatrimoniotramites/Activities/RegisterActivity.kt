@@ -14,6 +14,9 @@ import com.parse.ParseUser
 class RegisterActivity : AppCompatActivity() {
 
     val TAG = "RegisterActivity"
+    val USERNAME_TAKEN : Int = 202 // Error code for when the username is already taken
+    val USER_EMAIL_TAKEN : Int = 203 // Error code for when the email is already taken
+
     lateinit var etUsername: EditText
     lateinit var etMail: EditText
     lateinit var etPassword: EditText
@@ -70,10 +73,6 @@ class RegisterActivity : AppCompatActivity() {
                 Log.i(TAG, "Debes de llenar todo")
                 Toast.makeText(this, "Debes de llenar todos los campos", Toast.LENGTH_SHORT).show()
             }
-
-
-
-
         }
 
         tvLogin.setOnClickListener{
@@ -100,15 +99,22 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Registro exitoso", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    Log.i(TAG, "No se que pudo salio mal :(")
-                    Toast.makeText(applicationContext, "Algo falló, vuelve a intentarlo", Toast.LENGTH_SHORT).show()
-
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
+                    if (e.code == USERNAME_TAKEN) {
+                        // When the username is already taken in the database
+                        Toast.makeText(applicationContext, "El usuario ya está ocupado", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (e.code == USER_EMAIL_TAKEN) {
+                        Toast.makeText(applicationContext, "El correo ya está ocupado", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(applicationContext, "Algo salió mal. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "No se que pudo salio mal :(")
+                    }
                 }
             }
         }
-
     }
 
 
