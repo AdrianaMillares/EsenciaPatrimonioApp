@@ -1,6 +1,7 @@
 package com.example.escenciapatrimoniotramites.Activities
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -20,7 +21,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnLogOut : Button
     lateinit var bottomNav : BottomNavigationView
      override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Se definen los fragmentos de las pestañas

@@ -141,13 +141,7 @@ class HomeFragment : Fragment()  {
             //Thread.sleep(2_000)  // wait for 1 second
         }
 
-        val appContext = requireContext().applicationContext
-       // customAdapter = CustomAdapter(testArray)
-        //adapter = ArrayAdapter<String>(appContext, android.R.layout.simple_list_item_1, list)
-        //listView.adapter = adapter
-        //val rview: RecyclerView = view.findViewById(R.id.recyclerView1)
-        //rview.adapter = customAdapter
-       // var testArray = Array(1){"hola"}
+
 
         recyclerView1 = view.findViewById(R.id.recyclerView1)
         recyclerView2 = view.findViewById(R.id.recyclerView2)

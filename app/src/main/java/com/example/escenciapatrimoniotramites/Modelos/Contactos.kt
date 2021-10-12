@@ -5,18 +5,30 @@ import com.parse.ParseObject
 
 @ParseClassName("Contactos")
 class Contactos : ParseObject() {
-    val LLAVE_NOMBRE : String = "nombre"
-    val LLAVE_INSTITUTO : String = "instituto"
+    val LLAVE_MUNICIPIO : String = "municipio"
+    val LLAVE_URL : String = "url"
+    val LLAVE_EMAIL : String = "mail"
+    val LLAVE_TELEFONO : String = "telefono"
+
 
     /***************************
      * Setters and Getters
      ***************************/
-    var nombre: String?
-        get() = getString(LLAVE_NOMBRE)
-        set(nombre) = put(LLAVE_NOMBRE, nombre!!)
+    var municipio: String?
+        get() = getString(LLAVE_MUNICIPIO)
+        set(municipio) = put(LLAVE_MUNICIPIO, municipio!!)
 
-    var instituto: ParseObject?
-        get() = getParseObject(LLAVE_INSTITUTO)
-        set(instituto) = put(LLAVE_INSTITUTO, instituto!!)
+    var url: String?
+        get() = getString(LLAVE_URL)
+        set(url) = put(LLAVE_URL, url!!)
+
+    var email: String?
+        get() = getString(LLAVE_EMAIL)
+        set(email) = put(LLAVE_EMAIL, email!!)
+
+    var telefono: String?
+        get() = getString(LLAVE_TELEFONO)
+        set(telefono) = put(LLAVE_TELEFONO, telefono!!)
+
 
 }

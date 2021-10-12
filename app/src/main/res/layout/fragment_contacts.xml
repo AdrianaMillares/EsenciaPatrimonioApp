@@ -10,7 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="30dp"
+        android:textAlignment="center"
+
         android:fontFamily="@font/montserrat"
         android:text="Directorio" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvContactos"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/divider5"
+
+        > </androidx.recyclerview.widget.RecyclerView>
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
 </RelativeLayout>
