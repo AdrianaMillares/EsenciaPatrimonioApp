@@ -1,151 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity"
-    android:background="@color/ep_white" >
-
-
-    <ImageView
-        android:id="@+id/ivLogoEP"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/logoep_transparent" />
-
-    <ImageView
-        android:id="@+id/ivCurvita"
+    android:fillViewport="true">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="405dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/ic_curvita"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="330dp" />
+        android:layout_height="match_parent"
+        tools:context=".Activities.LoginActivity"
+        android:background="@color/ep_white" >
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvLoginCard"
-        android:layout_width="300dp"
-        android:layout_height="480dp"
-        android:layout_below="@+id/ivLogoEP"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/ep_white"
-        app:cardElevation="10dp">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/ivLogoEP"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@drawable/logoep_transparent" />
+
+        <ImageView
+            android:id="@+id/ivCurvita"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="405dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
+            app:srcCompat="@drawable/ic_curvita"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:layout_editor_absoluteY="330dp" />
 
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/raleway_bold"
-                android:textColor="@color/ep_yellow"
-                android:text="LOGIN"
-                android:textSize="35sp" />
-
-            <EditText
-                android:id="@+id/etUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_below="@+id/tvLogin"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:fontFamily="@font/raleway"
-                android:hint="Username"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="10dp" />
-
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_below="@+id/etUserName"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:fontFamily="@font/raleway"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingHorizontal="10dp" />
-
-            <TextView
-                android:id="@+id/tvForgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etPassword"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/ep_yellow"
-                android:textSize="11sp"
-                android:text="@string/olvidaste_tu_contrasena"
-                android:fontFamily="@font/raleway"
-                />
-
-            <Button
-                android:id="@+id/btnLogIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvForgotPassword"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
-                android:text="@string/ingresar"
-                android:fontFamily="@font/raleway"
-                />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLoginCard"
+            android:layout_width="300dp"
+            android:layout_height="480dp"
+            android:layout_below="@+id/ivLogoEP"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/ep_white"
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnLogIn"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tvHaveAccount"
+                    android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/raleway"
-                    android:text="@string/no_tienes_cuenta"
-                    android:textColor="@color/light_gray"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvSignUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toEndOf="@+id/tvHaveAccount"
-                    android:text="@string/registrate"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:text="Iniciar sesión"
                     android:textColor="@color/ep_yellow"
-                    android:textSize="14sp"
+                    android:textSize="35sp" />
+
+                <EditText
+                    android:id="@+id/etUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/tvLogin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:fontFamily="@font/raleway"
+                    android:hint="Nombre de usuario"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="10dp" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/etUserName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/edit_text_border"
+                    android:ems="10"
+                    android:fontFamily="@font/raleway"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="10dp" />
+
+                <TextView
+                    android:id="@+id/tvForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etPassword"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/ep_yellow"
+                    android:textSize="11sp"
+                    android:text="@string/olvidaste_tu_contrasena"
                     android:fontFamily="@font/raleway"
                     />
 
+                <Button
+                    android:id="@+id/btnLogIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvForgotPassword"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/ingresar"
+                    android:fontFamily="@font/raleway"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnLogIn"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/tvHaveAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/raleway"
+                        android:text="@string/no_tienes_cuenta"
+                        android:textColor="@color/light_gray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvSignUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toEndOf="@+id/tvHaveAccount"
+                        android:text="@string/registrate"
+                        android:textColor="@color/ep_yellow"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/raleway"
+                        />
+
+                </RelativeLayout>
+
+
             </RelativeLayout>
 
+        </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

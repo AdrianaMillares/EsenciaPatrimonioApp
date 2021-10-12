@@ -1,146 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+
+xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ep_white">
+    android:fillViewport="true"
+    >
 
-    <ImageView
-        android:id="@+id/ivInformation"
-        android:layout_width="236dp"
-        android:layout_height="215dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic_baseline_image_24" />
-
-    <ImageView
-        android:id="@+id/ivArrowInf"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
-
-    <Button
-        android:id="@+id/btnCompartirInf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Compartir"
-        android:textColor="@color/ep_blue" />
-
-
-    <TextView
-        android:id="@+id/tvTituloInf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivInformation"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Título"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="35dp" />
-
-    <TextView
-        android:id="@+id/tvSubtitInf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTituloInf"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="11dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Subtítulo"
-        android:textAlignment="textStart"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/tvInfoInf"
-        android:layout_width="352dp"
-        android:layout_height="73dp"
-        android:layout_above="@+id/btnConsultarFormato"
-        android:layout_below="@+id/ivInformation"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="140dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="[INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY][INFORMACIÓN SOBRE EL TRAMITE/LEY]"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:visibility="invisible" />
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
 
-    </ScrollView>
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="349dp"
-        android:layout_height="188dp"
-        android:layout_above="@+id/etComentario"
+        android:background="@color/ep_white">
 
-        android:layout_below="@+id/btnConsultarFormato"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-210dp"
-        android:layout_marginEnd="54dp"
-        android:divider="@color/light_gray"
-        android:dividerHeight="1dp"
-        android:horizontalSpacing="6dp"
-        android:numColumns="2"
-        android:verticalSpacing="6dp" />
-    <Button
-        android:id="@+id/btnConsultarFormato"
-        android:layout_width="276dp"
-        android:layout_height="64dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="217dp"
-        android:backgroundTint="@color/ep_green"
-        android:fontFamily="@font/raleway_bold"
-        android:text="CONSULTAR FORMATO"
-        android:textColor="@color/ep_white"
-        android:textSize="15dp" />
+        <ImageView
+            android:id="@+id/ivInformation"
+            android:layout_width="236dp"
+            android:layout_height="215dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@drawable/ic_baseline_image_24" />
 
-    <EditText
-        android:id="@+id/etComentario"
-        android:layout_width="294dp"
-        android:layout_height="46dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/edit_text_border"
-        android:ems="10"
-        android:fontFamily="@font/raleway"
-        android:hint="Escribe tu comentario"
-        android:inputType="textEmailAddress"
-        android:paddingHorizontal="5dp" />
+        <ImageView
+            android:id="@+id/ivArrowInf"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
 
-    <Button
-        android:id="@+id/btnComentar"
-        android:textSize="11dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="-100dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@+id/etComentario"
-        android:text="Comentar" />
+        <Button
+            android:id="@+id/btnCompartirInf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Compartir"
+            android:textColor="@color/ep_blue" />
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvTituloInf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivInformation"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Título"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/tvSubtitInf"
+            android:layout_width="322dp"
+            android:layout_height="179dp"
+            android:layout_below="@+id/tvTituloInf"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="57dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Subtítulo"
+            android:textAlignment="textStart"
+            android:textSize="15dp" />
+
+
+        <Button
+            android:id="@+id/btnConsultarFormato"
+            android:layout_width="276dp"
+            android:layout_height="54dp"
+            android:layout_below="@+id/tvSubtitInf"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="79dp"
+            android:backgroundTint="@color/ep_green"
+            android:fontFamily="@font/raleway_bold"
+            android:text="CONSULTAR FORMATO"
+            android:textColor="@color/ep_white"
+            android:textSize="15dp" />
+
+        <ListView
+            android:layout_marginStart="32dp"
+
+            android:id="@+id/listView"
+            android:layout_width="349dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/btnConsultarFormato"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="82dp"
+            android:divider="@color/light_gray"
+            android:dividerHeight="1dp"
+            android:horizontalSpacing="6dp"
+            android:nestedScrollingEnabled="true"
+            android:numColumns="2"
+            android:verticalSpacing="6dp" />
+
+        <EditText
+            android:id="@+id/etComentario"
+            android:layout_width="294dp"
+            android:layout_height="46dp"
+            android:layout_below="@+id/listView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="115dp"
+            android:layout_marginBottom="11dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:fontFamily="@font/raleway"
+            android:hint="Escribe tu comentario"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="5dp" />
+
+        <Button
+            android:id="@+id/btnComentar"
+            android:textSize="11dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/etComentario"
+            android:text="Comentar" />
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

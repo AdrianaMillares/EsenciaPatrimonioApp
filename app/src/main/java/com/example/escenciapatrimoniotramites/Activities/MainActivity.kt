@@ -19,8 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var btnLogOut : Button
     lateinit var bottomNav : BottomNavigationView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -45,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home ->{
+                    Log.i("openfragment","cargando homefragment")
                     openFragment(homeFragment)
                     true
                 }
@@ -84,4 +84,8 @@ class MainActivity : AppCompatActivity() {
         frag.replace(R.id.flContainer, fragmnt)
         frag.commit()
     }
+    private fun onListItemClick(position: Int) {
+        Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show()
+    }
 }
+
