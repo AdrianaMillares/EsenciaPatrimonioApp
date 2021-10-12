@@ -22,13 +22,15 @@ import com.example.escenciapatrimoniotramites.Activities.MainActivity
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import android.widget.Button
 import androidx.core.app.ActivityCompat.finishAffinity
- import com.example.escenciapatrimoniotramites.R
+import com.example.escenciapatrimoniotramites.Activities.ViewMoreActivity
+import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseObject
 
 import com.parse.ParseUser
+import org.w3c.dom.Text
 
 
 val listaTramites : ArrayList<Tramite> = ArrayList()
@@ -45,7 +47,8 @@ class HomeFragment : Fragment()  {
     lateinit var adapter: ArrayAdapter<*>
     lateinit var adapterLeyes: CustomAdapter
     lateinit var adapterTramites: CustomAdapter
-
+    lateinit var tvVerTramites : TextView
+    lateinit var tvVerLeyes : TextView
 
     val TAG : String = "HomeFragment"
     lateinit var btnLogOut : Button
@@ -57,6 +60,9 @@ class HomeFragment : Fragment()  {
         var vista = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView1=vista.findViewById(R.id.recyclerView1)
         recyclerView2=vista.findViewById(R.id.recyclerView2)
+        tvVerLeyes=vista.findViewById(R.id.tvVerLeyes)
+        tvVerTramites=vista.findViewById(R.id.tvVerTramites)
+
 
         var tempLayoutMan = LinearLayoutManager(activity)
         Log.i("rv","${recyclerView1.toString()}")
@@ -93,6 +99,7 @@ class HomeFragment : Fragment()  {
             goLoginActivity()
         }
         //listView = view.findViewById(R.id.listView)
+
 
         adapterTramites = CustomAdapter(listaTramites, requireContext(),
             { position -> onListItemClick(position) } )
@@ -170,6 +177,25 @@ class HomeFragment : Fragment()  {
 
         recyclerView2.setAdapter(adapterLeyes)
         recyclerView2.itemAnimator= DefaultItemAnimator()
+
+
+        tvVerLeyes.setOnClickListener{
+            val newActivity = Intent(context, ViewMoreActivity::class.java)
+            newActivity.putExtra("categoria", "Leyes")
+            newActivity.putExtra( "lista", listaLeyes  )
+            //Log.i("listaLeyes", listaLeyes.size.toString())
+
+            ( context as MainActivity?)!!.startActivity(newActivity)
+        }
+
+        tvVerTramites.setOnClickListener{
+            val newActivity = Intent(context, ViewMoreActivity::class.java)
+            newActivity.putExtra("categoria", "Trámites")
+            newActivity.putExtra( "lista", listaTramites  )
+          //  Log.i("listaLeyes", listaTramites.size.toString())
+
+            ( context as MainActivity?)!!.startActivity(newActivity)
+        }
 
     }
 
@@ -263,9 +289,5 @@ class CustomAdapter(private val dataSet: ArrayList<Tramite>, private val context
 
 
 }
-class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
-var data =  listOf<String>()
-
-
 
 

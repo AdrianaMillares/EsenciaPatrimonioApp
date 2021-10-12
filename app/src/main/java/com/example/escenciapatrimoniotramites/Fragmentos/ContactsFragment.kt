@@ -19,3 +19,4 @@ class ContactsFragment : Fragment() {
         fun newInstance(): ProfileFragment = ProfileFragment()
     }
 }
+

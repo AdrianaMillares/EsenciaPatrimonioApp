@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <queries>
+
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -15,6 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EscenciaPatrimonioTramites">
+        <activity
+            android:name=".Activities.ViewMoreActivity"
+            android:exported="true" />
         <activity
             android:name=".Activities.RegisterActivity"
             android:exported="true" />
@@ -54,12 +65,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <queries>
-        <!-- Camera -->
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-    </queries>
 
 </manifest>
