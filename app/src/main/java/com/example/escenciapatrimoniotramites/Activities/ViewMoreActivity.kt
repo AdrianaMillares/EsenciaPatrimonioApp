@@ -31,7 +31,7 @@ class ViewMoreActivity : AppCompatActivity() {
         val intent = getIntent()
         val recyclerView : RecyclerView
         val tvTituloVerMas : TextView = findViewById(R.id.tvTituloVerMas)
-         var adapterViewMore: CustomAdapter
+         var adapterViewMore: ViewMoreAdapter
 
         titulo = intent.extras?.getString("categoria").toString();
          val tempBool: Boolean
@@ -83,7 +83,7 @@ class ViewMoreActivity : AppCompatActivity() {
 
 
 
-         adapterViewMore = CustomAdapter(lista, this,
+         adapterViewMore = ViewMoreAdapter(lista, this,
             { position -> onListItemClick(position) } )
 
 
@@ -124,6 +124,14 @@ class ViewMoreActivity : AppCompatActivity() {
 
     }
 
+    fun goInformationActivity(tituloTramite : String ){
+         val i = Intent(this, InformationActivity::class.java)
+        i.putExtra("titulo",tituloTramite)
+        startActivity(i)
+    }
+
+
+
 }
 
 class ViewMoreAdapter(private val dataSet: ArrayList<Tramite>, private val contexto: Context, private val onItemClicked: (strTramite: String) -> Unit) :
@@ -159,12 +167,12 @@ class ViewMoreAdapter(private val dataSet: ArrayList<Tramite>, private val conte
 
             val textView: TextView = view.findViewById(R.id.textView4)
             val strTramite = textView.text.toString()
-            val i = Intent(view.context, LoginActivity::class.java)
-
+            //val i = Intent(view.context, LoginActivity::class.java)
+            //goInformationActivity(strTramite): ViewMoreActivity
             val intent = Intent(view.context , InformationActivity::class.java )
             intent.putExtra("nombreTramite", strTramite)
 
-            (view.context as MainActivity?)!!.startActivity(intent)
+            (view.context as ViewMoreActivity?)!!.startActivity(intent)
 
             onItemClicked(strTramite)
         }
