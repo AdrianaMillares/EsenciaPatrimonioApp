@@ -18,19 +18,32 @@ import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseException
 import com.parse.ParseQuery
 
+/**
+ * Despleiga en pantalla una vista tipo grid con todos los trámites o leyes para tener una mejor visión de estos
+ * Obtiene la información de los trámites o leyes de la base de datos
+ * @param titulo String que contiene la categoría seleccionada, trámite o ley
+ * @param lista Lista de Tramites que contiene todos los trámites existentes en la base de datos
+ * @param list Lista de strings que contiene los nombres de los trámites ya existentes en la interfaz para evitar duplicidad
+ * @param intent Obtiene la información enviada de la vista [home]
+ * @param recyclerView Elemento de la interfaz donde se despliegan los trámites
+ * @param tvTituloVerMas Elemento en el que se muestra el título de la categoría seleccionada trámites/leyes
+ * @param adapterViewMore Permite desplegar la información en la interfaz
+ */
 class ViewMoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Restringe la rotación automática
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_more)
+
         val titulo: String
-        var lista: ArrayList<Tramite> = ArrayList()
+        val lista: ArrayList<Tramite> = ArrayList()
         val list: ArrayList<String> = ArrayList()
         val intent = getIntent()
-        val recyclerView: RecyclerView
         val tvTituloVerMas: TextView = findViewById(R.id.tvTituloVerMas)
-        var adapterViewMore: ViewMoreAdapter
 
+        // Recupera la categoría seleccionada
         titulo = intent.extras?.getString("categoria").toString();
         val tempBool: Boolean
         if (titulo == "Trámites") {
@@ -39,16 +52,14 @@ class ViewMoreActivity : AppCompatActivity() {
             tempBool = false
         }
 
+        // Obtiene la información de la categoría seleccionada
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
         query.whereEqualTo("tramite", tempBool)
 
         try {
             val itemList: List<Tramite> = query.find()
             for (tramite in itemList) {
-
-                // Revisa que el tramite no esté en la lista
-
-
+                // Revisa que el tramite no esté en la lista para evitar duplicidad
                 if (tramite.nombre.toString() !in list) {
                     if (tramite.esTramite == true) {
                         lista.add(tramite)
@@ -56,23 +67,20 @@ class ViewMoreActivity : AppCompatActivity() {
                         lista.add(tramite)
                     }
                     list.add(tramite.nombre.toString())
-
                     Log.i("tramite", "$tramite.nombre.toString()")
-
-
                 } else {
                     continue
                 }
             }
-
         } catch (e: ParseException) {
             e.printStackTrace()
         }
 
+        // Despliega los datos en pantalla
         tvTituloVerMas.text = titulo
-        adapterViewMore = ViewMoreAdapter(lista, this,
+        val adapterViewMore: ViewMoreAdapter = ViewMoreAdapter(lista, this,
             { position -> onListItemClick(position) })
-        recyclerView = findViewById(R.id.rvViewMore)
+        val recyclerView: RecyclerView = findViewById(R.id.rvViewMore)
         val manager = GridLayoutManager(this, 2)
         manager.scrollToPosition(0)
 
@@ -80,11 +88,13 @@ class ViewMoreActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.setAdapter(adapterViewMore)
         recyclerView.itemAnimator = DefaultItemAnimator()
-
     }
 
     private fun onListItemClick(strTramite: String) {}
 
+    /**
+     * Redirige a la vista del trámite seleccionado
+     */
     fun goInformationActivity(tituloTramite: String) {
         val i = Intent(this, InformationActivity::class.java)
         i.putExtra("titulo", tituloTramite)
@@ -93,6 +103,12 @@ class ViewMoreActivity : AppCompatActivity() {
 
 }
 
+/**
+ * Permite mostrar información en la interfaz
+ * @param dataSet Lista de trámites
+ * @param contexto Contiene el contexto de la página donde se muestran los trámites/leyes
+ * @param onItemClicked Almacena la información del trámite/ley seleccionado
+ */
 class ViewMoreAdapter(
     private val dataSet: ArrayList<Tramite>,
     private val contexto: Context,
@@ -109,10 +125,16 @@ class ViewMoreAdapter(
             view.setOnClickListener(this)
         }
 
+        /**
+         * Recupera el nombre del trámite/ley seleccionado y envia la informacion a [InformationActivity] para generar
+         * la vista del objeto seleccionado
+         * @param textView Elemento de la interfaz que contiene el nombre del trámite/ley
+         * @param strTramite String que contiene el nombre del trámite
+         */
         override fun onClick(view: View) {
-
             val textView: TextView = view.findViewById(R.id.textView4)
             val strTramite = textView.text.toString()
+
             val intent = Intent(view.context, InformationActivity::class.java)
             intent.putExtra("nombreTramite", strTramite)
 
@@ -125,9 +147,11 @@ class ViewMoreAdapter(
         }
     }
 
-    // Create new views (invoked by the layout manager)
+    /**
+     * Crea las nuevas vistas con los elementos seleccionados en forma de grid
+     * @return los elementos con los datos
+     */
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
         var layoutInflater = LayoutInflater.from(viewGroup.context)
         Log.i("oncreateviewholder", "a punto de hacer return")
 
@@ -137,19 +161,17 @@ class ViewMoreAdapter(
         )
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Despliega la información de la base de datos en la interfaz
+     */
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         Log.i(
             "onbindviewholder",
             "a punto de obtener dataset y wardarlo en viewholder.textview.text"
         )
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         viewHolder.bind(dataSet[position].nombre.toString(), contexto)
         viewHolder.textView.text = dataSet[position].nombre.toString()
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
 }
