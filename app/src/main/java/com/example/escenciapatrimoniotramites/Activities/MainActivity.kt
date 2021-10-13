@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
      * @param donationsFragment fragmento donations
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Restringe la rotación automática
+        // Restringe la rotación automática
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -85,7 +87,8 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "Entered goMainActivity")
         val i = Intent(this, LoginActivity::class.java)
         startActivity(i)
-        finishAffinity() // Cierra todas las ventanas anteriores
+        // Cierra todas las ventanas anteriores
+        finishAffinity()
     }
 
     /**

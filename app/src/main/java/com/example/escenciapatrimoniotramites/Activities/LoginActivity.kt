@@ -17,7 +17,7 @@ import com.parse.ParseUser
  * @param etUsername Elemento de la interfaz que referencía al nombre del usuario ingresado
  * @param etPassword Elemento de la interfaz que referencía a la contraseña ingresada
  * @param btnLogin Elemento de la interfaz que referencía al botón que recupera al información al ser presionado
- * @param tvSingUp Elemento de la interfaz que referencía al botón que redirige al usuario al registro
+ * @param tvSingUp Elemento de la interfaz que referencía al botón que redirige al usuario al registro al ser presionado
  */
 class LoginActivity : AppCompatActivity() {
 
@@ -34,7 +34,9 @@ class LoginActivity : AppCompatActivity() {
      * Redirige a la vista de registro
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Restringe la rotación automática
+        // Restringe la rotación automática
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -98,17 +100,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Lleva al usuario a la pantalla principal
+     * Redirige al usuario a la pantalla principal
      */
     private fun goMainActivity() {
         Log.i(TAG, "goMainActivity: Entered")
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
-        finishAffinity() // Cierra todas las ventanas anteriores
+
+        // Cierra todas las ventanas anteriores
+        finishAffinity()
     }
 
     /**
-     * Lleva al usuario a la pantalla de registro
+     * Redirige al usuario a la pantalla de registro
      */
     private fun goRegisterActivity() {
         Log.i(TAG, "goRegisterActivity: Entered")

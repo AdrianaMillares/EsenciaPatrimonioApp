@@ -12,11 +12,22 @@ import android.widget.Toast
 import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseUser
 
+/**
+ * Gestiona el registro de nuevos usuarios a la aplicación, agregandolos tambien a la base de datos
+ * @param USERNAME_TAKEN Error que se muestra si el nombre de usuario ya está en uso
+ * @param USER_EMAIL_TAKEN Error que se muestra si el correo electónico ya está en uso
+ * @param etUsername Elemento de la interfaz que referencía al nombre del usuario ingresado
+ * @param etMail Elemento de la interfaz que referencía al correo electrónico ingresado
+ * @param etPassword Elemento de la interfaz que referencía a la contraseña ingresada
+ * @param etVerifyPassword Elemento de la interfaz que referencía a la confirmación de la contraseña ingresada
+ * @param btnRegister Elemento de la interfaz que referencía al botón que recupera al información al ser presionado
+ * @param tvLogin Elemento de la interfaz que referencía al botón que redirige al usuario al LogIn al ser presionado
+ */
 class RegisterActivity : AppCompatActivity() {
 
     val TAG = "RegisterActivity"
-    val USERNAME_TAKEN: Int = 202 // Error code for when the username is already taken
-    val USER_EMAIL_TAKEN: Int = 203 // Error code for when the email is already taken
+    val USERNAME_TAKEN: Int = 202
+    val USER_EMAIL_TAKEN: Int = 203
 
     lateinit var etUsername: EditText
     lateinit var etMail: EditText
@@ -25,8 +36,16 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var btnRegister: Button
     lateinit var tvLogin: TextView
 
+    /**
+     * Se ejecuta al crear la vista, permite que se muestre la interfaz y recupera los datos
+     * Corrobora que la contraseña cumpla las reglas de seguridad
+     * Muestra mensajes de error
+     * Inserta los datos en la base de datos
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Restringe la rotación automática
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
@@ -43,12 +62,17 @@ class RegisterActivity : AppCompatActivity() {
             var mail = etMail.text.toString()
             var password = etPassword.text.toString()
             var passwordv = etVerifyPassword.text.toString()
+
+            // Verifica que los datos ingresados en "correo electronico" sea una dirección de correo
             var verifmail = Regex("""\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}""")
+
+            // Verifica que la contraseña contenga al menos 8 caracteres, un número, una mayúscula, una minuscula y un caracter especial
             var verifpass = Regex("^(?=.*\\d)(?=.*[\\W])(?=.*[A-Z])(?=.*[a-z])\\S{8,99}\$")
 
 
             Log.i(TAG, "username: $username mail: $mail password: $password password v: $passwordv")
 
+            // Mensajes de error
             if (username != "" && mail != "" && password != "" && passwordv != "") {
                 if (password == passwordv) {
                     if (verifmail.containsMatchIn(mail)) {
@@ -88,16 +112,21 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Inserta los datos ingresados por el usuario en la base de datos
+     * Despliega mensajes de error si el usuario o el correo electónico ingresados está en uso
+     * @param nombreusuario Nombre de usuario ingresado en la interfaz
+     * @param mail Correo electrónico ingresado en la interfaz
+     * @param password Contraseña ingresada en la interfaz
+     */
     private fun registerUser(nombreusuario: String, mail: String, password: String) {
         Log.i(TAG, "registerUser: entre a la funcion")
         val user = ParseUser()
-
 
         with(user) {
             username = nombreusuario
             setPassword(password)
             email = mail
-
 
             signUpInBackground { e ->
                 if (e == null) {
@@ -107,10 +136,9 @@ class RegisterActivity : AppCompatActivity() {
                         .show()
 
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    // El registro falló
                     if (e.code == USERNAME_TAKEN) {
-                        // When the username is already taken in the database
+                        // El nombre de usuario está en uso
                         Toast.makeText(
                             applicationContext,
                             "El usuario ya está ocupado",
@@ -135,7 +163,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * Redirige al usuario a la pantalla principal
+     */
     private fun goLoginActivity() {
         Log.i(TAG, "goLoginActivity: Entered")
         val i = Intent(this, LoginActivity::class.java)
