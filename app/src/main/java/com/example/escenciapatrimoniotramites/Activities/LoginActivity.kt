@@ -12,7 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseUser
 
-
+/**
+ * Gestiona el inicio de sesión en la aplicación, la verificación de usuarios y contraseña de los mismos.
+ * @param etUsername Elemento de la interfaz que referencía al nombre del usuario ingresado
+ * @param etPassword Elemento de la interfaz que referencía a la contraseña ingresada
+ * @param btnLogin Elemento de la interfaz que referencía al botón que recupera al información al ser presionado
+ * @param tvSingUp Elemento de la interfaz que referencía al botón que redirige al usuario al registro
+ */
 class LoginActivity : AppCompatActivity() {
 
     val TAG = "LoginActivity"
@@ -21,23 +27,26 @@ class LoginActivity : AppCompatActivity() {
     lateinit var btnLogin:Button
     lateinit var tvSignUp:TextView
 
+    /**
+     * Se ejecuta al crear la vista, permite que se muestre la interfaz y recupera los datos
+     * Si el usuario ya inicio sesión lo redirige a la pantalla de inicio de la aplicación
+     * Verifica las credenciales de inicio de sesión
+     * Redirige a la vista de registro
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Restringe la rotación automática
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Si el usuario ya esta loggeado, muestra la pantalla principal
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity()
         }
 
-        // Se encuentran los componentes del layout
         etUsername = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogIn)
         tvSignUp = findViewById(R.id.tvSignUp)
 
-        // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
             Log.i(TAG, "onClick login button")
             var username = etUsername.text.toString()
@@ -51,7 +60,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // Verifica las credenciales dadas comparandolas a las guardadas en la base de datos con Parse
+    /**
+     * Verifica las credenciales dadas comparandolas a las guardadas en la base de datos con Parse
+     * Una vez validados los datos se redirige a la pantalla de inicio de la aplicación
+     * Si el usuario o la contraseña no coinciden se mostrará un mensaje de error
+     * @param username referencía al nombre de usuario ingresado a la interfaz
+     * @param password referencía a la contraseña ingresada a la interfaz
+     */
     private fun loginUser(username: String, password: String) {
         Log.i(TAG, "loginUser: entre a la funcion")
         ParseUser.logInInBackground(username, password,
@@ -59,11 +74,9 @@ class LoginActivity : AppCompatActivity() {
                 Log.i(TAG, "logInInBackground: entered function")
                 if (user != null) {
                     // Login fue exitoso
-                    var currentUser = username;
                     Log.i(TAG, "loginUser: Wuwuwuw estoy loggeado")
 
                     goMainActivity();
-                   // Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
@@ -82,19 +95,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         )
-
     }
 
-    // Lleva al usuario a la pantalla principal
+    /**
+     * Lleva al usuario a la pantalla principal
+     */
     private fun goMainActivity() {
         Log.i(TAG, "goMainActivity: Entered")
-        // val i = Intent(this, MainActivity::class.java)
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
     }
 
-    // Lleva al usuario a la pantalla de registro
+    /**
+     * Lleva al usuario a la pantalla de registro
+     */
     private fun goRegisterActivity() {
         Log.i(TAG, "goRegisterActivity: Entered")
         val i = Intent(this, RegisterActivity::class.java)

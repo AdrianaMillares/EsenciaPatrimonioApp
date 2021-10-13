@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
      * @param donationsFragment fragmento donations
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Elimina la rotación automática
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Restringe la rotación automática
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
