@@ -3,13 +3,14 @@ package com.example.escenciapatrimoniotramites.Activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
-import com.parse.Parse
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.parse.ParseException
 import com.parse.ParseUser
 
@@ -21,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var etPassword:EditText
     lateinit var btnLogin:Button
     lateinit var tvSignUp:TextView
+    lateinit var tvForgotPassword:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogIn)
         tvSignUp = findViewById(R.id.tvSignUp)
+        tvForgotPassword = findViewById(R.id.tvForgotPassword)
 
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
@@ -49,6 +52,49 @@ class LoginActivity : AppCompatActivity() {
         tvSignUp.setOnClickListener{
             goRegisterActivity()
         }
+
+        tvForgotPassword.setOnClickListener {
+            openModalResetPassword()
+        }
+    }
+
+    private fun openModalResetPassword() {
+        // La vista que sera inflada dentro del alert dialog
+        val viewReset = View.inflate(this, R.layout.reset_pass, null)
+
+        // Los componentes dentro de la alerta
+        val btnCancelarPassReset : Button = viewReset.findViewById(R.id.btnCancelarPassReset)
+        val btnAceptarPassReset : Button = viewReset.findViewById(R.id.btnAceptarPassReset)
+        val etMail : TextView = viewReset.findViewById(R.id.etMail)
+
+        val builder = MaterialAlertDialogBuilder(this).setView(viewReset)
+        val dialog = builder.create()
+        dialog.show()
+
+        btnCancelarPassReset.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnAceptarPassReset.setOnClickListener {
+            var mail : String = etMail.text.toString()
+            Log.i(TAG, "mail: $mail")
+            dialog.dismiss()
+            resetPassword(mail)
+        }
+    }
+
+    private fun resetPassword(mail: String) {
+        ParseUser.requestPasswordResetInBackground(mail) { e: ParseException? ->
+            if (e == null) {
+                // An email was successfully sent with reset instructions.
+                Log.i(TAG, "Correo enviado")
+                Toast.makeText(this, "Se te envío un correo con las instrucciones", Toast.LENGTH_SHORT)
+            } else {
+                // Something went wrong. Look at the ParseException to see what's up.
+                Log.i(TAG, "Correo no enviado")
+                Toast.makeText(this, "Hubo un error. Vuelve a intentarlo.", Toast.LENGTH_SHORT)
+            }
+        }
     }
 
     // Verifica las credenciales dadas comparandolas a las guardadas en la base de datos con Parse
@@ -61,9 +107,7 @@ class LoginActivity : AppCompatActivity() {
                     // Login fue exitoso
                     var currentUser = username;
                     Log.i(TAG, "loginUser: Wuwuwuw estoy loggeado")
-
-                    goMainActivity();
-                   // Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                    goMainActivity()
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
@@ -82,20 +126,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         )
-
     }
-
-    ///////////
-
-
-
-
-    //////////
 
     // Lleva al usuario a la pantalla principal
     private fun goMainActivity() {
         Log.i(TAG, "goMainActivity: Entered")
-//        val i = Intent(this, MainActivity::class.java)
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores
