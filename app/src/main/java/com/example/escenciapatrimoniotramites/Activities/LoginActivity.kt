@@ -1,6 +1,7 @@
 package com.example.escenciapatrimoniotramites.Activities
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var tvSignUp:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 

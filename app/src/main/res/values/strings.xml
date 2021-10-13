@@ -16,4 +16,5 @@
     <string name="no_tienes_cuenta">No tienes cuenta?</string>
     <string name="ingresar">Ingresar</string>
     <string name="olvidaste_tu_contrasena">Olvidaste tu contraseña?</string>
+    <string name="ver_todos"><u>Ver todos</u></string>
 </resources>
