@@ -106,18 +106,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Realiza el envío de correo para resetear la contraseña del usuario
+     * Realiza el envío de correo para cambiar la contraseña del usuario
      * en caso de que la haya olvidado o por algún problema
      * @param mail correo del usuario
      */
     private fun resetPassword(mail: String) {
         ParseUser.requestPasswordResetInBackground(mail) { e: ParseException? ->
             if (e == null) {
-                // An email was successfully sent with reset instructions.
+                // Se envio un correo electrónico con las instrcciones para cambiar la contraseña
                 Log.i(TAG, "Correo enviado")
                 Toast.makeText(this, "Se te envió un correo con las instrucciones", Toast.LENGTH_LONG).show()
             } else {
-                // Something went wrong. Look at the ParseException to see what's up.
+                // Ocurrio un error, revisa la consola
                 Log.i(TAG, "Correo no enviado")
                 Toast.makeText(this, "Hubo un error. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show()
             }
