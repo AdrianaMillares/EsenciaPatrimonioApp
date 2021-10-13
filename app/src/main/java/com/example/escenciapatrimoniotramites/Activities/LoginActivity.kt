@@ -74,6 +74,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre un modal con un campo para introducir el correo del usuario
+     * al que se le enviará un correo para realizar un reinicio de
+     * contraseña. El correo contendrá instrucciones a seguir para hacer
+     * este reinicio.
+     */
     private fun openModalResetPassword() {
         // La vista que sera inflada dentro del alert dialog
         val viewReset = View.inflate(this, R.layout.reset_pass, null)
@@ -99,6 +105,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Realiza el envío de correo para resetear la contraseña del usuario
+     * en caso de que la haya olvidado o por algún problema
+     * @param mail correo del usuario
+     */
     private fun resetPassword(mail: String) {
         ParseUser.requestPasswordResetInBackground(mail) { e: ParseException? ->
             if (e == null) {
