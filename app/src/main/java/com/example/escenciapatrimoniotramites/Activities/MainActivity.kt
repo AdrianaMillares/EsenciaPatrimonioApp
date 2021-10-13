@@ -12,37 +12,41 @@ import com.example.escenciapatrimoniotramites.Fragmentos.*
 import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
+/**
+ * Maneja los distintos fragmentos de la interfaz y su navegación
+ * @param btnLogOut Botón encargado de cerrar sesión
+ * @param bottomNav Menú de navegación
+ */
 class MainActivity : AppCompatActivity() {
 
     val TAG: String = "MainActivity"
 
     lateinit var btnLogOut: Button
     lateinit var bottomNav: BottomNavigationView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+    /**
+     * Se ejecuta al crear la vista, permite que se muestren las interfaces
+     * @param homeFragment fragmento home
+     * @param profileFragment fragmento profile
+     * @param searchFragment fragmento search
+     * @param contactsFragment fragmento contacts
+     * @param donationsFragment fragmento donations
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Elimina la rotación automática
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Se definen los fragmentos de las pestañas
         val homeFragment = HomeFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()
         val contactsFragment = ContactsFragment()
         val donationsFragment = DonationsFragment()
 
-
-        // Se encuentran los componentes de la pantalla
-        //btnLogOut = findViewById(R.id.btnLogOut)
         bottomNav = findViewById(R.id.bottomNavigation)
-
-        /*btnLogOut.setOnClickListener {
-            ParseUser.logOut()
-            goLoginActivity()
-        }*/
-
         openFragment(homeFragment)
+
+        // Se muestran las interfaces correspondientes a la opción del menú
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
@@ -74,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Redirige al logIn
+     */
     private fun goLoginActivity() {
         Log.i(TAG, "Entered goMainActivity")
         val i = Intent(this, LoginActivity::class.java)
@@ -81,6 +88,10 @@ class MainActivity : AppCompatActivity() {
         finishAffinity() // Cierra todas las ventanas anteriores
     }
 
+    /**
+     * Se encarga de abrir los fragmentos
+     * @param fragmnt fragmento que se desea abrir
+     */
     private fun openFragment(fragmnt: Fragment) {
         val frag = supportFragmentManager.beginTransaction()
         frag.replace(R.id.flContainer, fragmnt)
