@@ -205,11 +205,7 @@ class InformationActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
                 Log.d("Salida", "Guardado Correctamente")
-
             }
-
         }
-
     }
-
 }
