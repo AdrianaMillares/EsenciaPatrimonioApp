@@ -14,7 +14,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:background="@color/ep_white">
+        android:background="?backgroundColor">
 
         <ImageView
             android:id="@+id/ivInformation"
@@ -57,7 +57,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:fontFamily="@font/raleway_bold"
             android:text="Título"
             android:textAlignment="textStart"
-            android:textColor="@color/black"
             android:textSize="35dp" />
 
         <TextView
