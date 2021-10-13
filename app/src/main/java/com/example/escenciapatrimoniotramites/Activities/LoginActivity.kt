@@ -4,12 +4,15 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.parse.ParseException
 import com.parse.ParseUser
 
 /**
@@ -26,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var etPassword:EditText
     lateinit var btnLogin:Button
     lateinit var tvSignUp:TextView
+    lateinit var tvForgotPassword:TextView
 
     /**
      * Se ejecuta al crear la vista, permite que se muestre la interfaz y recupera los datos
@@ -40,15 +44,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Si el usuario ya esta loggeado, muestra la pantalla principal
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity()
         }
 
+        // Se encuentran los componentes del layout
         etUsername = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogIn)
         tvSignUp = findViewById(R.id.tvSignUp)
+        tvForgotPassword = findViewById(R.id.tvForgotPassword)
 
+        // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
             Log.i(TAG, "onClick login button")
             var username = etUsername.text.toString()
@@ -59,6 +67,49 @@ class LoginActivity : AppCompatActivity() {
 
         tvSignUp.setOnClickListener{
             goRegisterActivity()
+        }
+
+        tvForgotPassword.setOnClickListener {
+            openModalResetPassword()
+        }
+    }
+
+    private fun openModalResetPassword() {
+        // La vista que sera inflada dentro del alert dialog
+        val viewReset = View.inflate(this, R.layout.reset_pass, null)
+
+        // Los componentes dentro de la alerta
+        val btnCancelarPassReset : Button = viewReset.findViewById(R.id.btnCancelarPassReset)
+        val btnAceptarPassReset : Button = viewReset.findViewById(R.id.btnAceptarPassReset)
+        val etMail : TextView = viewReset.findViewById(R.id.etMail)
+
+        val builder = MaterialAlertDialogBuilder(this).setView(viewReset)
+        val dialog = builder.create()
+        dialog.show()
+
+        btnCancelarPassReset.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnAceptarPassReset.setOnClickListener {
+            var mail : String = etMail.text.toString()
+            Log.i(TAG, "mail: $mail")
+            dialog.dismiss()
+            resetPassword(mail)
+        }
+    }
+
+    private fun resetPassword(mail: String) {
+        ParseUser.requestPasswordResetInBackground(mail) { e: ParseException? ->
+            if (e == null) {
+                // An email was successfully sent with reset instructions.
+                Log.i(TAG, "Correo enviado")
+                Toast.makeText(this, "Se te envió un correo con las instrucciones", Toast.LENGTH_LONG).show()
+            } else {
+                // Something went wrong. Look at the ParseException to see what's up.
+                Log.i(TAG, "Correo no enviado")
+                Toast.makeText(this, "Hubo un error. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -77,8 +128,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null) {
                     // Login fue exitoso
                     Log.i(TAG, "loginUser: Wuwuwuw estoy loggeado")
-
-                    goMainActivity();
+                    goMainActivity()
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
