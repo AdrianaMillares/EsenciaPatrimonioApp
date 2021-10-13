@@ -15,9 +15,28 @@ import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
-
+/**
+ * Genera la vista donde se ven los trámites y leyes
+ * Redirige al usuario a la página donde existe más información sobre el trámite o ley
+ * Despliega los comentarios realizados por los usuarios
+ * Permite realizar comentarios al usuario
+ * @param etComment Elemento de la interfaz donde se muestran los comentarios
+ * @param btnPublish Botón de la interfaz que al presionarlo recupera la información y permite subir el comentario
+ * @param btnConsultarFormato Botón de la interfaz que redirige al usuario al url del tramite seleccionado
+ * @param etTitulo Elemento de la interfaz que contiene el título
+ * @param etDescripción Elemento de la interfaz que contiene la descripción
+ * @param tramiteActualNombre String que contiene el nombre del tramite actual
+ * @param tramiteActualDescripción String que contiene la descripción del tramite actual
+ * @param tramiteParseObject Objeto que contiene la información de la tabla [TRAMITES] de la base de datos
+ * @param tramiteActualUrl String que contiene la liga que lleva el pdf del tramite actual
+ * @param ivArrowInf Elemento de la interfaz que al presionarlo nos lleva a la vista de inicio
+ * @param listView Elemento de la interfaz que despliega los comentarios
+ * @param list Lista de strings en la que se guardan los comentarios
+ * @param adapter Permite enviar información a la interfaz
+ * @param btnCompartirInf Botón que al presionarlo da la opción de enviar el tramite/ley interactuando con otras aplicaciones
+ * @param nombreTramite Nombre por defecto utilizado para hacer pruebas
+ */
 class InformationActivity : AppCompatActivity() {
-
 
     val TAG = "InformationActivity"
     lateinit var etComment: EditText
@@ -36,8 +55,17 @@ class InformationActivity : AppCompatActivity() {
     lateinit var btnCompartirInf: Button
     var nombreTramite = "Impermeabilizar"
 
+    /**
+     * Se ejecuta al crear la vista, despliega la interfaz
+     * Obtiene los datos del trámite/ley actual y los despliega en pantalla
+     * Obtiene comentarios y los despliega en pantalla
+     * Permite compartir la información interactuando con otras aplicaciones
+     * Permite comentar un trámite/ley
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Restringe la rotación automática
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         super.onCreate(savedInstanceState)
         setContentView(com.example.escenciapatrimoniotramites.R.layout.activity_information)
         btnPublish = findViewById(com.example.escenciapatrimoniotramites.R.id.btnComentar)
@@ -46,15 +74,15 @@ class InformationActivity : AppCompatActivity() {
         etTitulo = findViewById(com.example.escenciapatrimoniotramites.R.id.tvTituloInf)
         etDescripcion = findViewById(com.example.escenciapatrimoniotramites.R.id.tvSubtitInf)
         ivArrowInf = findViewById(com.example.escenciapatrimoniotramites.R.id.ivArrowInf)
-        btnConsultarFormato =
-            findViewById(com.example.escenciapatrimoniotramites.R.id.btnConsultarFormato)
+        btnConsultarFormato = findViewById(com.example.escenciapatrimoniotramites.R.id.btnConsultarFormato)
 
+        // Obtiene el nombre del trámite/ley previamente seleccionado
         val intent = getIntent()
         nombreTramite = intent.extras?.getString("nombreTramite").toString();
 
+        // Petición a la base de datos para encontrar la información
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
         query.whereEqualTo("nombre", nombreTramite)
-
         try {
             val itemList: List<Tramite> = query.find()
             for (tramite in itemList) {
@@ -68,30 +96,30 @@ class InformationActivity : AppCompatActivity() {
                 etDescripcion.text = tramiteActualDescripcion
 
                 Log.i(TAG, "descripcion $tramiteActualDescripcion ");
-
             }
-
         } catch (e: ParseException) {
             e.printStackTrace()
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
 
+        // Redirige al formato web
         btnConsultarFormato.setOnClickListener {
-
             val url = tramiteActualUrl
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
-
-
         }
 
+        // Redirige al inicio
         ivArrowInf.setOnClickListener {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
-            finishAffinity() // Cierra todas las ventanas anteriores
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
         }
 
+        // Permite compartir interactuando con otras aplicaciones
         btnCompartirInf.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -100,15 +128,12 @@ class InformationActivity : AppCompatActivity() {
                     "¡Hola! Revisa la información que encontré sobre $tramiteActualNombre: $tramiteActualDescripcion"
                 )
                 type = "text/plain"
-
             }
-
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
-
         }
 
-
+        // Publica los comentarios
         btnPublish.setOnClickListener {
             Log.i(TAG, "onClick login button")
             var comentario = etComment.text.toString()
@@ -116,16 +141,14 @@ class InformationActivity : AppCompatActivity() {
             var usuario = ParseUser.getCurrentUser().username.toString()
             var idTramite = "1" // todo: definir como obtener el idtramitec
             Log.i(TAG, "username: $usuario comentario: $comentario")
-            saveNewComment(comentario, usuario, idTramite, idUsuario, TramiteParseObject)
+            saveNewComment(comentario, usuario, TramiteParseObject)
         }
+
         list = ArrayList()
 
-        var tempUser: ParseUser?
-
+        // Obtiene los comentarios de la base de datos
         val query2: ParseQuery<Comentar> = ParseQuery.getQuery(Comentar::class.java)
-
         query2.whereEqualTo("nombreTramite", nombreTramite)
-
         try {
             val itemList2: List<Comentar> = query2.find()
             if (itemList2.isEmpty()) {
@@ -136,37 +159,38 @@ class InformationActivity : AppCompatActivity() {
                 list.add("Comentarios")
 
                 for (comentar in itemList2) {
-                    tempUser = comentar.usuario
-
                     list.add(comentar.idUsario.toString() + ": " + comentar.comentario.toString())
                 }
-                // customAdapter.updateList(list)
             }
         } catch (e: ParseException) {
             e.printStackTrace()
         }
 
+        // Despliega los comentarios
         listView = findViewById(com.example.escenciapatrimoniotramites.R.id.listView)
         val appContext = this
         adapter = ArrayAdapter<String>(appContext, R.layout.simple_list_item_1, list)
         listView.adapter = adapter
-
     }
 
+    /**
+     * Inserta los comentarios nuevos en la base de datos
+     * Despliega mensajes de error y alerta
+     * @param comentario String que contiene el comentario
+     * @param usuario String que contiene el nombre del usuario que comentó
+     * @param objTramite Objeto que contiene la información del tramite actual
+     */
     fun saveNewComment(
         comentario: String,
         usuario: String,
-        idTramite: String,
-        idUsuario: String,
         objTramite: ParseObject
     ) {
         val usuarioParse = ParseObject.create("Tramite")
         usuarioParse.put("username", usuario);
+
         val comentar = ParseObject.create("Comentar")
-        //comentar.put("tramite", idTramite);
         comentar.put("idUsario", usuario);
         comentar.put("usuario", ParseUser.getCurrentUser());
-        //comentar.put("usuario",usuarioParse)
         comentar.put("comentario", comentario);
         comentar.put("Tramite", objTramite);
         comentar.put("nombreTramite", nombreTramite)
