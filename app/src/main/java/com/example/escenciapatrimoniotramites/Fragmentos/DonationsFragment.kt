@@ -2,16 +2,14 @@ package com.example.escenciapatrimoniotramites.Fragmentos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import com.example.escenciapatrimoniotramites.R
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
 import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
+import com.example.escenciapatrimoniotramites.R
 
 
 class DonationsFragment : Fragment() {

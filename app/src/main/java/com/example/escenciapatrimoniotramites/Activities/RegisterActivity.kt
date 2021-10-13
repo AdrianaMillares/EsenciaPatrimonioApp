@@ -15,15 +15,15 @@ import com.parse.ParseUser
 class RegisterActivity : AppCompatActivity() {
 
     val TAG = "RegisterActivity"
-    val USERNAME_TAKEN : Int = 202 // Error code for when the username is already taken
-    val USER_EMAIL_TAKEN : Int = 203 // Error code for when the email is already taken
+    val USERNAME_TAKEN: Int = 202 // Error code for when the username is already taken
+    val USER_EMAIL_TAKEN: Int = 203 // Error code for when the email is already taken
 
     lateinit var etUsername: EditText
     lateinit var etMail: EditText
     lateinit var etPassword: EditText
     lateinit var etVerifyPassword: EditText
     lateinit var btnRegister: Button
-    lateinit var tvLogin:TextView
+    lateinit var tvLogin: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -37,39 +37,44 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegistro)
         tvLogin = findViewById(R.id.tvLogInReg)
 
-        btnRegister.setOnClickListener{
+        btnRegister.setOnClickListener {
             Log.i(TAG, "Presionado registro")
             var username = etUsername.text.toString()
             var mail = etMail.text.toString()
             var password = etPassword.text.toString()
             var passwordv = etVerifyPassword.text.toString()
             var verifmail = Regex("""\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}""")
-//            var number = Regex("[0-9]")
-//            var may = Regex("[A-Z]")
-//            var min = Regex("[a-z]")
-//            var esp = Regex("\\W")
             var verifpass = Regex("^(?=.*\\d)(?=.*[\\W])(?=.*[A-Z])(?=.*[a-z])\\S{8,99}\$")
 
 
             Log.i(TAG, "username: $username mail: $mail password: $password password v: $passwordv")
 
-            if(username!="" && mail!="" && password!="" && passwordv!=""){
-                if (password==passwordv){
-                    if (verifmail.containsMatchIn(mail)){
-                        if (verifpass.containsMatchIn(password)){
+            if (username != "" && mail != "" && password != "" && passwordv != "") {
+                if (password == passwordv) {
+                    if (verifmail.containsMatchIn(mail)) {
+                        if (verifpass.containsMatchIn(password)) {
                             Log.i(TAG, "Ya jalo tu registro")
                             registerUser(username, mail, password)
                         } else {
                             Log.i(TAG, "Acaso quieres que te hacken?")
-                            Toast.makeText(this, "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
                         Log.i(TAG, "Ingresa un correo valido plz")
-                        Toast.makeText(this, "Debes de ingresar un correo valido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Debes de ingresar un correo valido",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     Log.i(TAG, "las contras deben de ser iguales")
-                    Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
                 Log.i(TAG, "Debes de llenar todo")
@@ -77,13 +82,13 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        tvLogin.setOnClickListener{
+        tvLogin.setOnClickListener {
             goLoginActivity()
         }
 
     }
 
-    private fun registerUser(nombreusuario: String, mail:String, password: String) {
+    private fun registerUser(nombreusuario: String, mail: String, password: String) {
         Log.i(TAG, "registerUser: entre a la funcion")
         val user = ParseUser()
 
@@ -98,20 +103,31 @@ class RegisterActivity : AppCompatActivity() {
                 if (e == null) {
                     Log.i(TAG, "Al parecer todo salio bien, usuario: $username, correo: $email")
                     goLoginActivity()
-                    Toast.makeText(applicationContext, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Registro exitoso", Toast.LENGTH_SHORT)
+                        .show()
 
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
                     if (e.code == USERNAME_TAKEN) {
                         // When the username is already taken in the database
-                        Toast.makeText(applicationContext, "El usuario ya está ocupado", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (e.code == USER_EMAIL_TAKEN) {
-                        Toast.makeText(applicationContext, "El correo ya está ocupado", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(applicationContext, "Algo salió mal. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                            applicationContext,
+                            "El usuario ya está ocupado",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    } else if (e.code == USER_EMAIL_TAKEN) {
+                        Toast.makeText(
+                            applicationContext,
+                            "El correo ya está ocupado",
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Algo salió mal. Vuelve a intentarlo.",
+                            Toast.LENGTH_SHORT
+                        ).show();
                         Log.i(TAG, "No se que pudo salio mal :(")
                     }
                 }

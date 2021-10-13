@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.escenciapatrimoniotramites.Fragmentos.*
 import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,14 +15,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG : String = "MainActivity"
+    val TAG: String = "MainActivity"
 
-    lateinit var btnLogOut : Button
-    lateinit var bottomNav : BottomNavigationView
-     override fun onCreate(savedInstanceState: Bundle?) {
-         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    lateinit var btnLogOut: Button
+    lateinit var bottomNav: BottomNavigationView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-         super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Se definen los fragmentos de las pestañas
@@ -46,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         openFragment(homeFragment)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_home ->{
-                    Log.i("openfragment","cargando homefragment")
+                R.id.action_home -> {
+                    Log.i("openfragment", "cargando homefragment")
                     openFragment(homeFragment)
                     true
                 }
-                R.id.action_search ->{
+                R.id.action_search -> {
                     openFragment(searchFragment)
                     true
                 }
@@ -59,11 +58,11 @@ class MainActivity : AppCompatActivity() {
                     openFragment(contactsFragment)
                     true
                 }
-                R.id.action_profile ->{
+                R.id.action_profile -> {
                     openFragment(profileFragment)
                     true
                 }
-                R.id.action_donation ->{
+                R.id.action_donation -> {
                     openFragment(donationsFragment)
                     true
                 }
@@ -87,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         frag.replace(R.id.flContainer, fragmnt)
         frag.commit()
     }
+
     private fun onListItemClick(position: Int) {
         Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show()
     }

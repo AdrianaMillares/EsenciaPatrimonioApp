@@ -5,21 +5,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.escenciapatrimonioinstitutos.Modelos.Contactos
-import com.example.escenciapatrimoniotramites.Activities.*
-import com.example.escenciapatrimoniotramites.Modelos.Tramite
+import com.example.escenciapatrimoniotramites.Activities.MainActivity
 import com.example.escenciapatrimoniotramites.R
 import com.parse.ParseException
 import com.parse.ParseQuery
@@ -33,14 +29,6 @@ class ContactsFragment : Fragment() {
     var list: ArrayList<String> = ArrayList()
     var listaContactos: ArrayList<Contactos> = ArrayList()
     lateinit var adapter: ContactsAdapter
-    lateinit var tvMunicipio: TextView
-    lateinit var tvUrl: TextView
-    lateinit var tvEmail: TextView
-    lateinit var tvTelefono: TextView
-
-    val TAG: String = "HomeFragment"
-    lateinit var btnLogOut: Button
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,17 +37,7 @@ class ContactsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var vista = inflater.inflate(R.layout.fragment_contacts, container, false)
-/*
-         tvMunicipio  = vista.findViewById(R.id.tvMunicipio)
-         tvUrl  = vista.findViewById(R.id.tvUrl)
-         tvEmail  = vista.findViewById(R.id.tvEmail)
-         tvTelefono = vista.findViewById(R.id.tvTelefono)
-*/
-        var tempLayoutMan = LinearLayoutManager(activity)
-
         recyclerView1 = vista.findViewById(R.id.rvContactos)
-
-
         return vista
     }
 
@@ -67,16 +45,13 @@ class ContactsFragment : Fragment() {
         fun newInstance(): ProfileFragment = ProfileFragment()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ContactsAdapter(
             listaContactos, requireContext()
         )
-
         val query: ParseQuery<Contactos> = ParseQuery.getQuery(Contactos::class.java)
-
         try {
             val itemList: List<Contactos> = query.find()
             for (contacto in itemList) {
@@ -94,7 +69,6 @@ class ContactsFragment : Fragment() {
                     continue
                 }
             }
-            // customAdapter.updateList(list)
 
         } catch (e: ParseException) {
             e.printStackTrace()
@@ -110,29 +84,12 @@ class ContactsFragment : Fragment() {
         recyclerView1.setHasFixedSize(true)
         recyclerView1.setAdapter(adapter)
         recyclerView1.itemAnimator = DefaultItemAnimator()
-
-
-
     }
 }
 
 
 class ContactsAdapter(private val dataSet: ArrayList<Contactos>, private val contexto: Context) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
-
-    public fun updateList(items: ArrayList<Contactos>) {
-        if (items != null && items.size > 0) {
-            // dataSet.clear()
-            //dataSet.addAll(items)
-
-            for (tramite in items) {
-                dataSet.add(tramite)
-            }
-
-            notifyDataSetChanged()
-        }
-    }
-
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -163,9 +120,6 @@ class ContactsAdapter(private val dataSet: ArrayList<Contactos>, private val con
             telefono: String,
             contexto: Context
         ) {
-
-
-
             tvMunicipio.setText(municipio)
             tvUrl.setText(url)
             tvUrl.linksClickable = true
@@ -183,22 +137,15 @@ class ContactsAdapter(private val dataSet: ArrayList<Contactos>, private val con
                 i.data = Uri.parse(url)
 
                 (contexto as MainActivity?)!!.startActivity(i)
-
-
-
             }
 
         }
     }
-
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         var layoutInflater = LayoutInflater.from(viewGroup.context)
-        // val view = LayoutInflater.from(viewGroup.context)
-        //    .inflate(R.layout.text_row_item, viewGroup, false)
         Log.i("oncreateviewholder", "a punto de hacer return")
-
         return ViewHolder(layoutInflater.inflate(R.layout.item_contact, viewGroup, false))
     }
 
@@ -218,7 +165,6 @@ class ContactsAdapter(private val dataSet: ArrayList<Contactos>, private val con
             dataSet[position].telefono.toString(),
             contexto
         )
-        //viewHolder.textView.text = dataSet[position].nombre.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)

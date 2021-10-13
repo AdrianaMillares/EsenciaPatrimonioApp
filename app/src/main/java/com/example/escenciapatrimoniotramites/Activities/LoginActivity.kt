@@ -10,8 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.R
-import com.parse.Parse
-import com.parse.ParseException
 import com.parse.ParseUser
 
 
@@ -87,17 +85,10 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    ///////////
-
-
-
-
-    //////////
-
     // Lleva al usuario a la pantalla principal
     private fun goMainActivity() {
         Log.i(TAG, "goMainActivity: Entered")
-//        val i = Intent(this, MainActivity::class.java)
+        // val i = Intent(this, MainActivity::class.java)
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finishAffinity() // Cierra todas las ventanas anteriores

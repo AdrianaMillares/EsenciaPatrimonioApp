@@ -1,31 +1,19 @@
 package com.example.escenciapatrimoniotramites.Activities
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
-import com.example.escenciapatrimoniotramites.Modelos.Tramite
-import androidx.recyclerview.widget.RecyclerView
-
-import org.w3c.dom.Text
 import android.R
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
-
-import android.view.LayoutInflater
-import android.view.View
-
-import android.view.ViewGroup
+import android.os.Bundle
+import android.util.Log
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.recyclerview.widget.AdapterListUpdateCallback
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.escenciapatrimoniotramites.Fragmentos.listaLeyes
-import com.example.escenciapatrimoniotramites.Fragmentos.listaTramites
+import androidx.appcompat.app.AppCompatActivity
 import com.example.escenciapatrimoniotramites.Modelos.Comentar
-import com.parse.*
-import kotlinx.coroutines.CoroutineStart
+import com.example.escenciapatrimoniotramites.Modelos.Tramite
+import com.parse.ParseException
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.ParseUser
 
 
 class InformationActivity : AppCompatActivity() {
@@ -37,18 +25,16 @@ class InformationActivity : AppCompatActivity() {
     lateinit var btnConsultarFormato: Button
     lateinit var etTitulo: TextView
     lateinit var etDescripcion: TextView
-    var nombreTramite = "Impermeabilizar"
     lateinit var tramiteActualNombre: String
     lateinit var tramiteActualDescripcion: String
     lateinit var TramiteParseObject: ParseObject
     lateinit var tramiteActualUrl: String
-    lateinit var rvComentarios: RecyclerView
-    lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var ivArrowInf: ImageView
     lateinit var listView: ListView
     lateinit var list: ArrayList<String>
     lateinit var adapter: ArrayAdapter<*>
     lateinit var btnCompartirInf: Button
+    var nombreTramite = "Impermeabilizar"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -63,34 +49,9 @@ class InformationActivity : AppCompatActivity() {
         btnConsultarFormato =
             findViewById(com.example.escenciapatrimoniotramites.R.id.btnConsultarFormato)
 
-        val tramiteTemp = ParseObject.create("Tramite")
         val intent = getIntent()
         nombreTramite = intent.extras?.getString("nombreTramite").toString();
 
-        // rvComentarios = findViewById(com.example.escenciapatrimoniotramites.R.id.rvComentarios)
-        //ParseQuery <Tramite> query = ParseQuery.getQuery(Tramite.class);
-
-        /*
-             val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
-              query.whereEqualTo("nombre", nombreTramite)
-              Log.d(TAG, "realizando query en bg")
-             query.findInBackground { itemList, e ->
-                 if (e == null) {
-                     // Access the array of results here
-                         TramiteParseObject = itemList[0];
-                      tramiteActualNombre = itemList[0].nombre.toString() ;
-                      tramiteActualDescripcion = itemList[0].descripcion.toString();
-                     Log.i(TAG ,"nombre $tramiteActualNombre ");
-                     etTitulo.text = tramiteActualNombre
-                     etDescripcion.text = tramiteActualDescripcion
-                     Log.i(TAG ,"descripcion $tramiteActualDescripcion ");
-
-                 } else {
-                     Log.d("item", "Error: " )
-                 }
-
-             }
-     */
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
         query.whereEqualTo("nombre", nombreTramite)
 
@@ -109,13 +70,11 @@ class InformationActivity : AppCompatActivity() {
                 Log.i(TAG, "descripcion $tramiteActualDescripcion ");
 
             }
-            // customAdapter.updateList(list)
 
         } catch (e: ParseException) {
             e.printStackTrace()
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
-        //Thread.sleep(2_000)  // wait for 1 second
 
         btnConsultarFormato.setOnClickListener {
 
@@ -159,11 +118,9 @@ class InformationActivity : AppCompatActivity() {
             Log.i(TAG, "username: $usuario comentario: $comentario")
             saveNewComment(comentario, usuario, idTramite, idUsuario, TramiteParseObject)
         }
-        lateinit var comentarioParsed: String
         list = ArrayList()
 
         var tempUser: ParseUser?
-        // Query para obtener los comentariños
 
         val query2: ParseQuery<Comentar> = ParseQuery.getQuery(Comentar::class.java)
 
@@ -189,45 +146,12 @@ class InformationActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        /*
-        query2.whereEqualTo("nombreTramite", nombreTramite)
-        Log.d(TAG, "realizando query en bg")
-        query2.findInBackground { itemList2, e ->
-            if (e == null) {
-
-                for (comentar in itemList2) {
-                        tempUser = comentar.usuario
-
-                        list.add( comentar.idUsario.toString()+ ": "+ comentar.comentario.toString())
-                }
-                // Access the array of results here
-
-
-
-            } else {
-                Log.d("item", "Error: " )
-            }
-
-        }*/
-
-
         listView = findViewById(com.example.escenciapatrimoniotramites.R.id.listView)
         val appContext = this
         adapter = ArrayAdapter<String>(appContext, R.layout.simple_list_item_1, list)
         listView.adapter = adapter
 
     }
-
-    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        listView = findViewById(com.example.escenciapatrimoniotramites.R.id.listView)
-        list = ArrayList()
-
-        val appContext = this
-        adapter = ArrayAdapter<String>(appContext, R.layout.simple_list_item_1, list)
-        listView.adapter = adapter
-    }
-
 
     fun saveNewComment(
         comentario: String,
@@ -265,41 +189,3 @@ class InformationActivity : AppCompatActivity() {
     }
 
 }
-/*
-class CustomAdapter(private val dataSet: Array<String>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-
-        init {
-            // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(com.example.escenciapatrimoniotramites.R.id.tvTituloInf)
-        }
-    }
-
-    // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(com.example.escenciapatrimoniotramites.R.layout.activity_information, viewGroup, false)
-
-        return ViewHolder(view)
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.size
-
-}*/

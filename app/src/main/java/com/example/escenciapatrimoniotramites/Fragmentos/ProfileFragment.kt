@@ -38,20 +38,24 @@ import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment() {
 
-    private val TAG : String = "ProfileActivity"
+    private val TAG: String = "ProfileActivity"
     private val LLAVE_PROFILE_PICTURE = "profilePicture"
-    protected val currentUser : ParseUser = ParseUser.getCurrentUser()
+    protected val currentUser: ParseUser = ParseUser.getCurrentUser()
 
     var photoFileName = "photo.jpg"
     lateinit var selectedImagePath: String
 
-    lateinit var ivProfile : ImageView
-    lateinit var tvUserProfile : TextView
-    lateinit var tvEmailProfile : TextView
-    lateinit var btnCambiarPass : Button
+    lateinit var ivProfile: ImageView
+    lateinit var tvUserProfile: TextView
+    lateinit var tvEmailProfile: TextView
+    lateinit var btnCambiarPass: Button
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
@@ -74,7 +78,8 @@ class ProfileFragment : Fragment() {
         tvUserProfile.setText(currentUser.username)
         tvEmailProfile.setText(currentUser.email)
         Log.i(TAG, "url: " + currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url)
-        Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop().into(ivProfile)
+        Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop()
+            .into(ivProfile)
 
         // Funcionalidad de cambiar contrasena
         btnCambiarPass.setOnClickListener {
@@ -82,10 +87,10 @@ class ProfileFragment : Fragment() {
             val viewNewPass = View.inflate(context, R.layout.change_password, null)
 
             // Los componentes dentro de la alerta
-            val btnCancelar : Button = viewNewPass.findViewById(R.id.btnCancelar)
-            val btnAceptar : Button = viewNewPass.findViewById(R.id.btnAceptar)
-            val etNewPassword : TextView = viewNewPass.findViewById(R.id.etNewPassword)
-            val etNewPasswordVerif : TextView = viewNewPass.findViewById(R.id.etNewPasswordVerif)
+            val btnCancelar: Button = viewNewPass.findViewById(R.id.btnCancelar)
+            val btnAceptar: Button = viewNewPass.findViewById(R.id.btnAceptar)
+            val etNewPassword: TextView = viewNewPass.findViewById(R.id.etNewPassword)
+            val etNewPasswordVerif: TextView = viewNewPass.findViewById(R.id.etNewPasswordVerif)
 
 
             val builder = MaterialAlertDialogBuilder(requireContext()).setView(viewNewPass)
@@ -97,8 +102,8 @@ class ProfileFragment : Fragment() {
             }
 
             btnAceptar.setOnClickListener {
-                var newPass : String = etNewPassword.text.toString()
-                var newPassVerif : String = etNewPasswordVerif.text.toString()
+                var newPass: String = etNewPassword.text.toString()
+                var newPassVerif: String = etNewPasswordVerif.text.toString()
                 dialog.dismiss()
                 cambiarContrasena(newPass, newPassVerif)
             }
@@ -114,10 +119,15 @@ class ProfileFragment : Fragment() {
         if (newPass == newPassVerif) {
             currentUser.setPassword(newPass)
             currentUser.saveInBackground {
-                Toast.makeText(requireContext(), "Éxito! Tu contraseña ha sido cambiada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Éxito! Tu contraseña ha sido cambiada",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         } else {
-            Toast.makeText(requireContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -128,7 +138,8 @@ class ProfileFragment : Fragment() {
             // check version of Android on device
             image = if (Build.VERSION.SDK_INT > 27) {
                 // on newer versions of Android, use the new decodeBitmap method
-                val source: ImageDecoder.Source = ImageDecoder.createSource(requireActivity().contentResolver, photoUri!!)
+                val source: ImageDecoder.Source =
+                    ImageDecoder.createSource(requireActivity().contentResolver, photoUri!!)
                 ImageDecoder.decodeBitmap(source)
             } else {
                 // support older versions of Android by using getBitmap
@@ -139,7 +150,6 @@ class ProfileFragment : Fragment() {
         }
         return image
     }
-
 
 
     /**
@@ -161,24 +171,25 @@ class ProfileFragment : Fragment() {
     /**
      * Respuesta cuando un usuario elige una foto de la galeria
      */
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+    var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
 
-            var data: Intent? = result.data
-            var selectedImageUri: Uri? = data!!.data
+                var data: Intent? = result.data
+                var selectedImageUri: Uri? = data!!.data
 
-            // var selectedImageUri: Uri = attr.data
-            selectedImagePath = selectedImageUri!!.path.toString()
+                // var selectedImageUri: Uri = attr.data
+                selectedImagePath = selectedImageUri!!.path.toString()
 
-            // Load the image located at photoUri into selectedImage
-            var selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
-            var stream = ByteArrayOutputStream()
-            selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            var byteArray: ByteArray = stream.toByteArray()
+                // Load the image located at photoUri into selectedImage
+                var selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
+                var stream = ByteArrayOutputStream()
+                selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                var byteArray: ByteArray = stream.toByteArray()
 
-            changeProfilePicture(byteArray)
+                changeProfilePicture(byteArray)
+            }
         }
-    }
 
 
     /**
@@ -202,7 +213,8 @@ class ProfileFragment : Fragment() {
 
                     override fun onPermissionRationaleShouldBeShown(
                         p0: PermissionRequest?,
-                        p1: PermissionToken?) {
+                        p1: PermissionToken?
+                    ) {
                         showRotationalDialogForPermission()
                     }
 
@@ -219,8 +231,10 @@ class ProfileFragment : Fragment() {
      */
     private fun showRotationalDialogForPermission() {
         AlertDialog.Builder(context)
-            .setMessage("Parece ser que tienes los permisos apagados para esta funcionalidad."
-                    + "Puedes encenderlas en configuraciones de la aplicación")
+            .setMessage(
+                "Parece ser que tienes los permisos apagados para esta funcionalidad."
+                        + "Puedes encenderlas en configuraciones de la aplicación"
+            )
             .setPositiveButton("Ir a configuración") { _, _ ->
                 try {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -231,7 +245,7 @@ class ProfileFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
-            .setNegativeButton("Cancelar") {dialog, _->
+            .setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.dismiss()
             }.show()
     }
@@ -243,7 +257,8 @@ class ProfileFragment : Fragment() {
      */
     private fun changeProfilePicture(newProfilePic: ByteArray) {
         Toast.makeText(context, "Guardando tu nueva foto de perfil...", Toast.LENGTH_LONG).show()
-        var parseFile : ParseFile = ParseFile("foto.png"+ File.separator + photoFileName, newProfilePic)
+        var parseFile: ParseFile =
+            ParseFile("foto.png" + File.separator + photoFileName, newProfilePic)
         parseFile.saveInBackground { e: ParseException? ->
             if (e == null) {
                 //Save successfull
@@ -273,7 +288,8 @@ class ProfileFragment : Fragment() {
      * con la nueva que acaba de cambiar
      */
     private fun refreshPicture() {
-        Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop().into(ivProfile)
+        Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop()
+            .into(ivProfile)
     }
 
 }
