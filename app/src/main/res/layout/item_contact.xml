@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="220dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-
         android:background="@color/ep_white"
         card_view:cardCornerRadius="14dp">
 
@@ -25,10 +26,9 @@
             <TextView
                 android:id="@+id/tvMunicipio"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
-                android:maxLines="2"
                 android:text="Municipio"
                 android:textAlignment="textStart"
                 android:textSize="20dp"
@@ -42,9 +42,7 @@
                 android:layout_below="@id/tvMunicipio"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
-                android:maxLines="2"
                 android:text= " url "
-
                 android:textAlignment="textStart"
                 android:textColor="#2F1FEF" />
 
@@ -55,7 +53,6 @@
                 android:layout_below="@id/tvUrl"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
-                android:maxLines="2"
                 android:text="Telefono"
                 android:textAlignment="textStart"
                 android:textColor="@color/black" />
@@ -67,7 +64,6 @@
                 android:layout_below="@id/tvTelefono"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
-                android:maxLines="2"
                 android:text="Email"
                 android:textAlignment="textStart"
                 android:textColor="@color/black" />
