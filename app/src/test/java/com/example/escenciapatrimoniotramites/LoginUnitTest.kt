@@ -8,7 +8,7 @@ import junit.framework.TestCase
  import org.junit.Test
 
 /**
- * Test [LoginActivity]
+ * Test [LoginActivity] -> iniciar sesión
  *
  * El input no es valido si ...
  * ... no se ingresó el nombre de usuario o el correo electrónico
@@ -25,7 +25,6 @@ import junit.framework.TestCase
     }
 
     @Test
-
     fun `contraseña vacia, se indica que hay que ponerla`() {
         val result = LoginUtils.validateLoginError(
             "password is required."
@@ -34,19 +33,20 @@ import junit.framework.TestCase
     }
 
     @Test
-
-
     fun `usuario o contraseña incorrecta, se indica esto`() {
         val result = LoginUtils.validateLoginError(
             "Invalid username/password."
         )
         assertThat(result).matches("El nombre de usuario o la contraseña no son correctos")
     }
-
-
-
 }
 
+/**
+ * Test [LoginActivity] -> olvidaste tu contraseña
+ *
+ * No existen errores si...
+ * ... se envia un correo con las instrucciones de cambio de contraseña
+ */
 class resetPasswordTest{
     @Test
     fun  `no hay errores`  (){
@@ -55,8 +55,4 @@ class resetPasswordTest{
         )
         assertThat(result).matches("Se te envió un correo con las instrucciones")
     }
-
-
-
-
 }
