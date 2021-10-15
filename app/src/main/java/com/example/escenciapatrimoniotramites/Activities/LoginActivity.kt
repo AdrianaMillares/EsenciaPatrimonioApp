@@ -145,7 +145,6 @@ class LoginActivity : AppCompatActivity() {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
                      Toast.makeText(this, LoginUtils.validateLoginError(e.message.toString()),Toast.LENGTH_SHORT).show()
-
                 }
             })
         )
@@ -174,21 +173,27 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
+/**
+ * Objeto creado para realizar el Unit test
+ */
 object LoginUtils{
 
-    public fun validateLoginError(e : String) : String{
-        when (e) {
+    /**
+     * @return mensaje de error dependiendo el tipo de fallo que presento el sistema
+     */
+    fun validateLoginError(e : String) : String{
+        return when (e) {
             "username/email is required." -> {
-                return( "Se deben ingresar nombre de usuario/email" )
+                ( "Se deben ingresar nombre de usuario/email" )
             }
             "password is required." -> {
-                return( "Se debe ingresar la contraseña" )
+                ( "Se debe ingresar la contraseña" )
             }
             "Invalid username/password." -> {
-                return( "El nombre de usuario o la contraseña no son correctos")
+                ( "El nombre de usuario o la contraseña no son correctos")
             }
             else -> {
-                return(e)
+                (e)
             }
         }
     }
