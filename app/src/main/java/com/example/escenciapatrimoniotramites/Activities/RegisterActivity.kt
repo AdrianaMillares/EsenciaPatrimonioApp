@@ -73,37 +73,36 @@ class RegisterActivity : AppCompatActivity() {
             Log.i(TAG, "username: $username mail: $mail password: $password password v: $passwordv")
 
             // Mensajes de error
-            if (username != "" && mail != "" && password != "" && passwordv != "") {
-                if (password == passwordv) {
-                    if (verifmail.containsMatchIn(mail)) {
-                        if (verifpass.containsMatchIn(password)) {
-                            Log.i(TAG, "Ya jalo tu registro")
-                            registerUser(username, mail, password)
-                        } else {
-                            Log.i(TAG, "Acaso quieres que te hacken?")
-                            Toast.makeText(
-                                this,
-                                "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        Log.i(TAG, "Ingresa un correo valido plz")
-                        Toast.makeText(
-                            this,
-                            "Debes de ingresar un correo valido",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } else {
-                    Log.i(TAG, "las contras deben de ser iguales")
-                    Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            } else {
-                Log.i(TAG, "Debes de llenar todo")
+            val validacion = RegisterUtils.validarInputs(username,password,passwordv,mail)
+
+            if (validacion =="La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial"){
+                Toast.makeText(
+                    this,
+                    "La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else if (validacion == "Debes de ingresar un correo valido"){
+                Toast.makeText(
+                    this,
+                    "Debes de ingresar un correo válido",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else if (validacion== "Las contraseñas deben de ser iguales"){
+                Toast.makeText(this, "Las contraseñas deben de ser iguales", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else if (validacion == "Debes de llenar todos los campos"){
                 Toast.makeText(this, "Debes de llenar todos los campos", Toast.LENGTH_SHORT).show()
             }
+            else if (validacion == "confirm"){
+                registerUser(username, mail, password)
+            }
+
+
+
+
         }
 
         tvLogin.setOnClickListener {
@@ -175,4 +174,36 @@ class RegisterActivity : AppCompatActivity() {
         val i = Intent(this, LoginActivity::class.java)
         startActivity(i)
     }
+}
+
+object RegisterUtils{
+    public fun validarInputs(username : String, password: String, passwordv: String, mail:String ) : String {
+        val verifmail = Regex("""\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}""")
+
+        // Verifica que la contraseña contenga al menos 8 caracteres, un número, una mayúscula, una minuscula y un caracter especial
+        val verifpass = Regex("^(?=.*\\d)(?=.*[\\W])(?=.*[A-Z])(?=.*[a-z])\\S{8,99}\$")
+
+        if (username != "" && mail != "" && password != "" && passwordv != "") {
+            if (password == passwordv) {
+                if (verifmail.containsMatchIn(mail)) {
+                    if (verifpass.containsMatchIn(password)) {
+                        return "confirm"
+                    //registerUser(username, mail, password)
+                    } else {
+                        return("La contraseña debe de contener al menos 8 caracteres, y al menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial")
+                    }
+                } else {
+                    return("Debes de ingresar un correo valido")
+                }
+            } else {
+                return ("Las contraseñas deben de ser iguales")
+            }
+        } else {
+            return ("Debes de llenar todos los campos")
+        }
+
+
+    }
+
+
 }
