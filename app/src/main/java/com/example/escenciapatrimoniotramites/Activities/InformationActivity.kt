@@ -39,21 +39,21 @@ import com.parse.ParseUser
 class InformationActivity : AppCompatActivity() {
 
     val TAG = "InformationActivity"
-    lateinit var etComment: EditText
-    lateinit var btnPublish: Button
-    lateinit var btnConsultarFormato: Button
-    lateinit var etTitulo: TextView
-    lateinit var etDescripcion: TextView
-    lateinit var tramiteActualNombre: String
-    lateinit var tramiteActualDescripcion: String
-    lateinit var TramiteParseObject: ParseObject
-    lateinit var tramiteActualUrl: String
-    lateinit var ivArrowInf: ImageView
-    lateinit var listView: ListView
-    lateinit var list: ArrayList<String>
-    lateinit var adapter: ArrayAdapter<*>
-    lateinit var btnCompartirInf: Button
-    var nombreTramite = "Impermeabilizar"
+    private lateinit var etComment: EditText
+    private lateinit var btnPublish: Button
+    private lateinit var btnConsultarFormato: Button
+    private lateinit var etTitulo: TextView
+    private lateinit var etDescripcion: TextView
+    private lateinit var tramiteActualNombre: String
+    private lateinit var tramiteActualDescripcion: String
+    private lateinit var TramiteParseObject: ParseObject
+    private lateinit var tramiteActualUrl: String
+    private lateinit var ivArrowInf: ImageView
+    private lateinit var listView: ListView
+    private lateinit var list: ArrayList<String>
+    private lateinit var adapter: ArrayAdapter<*>
+    private lateinit var btnCompartirInf: Button
+    private var nombreTramite = "Impermeabilizar"
 
     /**
      * Se ejecuta al crear la vista, despliega la interfaz
@@ -64,7 +64,7 @@ class InformationActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         // Restringe la rotación automática
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         super.onCreate(savedInstanceState)
         setContentView(com.example.escenciapatrimoniotramites.R.layout.activity_information)
@@ -77,8 +77,8 @@ class InformationActivity : AppCompatActivity() {
         btnConsultarFormato = findViewById(com.example.escenciapatrimoniotramites.R.id.btnConsultarFormato)
 
         // Obtiene el nombre del trámite/ley previamente seleccionado
-        val intent = getIntent()
-        nombreTramite = intent.extras?.getString("nombreTramite").toString();
+        val intent = intent
+        nombreTramite = intent.extras?.getString("nombreTramite").toString()
 
         // Petición a la base de datos para encontrar la información
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
@@ -86,16 +86,16 @@ class InformationActivity : AppCompatActivity() {
         try {
             val itemList: List<Tramite> = query.find()
             for (tramite in itemList) {
-                TramiteParseObject = itemList[0];
-                tramiteActualNombre = itemList[0].nombre.toString();
-                tramiteActualDescripcion = itemList[0].descripcion.toString();
+                TramiteParseObject = itemList[0]
+                tramiteActualNombre = itemList[0].nombre.toString()
+                tramiteActualDescripcion = itemList[0].descripcion.toString()
 
-                tramiteActualUrl = itemList[0].url.toString();
-                Log.i(TAG, "nombre $tramiteActualNombre ");
+                tramiteActualUrl = itemList[0].url.toString()
+                Log.i(TAG, "nombre $tramiteActualNombre ")
                 etTitulo.text = tramiteActualNombre
                 etDescripcion.text = tramiteActualDescripcion
 
-                Log.i(TAG, "descripcion $tramiteActualDescripcion ");
+                Log.i(TAG, "descripcion $tramiteActualDescripcion ")
             }
         } catch (e: ParseException) {
             e.printStackTrace()
@@ -136,10 +136,8 @@ class InformationActivity : AppCompatActivity() {
         // Publica los comentarios
         btnPublish.setOnClickListener {
             Log.i(TAG, "onClick login button")
-            var comentario = etComment.text.toString()
-            var idUsuario = ParseUser.getCurrentUser().toString()
-            var usuario = ParseUser.getCurrentUser().username.toString()
-            var idTramite = "1" // todo: definir como obtener el idtramitec
+            val comentario = etComment.text.toString()
+            val usuario = ParseUser.getCurrentUser().username.toString()
             Log.i(TAG, "username: $usuario comentario: $comentario")
             saveNewComment(comentario, usuario, TramiteParseObject)
         }
@@ -180,19 +178,19 @@ class InformationActivity : AppCompatActivity() {
      * @param usuario String que contiene el nombre del usuario que comentó
      * @param objTramite Objeto que contiene la información del tramite actual
      */
-    fun saveNewComment(
+    private fun saveNewComment(
         comentario: String,
         usuario: String,
         objTramite: ParseObject
     ) {
         val usuarioParse = ParseObject.create("Tramite")
-        usuarioParse.put("username", usuario);
+        usuarioParse.put("username", usuario)
 
         val comentar = ParseObject.create("Comentar")
-        comentar.put("idUsario", usuario);
-        comentar.put("usuario", ParseUser.getCurrentUser());
-        comentar.put("comentario", comentario);
-        comentar.put("Tramite", objTramite);
+        comentar.put("idUsario", usuario)
+        comentar.put("usuario", ParseUser.getCurrentUser())
+        comentar.put("comentario", comentario)
+        comentar.put("Tramite", objTramite)
         comentar.put("nombreTramite", nombreTramite)
         comentar.saveInBackground { error ->
             if (error == null) {

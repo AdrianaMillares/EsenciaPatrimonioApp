@@ -24,12 +24,12 @@ import com.parse.ParseUser
  */
 class LoginActivity : AppCompatActivity() {
 
-    val TAG = "LoginActivity"
-    lateinit var etUsername:EditText
-    lateinit var etPassword:EditText
-    lateinit var btnLogin:Button
-    lateinit var tvSignUp:TextView
-    lateinit var tvForgotPassword:TextView
+    private val TAG = "LoginActivity"
+    private lateinit var etUsername:EditText
+    private lateinit var etPassword:EditText
+    private lateinit var btnLogin:Button
+    private lateinit var tvSignUp:TextView
+    private lateinit var tvForgotPassword:TextView
 
     /**
      * Se ejecuta al crear la vista, permite que se muestre la interfaz y recupera los datos
@@ -59,8 +59,8 @@ class LoginActivity : AppCompatActivity() {
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
             Log.i(TAG, "onClick login button")
-            var username = etUsername.text.toString()
-            var password = etPassword.text.toString()
+            val username = etUsername.text.toString()
+            val password = etPassword.text.toString()
             Log.i(TAG, "username: $username password: $password")
             loginUser(username, password)
         }
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnAceptarPassReset.setOnClickListener {
-            var mail : String = etMail.text.toString()
+            val mail : String = etMail.text.toString()
             Log.i(TAG, "mail: $mail")
             dialog.dismiss()
             resetPassword(mail)
@@ -143,17 +143,19 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
-                    if (e.message == "username/email is required."){
-                        Toast.makeText(this, "Se deben ingresar nombre de usuario/email", Toast.LENGTH_SHORT).show()
-                    }
-                    else if (e.message == "password is required."){
-                        Toast.makeText(this, "Se debe ingresar la contraseña", Toast.LENGTH_SHORT).show()
-                    }
-                    else if (e.message == "Invalid username/password."){
-                        Toast.makeText(this, "El nombre de usuario o la contraseña no son correctos", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
-                        Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                    when (e.message) {
+                        "username/email is required." -> {
+                            Toast.makeText(this, "Se deben ingresar nombre de usuario/email", Toast.LENGTH_SHORT).show()
+                        }
+                        "password is required." -> {
+                            Toast.makeText(this, "Se debe ingresar la contraseña", Toast.LENGTH_SHORT).show()
+                        }
+                        "Invalid username/password." -> {
+                            Toast.makeText(this, "El nombre de usuario o la contraseña no son correctos", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             })

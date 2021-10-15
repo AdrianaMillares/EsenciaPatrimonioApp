@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         //Restringe la rotación automática
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -58,16 +58,16 @@ class RegisterActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             Log.i(TAG, "Presionado registro")
-            var username = etUsername.text.toString()
-            var mail = etMail.text.toString()
-            var password = etPassword.text.toString()
-            var passwordv = etVerifyPassword.text.toString()
+            val username = etUsername.text.toString()
+            val mail = etMail.text.toString()
+            val password = etPassword.text.toString()
+            val passwordv = etVerifyPassword.text.toString()
 
             // Verifica que los datos ingresados en "correo electronico" sea una dirección de correo
-            var verifmail = Regex("""\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}""")
+            val verifmail = Regex("""\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}""")
 
             // Verifica que la contraseña contenga al menos 8 caracteres, un número, una mayúscula, una minuscula y un caracter especial
-            var verifpass = Regex("^(?=.*\\d)(?=.*[\\W])(?=.*[A-Z])(?=.*[a-z])\\S{8,99}\$")
+            val verifpass = Regex("^(?=.*\\d)(?=.*[\\W])(?=.*[A-Z])(?=.*[a-z])\\S{8,99}\$")
 
 
             Log.i(TAG, "username: $username mail: $mail password: $password password v: $passwordv")
@@ -137,26 +137,30 @@ class RegisterActivity : AppCompatActivity() {
 
                 } else {
                     // El registro falló
-                    if (e.code == USERNAME_TAKEN) {
-                        // El nombre de usuario está en uso
-                        Toast.makeText(
-                            applicationContext,
-                            "El usuario ya está ocupado",
-                            Toast.LENGTH_SHORT
-                        ).show();
-                    } else if (e.code == USER_EMAIL_TAKEN) {
-                        Toast.makeText(
-                            applicationContext,
-                            "El correo ya está ocupado",
-                            Toast.LENGTH_SHORT
-                        ).show();
-                    } else {
-                        Toast.makeText(
-                            applicationContext,
-                            "Algo salió mal. Vuelve a intentarlo.",
-                            Toast.LENGTH_SHORT
-                        ).show();
-                        Log.i(TAG, "No se que pudo salio mal :(")
+                    when (e.code) {
+                        USERNAME_TAKEN -> {
+                            // El nombre de usuario está en uso
+                            Toast.makeText(
+                                applicationContext,
+                                "El usuario ya está ocupado",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        USER_EMAIL_TAKEN -> {
+                            Toast.makeText(
+                                applicationContext,
+                                "El correo ya está ocupado",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                applicationContext,
+                                "Algo salió mal. Vuelve a intentarlo.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.i(TAG, "No se que pudo salio mal :(")
+                        }
                     }
                 }
             }

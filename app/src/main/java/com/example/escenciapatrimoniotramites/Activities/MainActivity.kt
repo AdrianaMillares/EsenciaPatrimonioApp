@@ -19,10 +19,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  */
 class MainActivity : AppCompatActivity() {
 
-    val TAG: String = "MainActivity"
-
+    private val TAG: String = "MainActivity"
     lateinit var btnLogOut: Button
-    lateinit var bottomNav: BottomNavigationView
+    private lateinit var bottomNav: BottomNavigationView
 
     /**
      * Se ejecuta al crear la vista, permite que se muestren las interfaces
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         // Restringe la rotación automática
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

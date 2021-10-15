@@ -78,15 +78,15 @@ class ViewMoreActivity : AppCompatActivity() {
 
         // Despliega los datos en pantalla
         tvTituloVerMas.text = titulo
-        val adapterViewMore: ViewMoreAdapter = ViewMoreAdapter(lista, this,
-            { position -> onListItemClick(position) })
+        val adapterViewMore: ViewMoreAdapter = ViewMoreAdapter(lista, this
+        ) { position -> onListItemClick(position) }
         val recyclerView: RecyclerView = findViewById(R.id.rvViewMore)
         val manager = GridLayoutManager(this, 2)
         manager.scrollToPosition(0)
 
-        recyclerView.setLayoutManager(manager)
+        recyclerView.layoutManager = manager
         recyclerView.setHasFixedSize(true)
-        recyclerView.setAdapter(adapterViewMore)
+        recyclerView.adapter = adapterViewMore
         recyclerView.itemAnimator = DefaultItemAnimator()
     }
 
@@ -143,7 +143,7 @@ class ViewMoreAdapter(
         }
 
         fun bind(str: String, contexto: Context) {
-            textView.setText(str)
+            textView.text = str
         }
     }
 
@@ -152,7 +152,7 @@ class ViewMoreAdapter(
      * @return los elementos con los datos
      */
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        var layoutInflater = LayoutInflater.from(viewGroup.context)
+        val layoutInflater = LayoutInflater.from(viewGroup.context)
         Log.i("oncreateviewholder", "a punto de hacer return")
 
         return ViewHolder(

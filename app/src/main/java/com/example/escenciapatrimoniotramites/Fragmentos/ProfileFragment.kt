@@ -35,55 +35,63 @@ import android.widget.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.ByteArrayOutputStream
 
-
-class ProfileFragment : Fragment() {
-
+/**
+ * Muestra el perfil del usuario
+ * Permite cambiar la contraseña y la imagen del usuario
+ * @param LLAVE_PROFILE_PICTURE llave que permite cambiar la foto de perfil
+ * @param currentUser Usuario actual
+ * @param photoFileName Nombre del archivo de la foto del usuario
+ * @param selectedImagePath imagen seleccionada del carrete del usuario
+ * @param ivProfile Elemento de la interfaz donde se almacena la imagen de perfil
+ * @param tvUserProfile Elemento de la interfaz que despliega el nombre de usuario
+ * @param tvEmailProfile Elemento de la interfaz que despliega el correo electrónico del usuario
+ * @param btnCambiarPass Botón que al presionarlo permite cambiar la contraseña
+ */
+open class ProfileFragment : Fragment() {
     private val TAG: String = "ProfileActivity"
     private val LLAVE_PROFILE_PICTURE = "profilePicture"
-    protected val currentUser: ParseUser = ParseUser.getCurrentUser()
-
-    var photoFileName = "photo.jpg"
-    lateinit var selectedImagePath: String
-
-    lateinit var ivProfile: ImageView
-    lateinit var tvUserProfile: TextView
-    lateinit var tvEmailProfile: TextView
-    lateinit var btnCambiarPass: Button
+    private val currentUser: ParseUser = ParseUser.getCurrentUser()
+    private var photoFileName = "photo.jpg"
+    private lateinit var selectedImagePath: String
+    private lateinit var ivProfile: ImageView
+    private lateinit var tvUserProfile: TextView
+    private lateinit var tvEmailProfile: TextView
+    private lateinit var btnCambiarPass: Button
 
 
+    /**
+     * Se ejecuta al crear la vista
+     * @return la vista del profilefragment
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    companion object {
-        fun newInstance(): ProfileFragment = ProfileFragment()
-    }
-
+    /**
+     * Se ejecuta una vez que la vista esté creada despliega la información en los elementos correspondientes
+     * Permite cambiar la contraseña
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Encuentra los componentes de la vista
         ivProfile = view.findViewById(R.id.ivProfile)
         tvUserProfile = view.findViewById(R.id.tvUserProfile)
         tvEmailProfile = view.findViewById(R.id.tvEmailProfile)
         btnCambiarPass = view.findViewById(R.id.btnCambiarPass)
 
-        // Establece el texto correspondiente al usuario loggeado
         Log.d(TAG, "username: " + currentUser.username + "email: " + currentUser.email)
-        tvUserProfile.setText(currentUser.username)
-        tvEmailProfile.setText(currentUser.email)
+        tvUserProfile.text = currentUser.username
+        tvEmailProfile.text = currentUser.email
         Log.i(TAG, "url: " + currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url)
         Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop()
             .into(ivProfile)
 
-        // Funcionalidad de cambiar contrasena
+        // Cambiar contraseña
         btnCambiarPass.setOnClickListener {
-            // La vista que sera inflada dentro del alert dialog
             val viewNewPass = View.inflate(context, R.layout.change_password, null)
 
             // Los componentes dentro de la alerta
@@ -91,8 +99,6 @@ class ProfileFragment : Fragment() {
             val btnAceptar: Button = viewNewPass.findViewById(R.id.btnAceptar)
             val etNewPassword: TextView = viewNewPass.findViewById(R.id.etNewPassword)
             val etNewPasswordVerif: TextView = viewNewPass.findViewById(R.id.etNewPasswordVerif)
-
-
             val builder = MaterialAlertDialogBuilder(requireContext()).setView(viewNewPass)
             val dialog = builder.create()
             dialog.show()
@@ -102,8 +108,8 @@ class ProfileFragment : Fragment() {
             }
 
             btnAceptar.setOnClickListener {
-                var newPass: String = etNewPassword.text.toString()
-                var newPassVerif: String = etNewPasswordVerif.text.toString()
+                val newPass: String = etNewPassword.text.toString()
+                val newPassVerif: String = etNewPasswordVerif.text.toString()
                 dialog.dismiss()
                 cambiarContrasena(newPass, newPassVerif)
             }
@@ -114,7 +120,12 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Permite cambiar la contraseña
+     * Despliega mensajes de alerta
+     * @param newPass String que contiene la nueva contraseña
+     * @param newPassVerif String que comprueva que la nueva contraseña es correcta
+     */
     private fun cambiarContrasena(newPass: String, newPassVerif: String) {
         if (newPass == newPassVerif) {
             currentUser.setPassword(newPass)
@@ -131,18 +142,19 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
-    fun loadFromUri(photoUri: Uri?): Bitmap? {
+    /**
+     * Permite cambiar la foto de perfil
+     * @return la nueva imagen
+     */
+    private fun loadFromUri(photoUri: Uri?): Bitmap? {
         var image: Bitmap? = null
         try {
-            // check version of Android on device
+            // Comprueba la versión del sistema operativo
             image = if (Build.VERSION.SDK_INT > 27) {
-                // on newer versions of Android, use the new decodeBitmap method
                 val source: ImageDecoder.Source =
                     ImageDecoder.createSource(requireActivity().contentResolver, photoUri!!)
                 ImageDecoder.decodeBitmap(source)
             } else {
-                // support older versions of Android by using getBitmap
                 MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, photoUri)
             }
         } catch (e: IOException) {
@@ -171,29 +183,25 @@ class ProfileFragment : Fragment() {
     /**
      * Respuesta cuando un usuario elige una foto de la galeria
      */
-    var resultLauncher =
+    private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
 
-                var data: Intent? = result.data
-                var selectedImageUri: Uri? = data!!.data
-
-                // var selectedImageUri: Uri = attr.data
+                val data: Intent? = result.data
+                val selectedImageUri: Uri? = data!!.data
                 selectedImagePath = selectedImageUri!!.path.toString()
 
-                // Load the image located at photoUri into selectedImage
-                var selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
-                var stream = ByteArrayOutputStream()
+                val selectedImage: Bitmap = loadFromUri(selectedImageUri)!!
+                val stream = ByteArrayOutputStream()
                 selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                var byteArray: ByteArray = stream.toByteArray()
+                val byteArray: ByteArray = stream.toByteArray()
 
                 changeProfilePicture(byteArray)
             }
         }
 
-
     /**
-     * Checa si el usuario ya dio los permisos necesarios para la aplicacion
+     * Revisa si el usuario ya dio los permisos necesarios para la aplicacion
      * Si no ha dado o negado permisos, pregunta por ellos
      * Si se le da los permisos se abre la galeria para elegir una imagen
      * Si no se dieron permisos, muestra un dialogo de ello
@@ -225,7 +233,6 @@ class ProfileFragment : Fragment() {
     /**
      * Muestra un mensaje para activar permisos desde configuracion
      * en caso de que el usuario no los tenga activados
-     *
      * Si presiona 'Ir a configuracion' lo llevo a la configuracion de la aplicacion
      * Si presiona 'Cancelar' no hace nada y se queda en la pagina de Perfil
      */
@@ -250,14 +257,13 @@ class ProfileFragment : Fragment() {
             }.show()
     }
 
-
     /**
      * Cambia la foto de perfil en la base de datos
      * @param newProfilePic - Archivo de la nueva foto de perfil
      */
     private fun changeProfilePicture(newProfilePic: ByteArray) {
         Toast.makeText(context, "Guardando tu nueva foto de perfil...", Toast.LENGTH_LONG).show()
-        var parseFile: ParseFile =
+        val parseFile: ParseFile =
             ParseFile("foto.png" + File.separator + photoFileName, newProfilePic)
         parseFile.saveInBackground { e: ParseException? ->
             if (e == null) {
