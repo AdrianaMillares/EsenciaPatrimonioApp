@@ -1,5 +1,6 @@
 package com.example.escenciapatrimoniotramites.Activities
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -131,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
      * @param username referencía al nombre de usuario ingresado a la interfaz
      * @param password referencía a la contraseña ingresada a la interfaz
      */
-    private fun loginUser(username: String, password: String) {
+    public fun loginUser(username: String, password: String) {
         Log.i(TAG, "loginUser: entre a la funcion")
         ParseUser.logInInBackground(username, password,
             ({ user, e ->
@@ -143,24 +144,13 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
-                    when (e.message) {
-                        "username/email is required." -> {
-                            Toast.makeText(this, "Se deben ingresar nombre de usuario/email", Toast.LENGTH_SHORT).show()
-                        }
-                        "password is required." -> {
-                            Toast.makeText(this, "Se debe ingresar la contraseña", Toast.LENGTH_SHORT).show()
-                        }
-                        "Invalid username/password." -> {
-                            Toast.makeText(this, "El nombre de usuario o la contraseña no son correctos", Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {
-                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                     Toast.makeText(this, LoginUtils.validateLoginError(e.message.toString()),Toast.LENGTH_SHORT).show()
+
                 }
             })
         )
     }
+
 
     /**
      * Redirige al usuario a la pantalla principal
@@ -182,4 +172,25 @@ class LoginActivity : AppCompatActivity() {
         val i = Intent(this, RegisterActivity::class.java)
         startActivity(i)
     }
+}
+
+object LoginUtils{
+
+    public fun validateLoginError(e : String) : String{
+        when (e) {
+            "username/email is required." -> {
+                return( "Se deben ingresar nombre de usuario/email" )
+            }
+            "password is required." -> {
+                return( "Se debe ingresar la contraseña" )
+            }
+            "Invalid username/password." -> {
+                return( "El nombre de usuario o la contraseña no son correctos")
+            }
+            else -> {
+                return(e)
+            }
+        }
+    }
+
 }
