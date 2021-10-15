@@ -1,22 +1,20 @@
 package com.example.escenciapatrimoniotramites
 
-import com.example.escenciapatrimoniotramites.Activities.LoginUtils
 import com.example.escenciapatrimoniotramites.Activities.RegisterUtils
 import com.google.common.truth.Truth.assertThat
- import com.parse.ParseException
-import junit.framework.TestCase
-
- import org.junit.Test
+import org.junit.Test
 
 /**
  * Test [RegisterActivity]
+ * El input es valido si ...
+ * ... Todos los datos cumplen las especificaciones
  *
  * El input no es valido si ...
  * ... no se ingresó el nombre de usuario o el correo electrónico
  * ... no se ingresó la contraseña
  * ... el nombre de usuario o la contraseña no son correctas
  */
- class RegisterUnitTest {
+class RegisterUnitTest {
     @Test
     fun `registroExitoso`() {
         val result = RegisterUtils.validarInputs(
@@ -71,6 +69,5 @@ import junit.framework.TestCase
         )
         assertThat(result).matches("Debes de llenar todos los campos")
     }
-
 }
 

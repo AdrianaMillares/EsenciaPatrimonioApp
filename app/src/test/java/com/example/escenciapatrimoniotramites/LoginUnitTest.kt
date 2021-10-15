@@ -2,10 +2,10 @@ package com.example.escenciapatrimoniotramites
 
 import com.example.escenciapatrimoniotramites.Activities.LoginUtils
 import com.google.common.truth.Truth.assertThat
- import com.parse.ParseException
+import com.parse.ParseException
 import junit.framework.TestCase
 
- import org.junit.Test
+import org.junit.Test
 
 /**
  * Test [LoginActivity] -> iniciar sesión
@@ -15,7 +15,7 @@ import junit.framework.TestCase
  * ... no se ingresó la contraseña
  * ... el nombre de usuario o la contraseña no son correctas
  */
- class LoginUnitTest {
+class LoginUnitTest {
     @Test
     fun `nombre de usuario vacio, se indica que se debe colocar username o password`() {
         val result = LoginUtils.validateLoginError(
@@ -47,10 +47,10 @@ import junit.framework.TestCase
  * No existen errores si...
  * ... se envia un correo con las instrucciones de cambio de contraseña
  */
-class resetPasswordTest{
+class resetPasswordTest {
     @Test
-    fun  `no hay errores`  (){
-        val result = LoginUtils.validateResetPasswordError (
+    fun `no hay errores`() {
+        val result = LoginUtils.validateResetPasswordError(
             null
         )
         assertThat(result).matches("Se te envió un correo con las instrucciones")
