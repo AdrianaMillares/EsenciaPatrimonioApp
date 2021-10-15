@@ -4,6 +4,7 @@ import com.example.escenciapatrimoniotramites.Activities.LoginActivity
 import com.example.escenciapatrimoniotramites.Activities.LoginUtils
  import org.junit.Test
 import com.google.common.truth.Truth.assertThat
+import com.parse.ParseException
 import junit.framework.TestCase
 
 class LoginUnitTest {
@@ -17,7 +18,7 @@ class LoginUnitTest {
     }
 
     @Test
-    fun  ` contraseña vacia, se indica que hay que ponerla   `  (){
+    fun  `contraseña vacia, se indica que hay que ponerla`  (){
         val result = LoginUtils.validateLoginError (
             "password is required."
 
@@ -26,12 +27,25 @@ class LoginUnitTest {
     }
 
     @Test
-    fun  `usuario o contraseña incorrecta, se indica esto `  (){
+    fun  `usuario o contraseña incorrecta, se indica esto`  (){
         val result = LoginUtils.validateLoginError (
             "Invalid username/password."
 
         )
         assertThat(result).matches("El nombre de usuario o la contraseña no son correctos")
+    }
+
+
+
+}
+
+class resetPasswordTest{
+    @Test
+    fun  `no hay errores`  (){
+        val result = LoginUtils.validateResetPasswordError (
+            null
+        )
+        assertThat(result).matches("Se te envió un correo con las instrucciones")
     }
 
 

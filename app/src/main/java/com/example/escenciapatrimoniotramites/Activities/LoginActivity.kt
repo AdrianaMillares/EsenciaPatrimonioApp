@@ -113,15 +113,8 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun resetPassword(mail: String) {
         ParseUser.requestPasswordResetInBackground(mail) { e: ParseException? ->
-            if (e == null) {
-                // Se envio un correo electrónico con las instrcciones para cambiar la contraseña
-                Log.i(TAG, "Correo enviado")
-                Toast.makeText(this, "Se te envió un correo con las instrucciones", Toast.LENGTH_LONG).show()
-            } else {
-                // Ocurrio un error, revisa la consola
-                Log.i(TAG, "Correo no enviado")
-                Toast.makeText(this, "Hubo un error. Vuelve a intentarlo.", Toast.LENGTH_SHORT).show()
-            }
+        Toast.makeText(this,LoginUtils.validateResetPasswordError(e), Toast.LENGTH_LONG).show()
+
         }
     }
 
@@ -192,5 +185,17 @@ object LoginUtils{
             }
         }
     }
+
+
+    public fun validateResetPasswordError(e:ParseException?):String {
+        if (e == null) {
+            // Se envio un correo electrónico con las instrcciones para cambiar la contraseña
+            return ("Se te envió un correo con las instrucciones" )
+        } else {
+            return("Hubo un error. Vuelve a intentarlo.")
+        }
+    }
+
+
 
 }
