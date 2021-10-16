@@ -1,6 +1,7 @@
 package com.example.escenciapatrimoniotramites.Activities
 
 import android.R
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
@@ -196,14 +197,25 @@ class InformationActivity : AppCompatActivity() {
             if (error == null) {
                 Toast.makeText(this, "¡Tu comentario ha sido publicado!", Toast.LENGTH_SHORT).show()
                 etComment.text.clear()
-                if (list[1] == "Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ") {
-                    list[1] = "$usuario: $comentario"
-                } else {
-                    list.add("$usuario: $comentario")
-                }
+                list = CommentUtils.commentBoxFormat(list, usuario, comentario)
                 adapter.notifyDataSetChanged()
                 Log.d("Salida", "Guardado Correctamente")
             }
         }
+    }
+}
+
+object CommentUtils {
+
+    public fun commentBoxFormat(list : ArrayList<String>,usuario: String, comentario: String) : ArrayList<String> {
+
+            if (list[1] == "Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ") {
+                list[1] = "$usuario: $comentario"
+            } else {
+                list.add("$usuario: $comentario")
+            }
+
+
+        return list
     }
 }
