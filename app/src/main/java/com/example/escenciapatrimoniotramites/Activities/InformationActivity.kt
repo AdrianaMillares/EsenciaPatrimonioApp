@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.escenciapatrimoniotramites.Activities.InternetUtils.isNetworkAvailable
 import com.example.escenciapatrimoniotramites.Modelos.Comentar
 import com.example.escenciapatrimoniotramites.Modelos.Tramite
 import com.parse.ParseException
@@ -64,6 +65,16 @@ class InformationActivity : AppCompatActivity() {
      * Permite comentar un trámite/ley
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Verificar la conectividad de internet
+        if (isNetworkAvailable(this) == false){
+            val i = Intent(this, ConnectionErrorActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
+
+
         // Restringe la rotación automática
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 

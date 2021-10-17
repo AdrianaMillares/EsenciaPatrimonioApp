@@ -49,6 +49,14 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        //verificar conexion a internet
+        if (InternetUtils.isNetworkAvailable(this) == false){
+            val i = Intent(this, ConnectionErrorActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
         etUsername = findViewById(R.id.etNombreReg)
         etMail = findViewById(R.id.etCorreoReg)
         etPassword = findViewById(R.id.etContraseñaReg)

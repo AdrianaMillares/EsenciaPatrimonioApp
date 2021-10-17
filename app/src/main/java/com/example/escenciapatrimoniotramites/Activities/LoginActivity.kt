@@ -45,6 +45,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+        //verificar conexion a internet
+        if (InternetUtils.isNetworkAvailable(this) == false){
+            val i = Intent(this, ConnectionErrorActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
         // Si el usuario ya esta loggeado, muestra la pantalla principal
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity()

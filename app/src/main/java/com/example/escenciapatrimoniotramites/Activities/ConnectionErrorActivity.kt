@@ -1,8 +1,11 @@
 package com.example.escenciapatrimoniotramites.Activities
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import com.example.escenciapatrimoniotramites.R
 
 /**
@@ -15,5 +18,15 @@ class ConnectionErrorActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_connection_error)
+        val btnReintentar : Button = findViewById(R.id.btnNoInternet)
+
+        btnReintentar.setOnClickListener {
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
+
     }
 }

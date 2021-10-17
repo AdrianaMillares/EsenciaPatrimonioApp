@@ -38,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //verificar conexion a internet
+        if (InternetUtils.isNetworkAvailable(this) == false){
+            val i = Intent(this, ConnectionErrorActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
         val homeFragment = HomeFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()

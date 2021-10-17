@@ -37,6 +37,15 @@ class ViewMoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_more)
 
+        //verificar conexion a internet
+        if (InternetUtils.isNetworkAvailable(this) == false){
+            val i = Intent(this, ConnectionErrorActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
+
         val titulo: String
         val lista: ArrayList<Tramite> = ArrayList()
         val list: ArrayList<String> = ArrayList()
