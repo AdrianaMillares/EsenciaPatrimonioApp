@@ -124,10 +124,10 @@ open class ProfileFragment : Fragment() {
      * Permite cambiar la contraseña
      * Despliega mensajes de alerta
      * @param newPass String que contiene la nueva contraseña
-     * @param newPassVerif String que comprueva que la nueva contraseña es correcta
+     * @param newPassVerif String que comprueba que la nueva contraseña es correcta
      */
     private fun cambiarContrasena(newPass: String, newPassVerif: String) {
-        if (newPass == newPassVerif) {
+        if (ProfileUtils.verificarCoincidenciaPasswords(newPass,newPassVerif)) {
             currentUser.setPassword(newPass)
             currentUser.saveInBackground {
                 Toast.makeText(
@@ -297,5 +297,14 @@ open class ProfileFragment : Fragment() {
         Glide.with(this).load(currentUser.getParseFile(LLAVE_PROFILE_PICTURE)?.url).circleCrop()
             .into(ivProfile)
     }
+
+}
+object ProfileUtils{
+    public fun verificarCoincidenciaPasswords(newPass: String, newPassVerif: String) : Boolean{
+        return (newPass==newPassVerif)
+    }
+
+
+
 
 }
