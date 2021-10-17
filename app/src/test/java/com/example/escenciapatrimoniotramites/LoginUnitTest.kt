@@ -55,4 +55,14 @@ class resetPasswordTest {
         )
         assertThat(result).matches("Se te envió un correo con las instrucciones")
     }
+
+    @Test
+    fun ` hay errores`() {
+        val error = ParseException(1,"error")
+        val result = LoginUtils.validateResetPasswordError(
+            error
+        )
+        assertThat(result).doesNotMatch("Se te envió un correo con las instrucciones")
+    }
+
 }

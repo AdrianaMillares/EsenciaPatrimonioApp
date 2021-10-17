@@ -277,15 +277,14 @@ open class ProfileFragment : Fragment() {
 
         currentUser.put(LLAVE_PROFILE_PICTURE, ParseFile(newProfilePic))
         currentUser.saveInBackground { e: ParseException? ->
+            val messageToShow = ProfileUtils.validateImageError(e)
             if (e == null) {
                 // Save successful
                 refreshPicture()
-                Log.i(TAG, "Saved profile picture successful")
-                Toast.makeText(context, "¡Tu nueva foto se ha guardado!", Toast.LENGTH_SHORT).show()
-            } else {
-                Log.e(TAG, e.message!!)
-                Log.i(TAG, "Vuelve a intentar más tarde, por favor.")
             }
+            Toast.makeText(context, messageToShow , Toast.LENGTH_SHORT).show()
+
+
         }
     }
 
@@ -305,6 +304,14 @@ object ProfileUtils{
     }
 
 
+    public fun validateImageError(e: ParseException?):String{
+        if (e == null) {
+            return ( "¡Tu nueva foto se ha guardado!")
+        } else {
+            return ("Vuelve a intentar más tarde, por favor.")
 
+        }
+
+    }
 
 }

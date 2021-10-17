@@ -4,6 +4,7 @@ import com.example.escenciapatrimoniotramites.Activities.CommentUtils
 import com.example.escenciapatrimoniotramites.Activities.RegisterUtils
 import com.example.escenciapatrimoniotramites.Fragmentos.ProfileUtils
 import com.google.common.truth.Truth.assertThat
+import com.parse.ParseException
 import org.junit.Test
 
 /**
@@ -40,3 +41,23 @@ class ProfileUnitTest {
 
 }
 
+class cambiarFotoUnitTest {
+    @Test
+    fun `regresa un mensaje que le avisa al usuario que se guardo su foto`() {
+
+        val result = ProfileUtils.validateImageError(
+            null
+        )
+        assertThat(result).matches("¡Tu nueva foto se ha guardado!")
+    }
+
+    @Test
+    fun `regresa un mensaje que le avisa al usuario de un error`() {
+        val error : ParseException  = ParseException(1,"error")
+        val result = ProfileUtils.validateImageError(
+            error
+        )
+        assertThat(result).matches("Vuelve a intentar más tarde, por favor.")
+    }
+
+}
