@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Escencia Patrimonio Tramites</string>
+    <string name="app_name">Kampa: Trámite y gestión</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
