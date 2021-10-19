@@ -4,6 +4,7 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -120,26 +121,27 @@
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="349dp"
+            android:layout_width="320dp"
             android:layout_height="200dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/edit_text_border"
             android:divider="@color/light_gray"
             android:dividerHeight="0dp"
             android:horizontalSpacing="6dp"
             android:nestedScrollingEnabled="true"
             android:numColumns="2"
-            android:background="@drawable/edit_text_border"
             android:verticalSpacing="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvComent" />
 
         <EditText
             android:id="@+id/etComentario"
-            android:layout_width="258dp"
-            android:layout_height="50dp"
+            android:layout_width="263dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="112dp"
             android:layout_marginBottom="11dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
@@ -148,7 +150,7 @@
             android:inputType="textEmailAddress"
             android:paddingHorizontal="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listView"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -156,9 +158,9 @@
             android:id="@+id/btnComentar"
             android:layout_width="89dp"
             android:layout_height="50dp"
-            android:layout_marginStart="8dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/etComentario"
             app:srcCompat="@drawable/ic_baseline_send_24" />
 
