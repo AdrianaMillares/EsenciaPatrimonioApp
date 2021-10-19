@@ -25,10 +25,10 @@
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Perfil" />
 
-    <item
-        android:id="@+id/action_donation"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_monetization_on_24"
-        android:title="Donaciones" />
+<!--    <item-->
+<!--        android:id="@+id/action_donation"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_baseline_monetization_on_24"-->
+<!--        android:title="Donaciones" />-->
 
 </menu>

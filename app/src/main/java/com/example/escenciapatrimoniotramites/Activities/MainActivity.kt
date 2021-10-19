@@ -75,10 +75,10 @@ class MainActivity : AppCompatActivity() {
                     openFragment(profileFragment)
                     true
                 }
-                R.id.action_donation -> {
-                    openFragment(donationsFragment)
-                    true
-                }
+//                R.id.action_donation -> {
+//                    openFragment(donationsFragment)
+//                    true
+//                }
                 else -> {
                     openFragment(homeFragment)
                     true

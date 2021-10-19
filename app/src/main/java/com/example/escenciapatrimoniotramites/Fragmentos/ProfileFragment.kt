@@ -32,6 +32,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.single.PermissionListener
 import android.widget.*
+import com.example.escenciapatrimoniotramites.Activities.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.ByteArrayOutputStream
 
@@ -57,6 +58,8 @@ open class ProfileFragment : Fragment() {
     private lateinit var tvUserProfile: TextView
     private lateinit var tvEmailProfile: TextView
     private lateinit var btnCambiarPass: Button
+    private lateinit var btnLogOut: Button
+
 
 
     /**
@@ -72,6 +75,18 @@ open class ProfileFragment : Fragment() {
     }
 
     /**
+     * Redirige a la vista de [LogIn]
+     */
+    private fun goLoginActivity() {
+        Log.i(TAG, "Entered goMainActivity")
+        val i = Intent(context, LoginActivity::class.java)
+        startActivity(i)
+
+        // Cierra todas las ventanas anteriores
+        activity?.finishAffinity()
+    }
+
+    /**
      * Se ejecuta una vez que la vista esté creada despliega la información en los elementos correspondientes
      * Permite cambiar la contraseña
      */
@@ -82,6 +97,11 @@ open class ProfileFragment : Fragment() {
         tvUserProfile = view.findViewById(R.id.tvUserProfile)
         tvEmailProfile = view.findViewById(R.id.tvEmailProfile)
         btnCambiarPass = view.findViewById(R.id.btnCambiarPass)
+        btnLogOut = view.findViewById(R.id.btnLogOut)
+        btnLogOut.setOnClickListener {
+            ParseUser.logOut()
+            goLoginActivity()
+        }
 
         Log.d(TAG, "username: " + currentUser.username + "email: " + currentUser.email)
         tvUserProfile.text = currentUser.username

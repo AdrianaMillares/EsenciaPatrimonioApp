@@ -51,7 +51,6 @@ class HomeFragment : Fragment() {
     private lateinit var adapterTramites: CustomAdapter
     private lateinit var tvVerTramites: TextView
     private lateinit var tvVerLeyes: TextView
-    private lateinit var btnLogOut: Button
 
     private var list: ArrayList<String> = ArrayList()
     private val TAG: String = "HomeFragment"
@@ -81,18 +80,6 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Redirige a la vista de [LogIn]
-     */
-    private fun goLoginActivity() {
-        Log.i(TAG, "Entered goMainActivity")
-        val i = Intent(context, LoginActivity::class.java)
-        startActivity(i)
-
-        // Cierra todas las ventanas anteriores
-        activity?.finishAffinity()
-    }
-
-    /**
      * Se ejecuta una vez que la vista se encuentre creada
      * Permite el Log Out
      * Obtiene la informacion de [Tramite] y la despliega en pantalla
@@ -100,11 +87,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnLogOut = view.findViewById(R.id.btnLogOut)
-        btnLogOut.setOnClickListener {
-            ParseUser.logOut()
-            goLoginActivity()
-        }
+
 
         adapterTramites = CustomAdapter(listaTramites, requireContext()
         ) { position -> onListItemClick(position) }
