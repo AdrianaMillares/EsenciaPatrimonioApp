@@ -6,11 +6,9 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.parse.ParseException
@@ -44,6 +42,22 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val condiciones = View.inflate(this, R.layout.condiciones, null)
+        val check: CheckBox = condiciones.findViewById(R.id.checkBox)
+        val btnContinuar: Button = condiciones.findViewById(R.id.button)
+        val builder = MaterialAlertDialogBuilder(this).setView(condiciones)
+        val dialog = builder.create()
+        dialog.show()
+
+        if(check.isChecked){
+            btnContinuar.isEnabled = true
+            btnContinuar.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
+        else{
+            btnContinuar.isEnabled = false
+        }
 
 
         //verificar conexion a internet
