@@ -69,6 +69,9 @@ class LoginActivity : AppCompatActivity() {
         tvSignUp = findViewById(R.id.tvSignUp)
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
 
+        if (attemptCounter > 3 ){
+            btnLogin.isEnabled= false
+        }
 
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
@@ -91,9 +94,10 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onFinish() {
-                        toast = Toast.makeText(applicationContext,"Ya puedes volver a intentar iniciar sesión =)" , Toast.LENGTH_SHORT)
+                        toast = Toast.makeText(applicationContext,"Ya puedes volver a intentar iniciar sesión" , Toast.LENGTH_SHORT)
                         toast?.show()
                         btnLogin.isEnabled= true
+                        attemptCounter = 0
                     }
                 }.start()
 
