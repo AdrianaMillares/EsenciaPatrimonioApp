@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -36,6 +37,8 @@ class ViewMoreActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_more)
+
+        var arrow: ImageView = findViewById(com.example.escenciapatrimoniotramites.R.id.ivArrow)
 
         //verificar conexion a internet
         if (InternetUtils.isNetworkAvailable(this) == false){
@@ -97,6 +100,15 @@ class ViewMoreActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapterViewMore
         recyclerView.itemAnimator = DefaultItemAnimator()
+
+        // Redirige al inicio
+        arrow.setOnClickListener {
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+
+            // Cierra todas las ventanas anteriores
+            finishAffinity()
+        }
     }
 
     private fun onListItemClick(strTramite: String) {}
@@ -109,6 +121,8 @@ class ViewMoreActivity : AppCompatActivity() {
         i.putExtra("titulo", tituloTramite)
         startActivity(i)
     }
+
+
 
 }
 

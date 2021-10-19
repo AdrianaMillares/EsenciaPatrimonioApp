@@ -42,7 +42,7 @@ class InformationActivity : AppCompatActivity() {
 
     val TAG = "InformationActivity"
     private lateinit var etComment: EditText
-    private lateinit var btnPublish: Button
+    private lateinit var btnPublish: ImageView
     private lateinit var btnConsultarFormato: Button
     private lateinit var etTitulo: TextView
     private lateinit var etDescripcion: TextView
@@ -54,7 +54,7 @@ class InformationActivity : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var list: ArrayList<String>
     private lateinit var adapter: ArrayAdapter<*>
-    private lateinit var btnCompartirInf: Button
+    private lateinit var btnCompartirInf: TextView
     private var nombreTramite = "Impermeabilizar"
 
     /**
@@ -162,12 +162,8 @@ class InformationActivity : AppCompatActivity() {
         try {
             val itemList2: List<Comentar> = query2.find()
             if (itemList2.isEmpty()) {
-                list.add("Comentarios")
-
                 list.add("Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ")
             } else {
-                list.add("Comentarios")
-
                 for (comentar in itemList2) {
                     list.add(comentar.idUsario.toString() + ": " + comentar.comentario.toString())
                 }
@@ -218,10 +214,10 @@ class InformationActivity : AppCompatActivity() {
 
 object CommentUtils {
 
-    public fun commentBoxFormat(list : ArrayList<String>,usuario: String, comentario: String) : ArrayList<String> {
+    fun commentBoxFormat(list : ArrayList<String>,usuario: String, comentario: String) : ArrayList<String> {
 
-            if (list[1] == "Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ") {
-                list[1] = "$usuario: $comentario"
+            if (list[0] == "Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ") {
+                list[0] = "$usuario: $comentario"
             } else {
                 list.add("$usuario: $comentario")
             }

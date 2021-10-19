@@ -18,8 +18,7 @@ import org.junit.Test
 class CommentUnitTest {
     @Test
     fun `este es el primer comentario, se debe remover el texto que invita a comentar`() {
-        var list: ArrayList<String> = ArrayList()
-        list.add("Comentarios:")
+        val list: ArrayList<String> = ArrayList()
         list.add("Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ")
 
         val result = CommentUtils.commentBoxFormat(
@@ -27,13 +26,12 @@ class CommentUnitTest {
             "cut",
             "excelente info! gracias!"
         )
-        assertThat(result[1]).doesNotMatch("Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ")
+        assertThat(result[0]).doesNotMatch("Aún no hay comentarios. ¡Sé la primera persona en comentar! ¿Te fue útil la información? ")
     }
 
     @Test
     fun `ya habia mas comentarios, solo se agrega a la lista`() {
-        var list: ArrayList<String> = ArrayList()
-        list.add("Comentarios:")
+        val list: ArrayList<String> = ArrayList()
         list.add("cut: este es un comentario ya existente")
 
         val result = CommentUtils.commentBoxFormat(

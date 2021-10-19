@@ -2,86 +2,93 @@
 
 <androidx.core.widget.NestedScrollView
 
-xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    >
+    android:fillViewport="true">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
+        android:layout_height="match_parent"
         android:background="?backgroundColor">
 
         <ImageView
             android:id="@+id/ivInformation"
-            android:layout_width="236dp"
-            android:layout_height="215dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_width="235dp"
+            android:layout_height="171dp"
+            android:layout_marginTop="76dp"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_image_24" />
 
         <ImageView
             android:id="@+id/ivArrowInf"
             android:layout_width="62dp"
             android:layout_height="62dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
 
-        <Button
+
+        <TextView
             android:id="@+id/btnCompartirInf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/share_button"
             android:fontFamily="@font/raleway_bold"
+            android:importantForAutofill="no"
+            android:padding="10dp"
             android:text="Compartir"
-            android:textColor="@color/ep_blue" />
-
+            android:textColor="@color/ep_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/ivArrowInf"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvTituloInf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ivInformation"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="57dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/raleway_bold"
             android:text="Título"
             android:textAlignment="textStart"
-            android:textSize="35dp" />
+            android:textSize="35sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivInformation" />
 
         <TextView
             android:id="@+id/tvSubtitInf"
             android:layout_width="322dp"
-            android:layout_height="179dp"
-            android:layout_below="@+id/tvTituloInf"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="57dp"
-            android:fontFamily="@font/raleway_bold"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/raleway"
             android:text="Subtítulo"
             android:textAlignment="textStart"
-            android:textSize="15dp" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTituloInf" />
 
 
         <Button
             android:id="@+id/btnConsultarFormato"
-            android:layout_width="276dp"
-            android:layout_height="54dp"
-            android:layout_below="@+id/tvSubtitInf"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_marginStart="56dp"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="79dp"
@@ -89,53 +96,72 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:fontFamily="@font/raleway_bold"
             android:text="CONSULTAR FORMATO"
             android:textColor="@color/ep_white"
-            android:textSize="15dp" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubtitInf" />
+
+        <TextView
+            android:id="@+id/tvComent"
+            android:layout_width="322dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="57dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Comentarios"
+            android:textAlignment="textStart"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConsultarFormato" />
 
         <ListView
-            android:layout_marginStart="32dp"
-
             android:id="@+id/listView"
             android:layout_width="349dp"
             android:layout_height="200dp"
-            android:layout_below="@+id/btnConsultarFormato"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="62dp"
-            android:layout_marginBottom="82dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
             android:divider="@color/light_gray"
-            android:dividerHeight="1dp"
+            android:dividerHeight="0dp"
             android:horizontalSpacing="6dp"
             android:nestedScrollingEnabled="true"
             android:numColumns="2"
-            android:verticalSpacing="6dp" />
+            android:background="@drawable/edit_text_border"
+            android:verticalSpacing="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvComent" />
 
         <EditText
             android:id="@+id/etComentario"
-            android:layout_width="294dp"
-            android:layout_height="46dp"
-            android:layout_below="@+id/listView"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="115dp"
+            android:layout_width="258dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="112dp"
             android:layout_marginBottom="11dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:fontFamily="@font/raleway"
             android:hint="Escribe tu comentario"
             android:inputType="textEmailAddress"
-            android:paddingHorizontal="5dp" />
+            android:paddingHorizontal="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listView"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnComentar"
-            android:textSize="11dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="-100dp"
+            android:layout_width="89dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/etComentario"
-            android:text="Comentar" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etComentario"
+            app:srcCompat="@drawable/ic_baseline_send_24" />
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -114,53 +114,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etConfContraseñaReg"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/raleway"
                 android:text="Registrarse" />
-
-            <TextView
-                android:id="@+id/tvReg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnRegistro"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:text="O ingresa con"
-                android:textColor="@color/light_gray" />
-
-            <View
-                android:id="@+id/lineReg"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_below="@+id/btnRegistro"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="110dp"
-                android:background="@color/light_gray" />
-
-            <ImageView
-                android:id="@+id/ivGoogleReg"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lineReg"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="-160dp"
-                app:srcCompat="@drawable/google" />
-
-            <ImageView
-                android:id="@+id/ivFBReg"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lineReg"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="-155dp"
-                android:layout_marginEnd="70dp"
-                app:srcCompat="@drawable/fb" />
 
             <TextView
                 android:id="@+id/tvReg3"
@@ -168,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnRegistro"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="110dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="41dp"
                 android:text="Si ya tienes una cuenta" />
 
             <TextView
@@ -178,8 +134,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnRegistro"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="110dp"
-                android:layout_marginEnd="35dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginEnd="37dp"
                 android:text="Inicia sesión"
                 android:textColor="@color/ep_yellow"
                 android:textStyle="bold" />
