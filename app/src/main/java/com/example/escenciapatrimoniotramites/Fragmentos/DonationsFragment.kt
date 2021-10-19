@@ -45,6 +45,7 @@ class DonationsFragment : Fragment() {
         }
 
         myWebView.loadUrl("https://www.paypal.com/donate?hosted_button_id=T6FJA2T992HPS")
+        myWebView.settings.javaScriptEnabled = true
         myWebView.settings.allowContentAccess = true
         myWebView.settings.domStorageEnabled = true
         myWebView.settings.useWideViewPort = true
