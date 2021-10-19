@@ -3,61 +3,70 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fillViewport="true"
 
     android:layout_height="match_parent">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/ep_white">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ep_white">
 
-    <ImageView
-        android:id="@+id/ivPerro"
-        android:layout_width="303dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        <ImageView
+            android:id="@+id/ivPerro"
+            android:layout_width="303dp"
+            android:layout_height="300dp"
 
-        android:layout_marginBottom="255dp"
-        app:srcCompat="@drawable/perroconfundido" />
+            android:layout_marginBottom="255dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/perroconfundido" />
 
-    <TextView
-        android:id="@+id/tvNoInternet1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPerro"
-        android:layout_alignBottom="@+id/ivPerro"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-330dp"
-        android:layout_marginBottom="47dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Sin conexión a internet"
-        android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tvNoInternet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="255dp"
+            android:layout_marginBottom="47dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Sin conexión a internet"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPerro"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivPerro"
+            app:layout_constraintVertical_bias="0.772" />
 
-    <TextView
-        android:id="@+id/tvNoInternet2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnNoInternet"
-        android:layout_below="@+id/tvNoInternet1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="86dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Por favor revisa tu conexión y vuelva a intentarlo"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tvNoInternet2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:layout_marginBottom="-180dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Por favor revisa tu conexión y vuelva a intentarlo"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnNoInternet"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNoInternet1"
+            app:layout_constraintVertical_bias="0.132" />
 
-    <Button
-        android:id="@+id/btnNoInternet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPerro"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-180dp"
-        android:text="Reintentar" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnNoInternet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:text="Reintentar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivPerro" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
