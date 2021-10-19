@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -15,6 +16,8 @@ import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.parse.ParseException
 import com.parse.ParseUser
+
+var attemptCounter = 0
 
 /**
  * Gestiona el inicio de sesión en la aplicación, la verificación de usuarios y contraseña de los mismos.
@@ -66,13 +69,39 @@ class LoginActivity : AppCompatActivity() {
         tvSignUp = findViewById(R.id.tvSignUp)
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
 
+
         // Cuando el usuario da click, se verifican las credenciales de inicio de sesion
         btnLogin.setOnClickListener{
             Log.i(TAG, "onClick login button")
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
             Log.i(TAG, "username: $username password: $password")
-            loginUser(username, password)
+            var toast : Toast? = null
+            if (attemptCounter > 3){
+                btnLogin.isEnabled = false
+                object : CountDownTimer(60000 * 3, 1000) {
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        if (toast != null) {
+                            toast?.cancel()
+                        }
+                        toast = Toast.makeText(applicationContext,"Por favor espera, podrás volver a intentar en " + millisUntilFinished/1000 + " segundos" , Toast.LENGTH_SHORT)
+                        toast?.show()
+
+                    }
+
+                    override fun onFinish() {
+                        toast = Toast.makeText(applicationContext,"Ya puedes volver a intentar iniciar sesión =)" , Toast.LENGTH_SHORT)
+                        toast?.show()
+                        btnLogin.isEnabled= true
+                    }
+                }.start()
+
+            }
+            else {
+                attemptCounter++
+                loginUser(username, password)
+            }
         }
 
         tvSignUp.setOnClickListener{
@@ -146,7 +175,8 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     // El login falló, ver ParseException para ver qué pasó
                     e.message?.let { Log.e(TAG, it) }
-                     Toast.makeText(this, LoginUtils.validateLoginError(e.message.toString()),Toast.LENGTH_SHORT).show()
+                    attemptCounter ++
+                    Toast.makeText(this, LoginUtils.validateLoginError(e.message.toString()),Toast.LENGTH_SHORT).show()
                 }
             })
         )
