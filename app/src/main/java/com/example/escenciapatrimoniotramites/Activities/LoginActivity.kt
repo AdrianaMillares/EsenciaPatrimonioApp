@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.system.Os.close
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -13,6 +16,14 @@ import com.example.escenciapatrimoniotramites.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.parse.ParseException
 import com.parse.ParseUser
+import android.widget.CompoundButton
+import android.graphics.drawable.BitmapDrawable
+
+
+
+
+
+
 
 /**
  * Gestiona el inicio de sesión en la aplicación, la verificación de usuarios y contraseña de los mismos.
@@ -49,14 +60,15 @@ class LoginActivity : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
 
-        if(check.isChecked){
-            btnContinuar.isEnabled = true
-            btnContinuar.setOnClickListener {
-                dialog.dismiss()
-            }
+        condiciones.isFocusable = true
+        btnContinuar.isEnabled = false
+
+        check.setOnCheckedChangeListener { _, isChecked ->
+            btnContinuar.isEnabled = isChecked
         }
-        else{
-            btnContinuar.isEnabled = false
+
+        btnContinuar.setOnClickListener {
+            dialog.dismiss()
         }
 
 
