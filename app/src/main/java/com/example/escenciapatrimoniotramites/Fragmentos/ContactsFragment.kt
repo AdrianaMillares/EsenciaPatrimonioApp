@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,7 @@ class ContactsFragment : Fragment() {
     private lateinit var adapter: ContactsAdapter
     private var list: ArrayList<String> = ArrayList()
     private var listaContactos: ArrayList<Contactos> = ArrayList()
-
+    private lateinit var inahUrl: TextView
     /**
      * @param vista Contiene la interfaz de [ContactsFragment]
      * @return la vista de la interfaz
@@ -64,7 +65,7 @@ class ContactsFragment : Fragment() {
             for (contacto in itemList) {
 
                 // Revisa que el tramite no esté en la lista
-                if (contacto.municipio.toString() !in list) {
+                if (contacto.municipio.toString() !in list ) {
                     listaContactos.add(contacto)
                     list.add(contacto.municipio.toString())
                     Log.i("query", contacto.municipio.toString())
@@ -77,7 +78,6 @@ class ContactsFragment : Fragment() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-
         // Desplegar el contenido en pantalla
         recyclerView1 = view.findViewById(R.id.rvContactos)
         val manager = LinearLayoutManager(requireContext())
@@ -87,6 +87,17 @@ class ContactsFragment : Fragment() {
         recyclerView1.setHasFixedSize(true)
         recyclerView1.adapter = adapter
         recyclerView1.itemAnimator = DefaultItemAnimator()
+        inahUrl = view.findViewById(R.id.tvInahUrl)
+
+
+        inahUrl.setText("https://cnci.inah.gob.mx/publico/index.php")
+        inahUrl.setOnClickListener{
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse("https://cnci.inah.gob.mx/publico/index.php")
+            (context as MainActivity?)!!.startActivity(i)
+        }
+
+
     }
 }
 
