@@ -72,7 +72,7 @@ Esencia patrimonio Se reserva el derecho de cambiar los términos de la presente
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.083"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBox"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
