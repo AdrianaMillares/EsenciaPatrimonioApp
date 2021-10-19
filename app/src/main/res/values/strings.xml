@@ -17,4 +17,10 @@
     <string name="ingresar">Ingresar</string>
     <string name="olvidaste_tu_contrasena">Olvidaste tu contraseña?</string>
     <string name="ver_todos"><u>Ver todos</u></string>
+    <string name="correo_electronico">Correo Electrónico</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="confirmar_contrasena">Confirmar contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="inicia_sesion">Inicia sesión</string>
 </resources>
