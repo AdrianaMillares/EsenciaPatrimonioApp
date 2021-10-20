@@ -17,5 +17,8 @@
         <item name="background">@color/dark_grey</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:linksClickable">@color/link_blue_darkmode</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceMediumComponent.EscenciaPatrimonioTramites.Button</item>
+        <item name="textAppearanceButton">@style/TextAppearance.EscenciaPatrimonioTramites.Button</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.EscenciaPatrimonioTramites.SmallComponent</item>
     </style>
 </resources>
