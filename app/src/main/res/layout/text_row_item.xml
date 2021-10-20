@@ -37,9 +37,9 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="113dp"
-                android:layout_marginTop="0dp"
                 android:layout_below="@id/textView4"
-                card_view:srcCompat="@drawable/ic_baseline_image_24" />
+                android:layout_marginTop="0dp"
+                card_view:srcCompat="@drawable/logo_leyes" />
 
 
         </RelativeLayout>
