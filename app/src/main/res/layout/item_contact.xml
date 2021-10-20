@@ -5,34 +5,31 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_margin="20dp"
         android:background="@color/ep_white"
         card_view:cardCornerRadius="14dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_margin="20dp"
             >
 
             <TextView
                 android:id="@+id/tvMunicipio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/muli"
                 android:text="Municipio"
+                android:textIsSelectable="true"
                 android:textAlignment="textStart"
                 android:textSize="20dp"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
 
             <TextView
@@ -42,9 +39,11 @@
                 android:layout_below="@id/tvMunicipio"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
-                android:text= " url "
+                android:text= "url"
+                android:textIsSelectable="true"
+                android:textColor="?android:linksClickable"
                 android:textAlignment="textStart"
-                android:textColor="#2F1FEF" />
+                android:fontFamily="@font/muli" />
 
             <TextView
                 android:id="@+id/tvTelefono"
@@ -53,9 +52,10 @@
                 android:layout_below="@id/tvUrl"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
+                android:textIsSelectable="true"
                 android:text="Telefono"
                 android:textAlignment="textStart"
-                android:textColor="@color/black" />
+                android:fontFamily="@font/muli"/>
 
             <TextView
                 android:id="@+id/tvEmail"
@@ -65,8 +65,9 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:text="Email"
+                android:textIsSelectable="true"
                 android:textAlignment="textStart"
-                android:textColor="@color/black" />
+                android:fontFamily="@font/muli"/>
 
 
         </RelativeLayout>
