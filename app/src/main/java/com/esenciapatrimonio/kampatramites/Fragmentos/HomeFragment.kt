@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -186,7 +185,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun randomImg(): Int {
-        return (0..10).random()
+        return (1..7).random()
     }
 
     private fun onListItemClick(strTramite: String) {}
@@ -260,6 +259,15 @@ class CustomAdapter(
             "a punto de obtener dataset y wardarlo en viewholder.textview.text"
         )
 
+        when (dataSet2[position]) {
+            1 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite1)
+            2 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite2)
+            3 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite3)
+            4 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite4)
+            5 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite5)
+            6 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite6)
+            7 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite7)
+        }
         viewHolder.bind(dataSet[position].nombre.toString(), contexto)
         viewHolder.textView.text = dataSet[position].nombre.toString()
 
