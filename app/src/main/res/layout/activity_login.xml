@@ -7,150 +7,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activities.LoginActivity"
-        android:background="?backgroundColor">
+        android:background="?backgroundColor"
+        tools:context=".Activities.LoginActivity">
 
 
         <ImageView
             android:id="@+id/ivLogoEP"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@+id/cvLoginCard"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.196"
             app:srcCompat="@drawable/logoep_transparent" />
 
         <ImageView
             android:id="@+id/ivCurvita"
             android:layout_width="match_parent"
-            android:layout_height="405dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/ic_curvita"
-            tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="330dp" />
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/ic_curvita" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvLoginCard"
-            android:layout_width="300dp"
-            android:layout_height="480dp"
-            android:layout_below="@+id/ivLogoEP"
-            android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            app:cardBackgroundColor="?background"
             app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="?backgroundColor"
-            app:cardElevation="10dp">
+            app:cardElevation="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.61">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/relativeLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="40dp">
 
                 <TextView
                     android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/raleway_bold"
                     android:text="Iniciar sesión"
+                    android:textAlignment="center"
                     android:textColor="@color/ep_yellow"
-                    android:textSize="35sp" />
+                    android:textSize="35sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <EditText
                     android:id="@+id/etUserName"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_below="@+id/tvLogin"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="45dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:fontFamily="@font/raleway"
                     android:hint="Nombre de usuario"
                     android:inputType="textEmailAddress"
-                    android:paddingHorizontal="10dp" />
+                    android:paddingHorizontal="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLogin"
+                    app:layout_constraintHorizontal_bias="0.505"
+                    app:layout_constraintStart_toStartOf="@+id/tvLogin"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
 
                 <EditText
                     android:id="@+id/etPassword"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_below="@+id/etUserName"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:fontFamily="@font/raleway"
                     android:hint="Contraseña"
                     android:inputType="textPassword"
-                    android:paddingHorizontal="10dp" />
+                    android:paddingHorizontal="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/etUserName"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/etUserName"
+                    app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 
                 <TextView
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/etPassword"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:textColor="@color/ep_yellow"
-                    android:textSize="11sp"
-                    android:text="@string/olvidaste_tu_contrasena"
                     android:fontFamily="@font/raleway"
-                    />
+                    android:text="@string/olvidaste_tu_contrasena"
+                    android:textColor="@color/ep_yellow"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                    app:layout_constraintHorizontal_bias="0.511"
+                    app:layout_constraintStart_toStartOf="@+id/etPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
                 <Button
                     android:id="@+id/btnLogIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvForgotPassword"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:text="@string/ingresar"
                     android:fontFamily="@font/raleway"
-                    />
+                    android:text="@string/ingresar"
+                    app:layout_constraintEnd_toEndOf="@+id/tvForgotPassword"
+                    app:layout_constraintStart_toStartOf="@+id/tvForgotPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvHaveAccount"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/btnLogIn"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/raleway"
+                    android:text="@string/no_tienes_cuenta"
+                    android:textColor="@color/light_gray"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvSignUp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
 
-                    <TextView
-                        android:id="@+id/tvHaveAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/raleway"
-                        android:text="@string/no_tienes_cuenta"
-                        android:textColor="@color/light_gray"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tvSignUp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_toEndOf="@+id/tvHaveAccount"
-                        android:text="@string/registrate"
-                        android:textColor="@color/ep_yellow"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/raleway"
-                        />
-
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/raleway"
+                    android:text="@string/registrate"
+                    android:textColor="@color/ep_yellow"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvHaveAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLogIn" />
 
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

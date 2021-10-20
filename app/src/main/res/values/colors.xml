@@ -7,9 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dark_grey">#1e1e1e</color>
+    <color name="dark_grey">#333333</color>
     <color name="ep_white">#F9F9F9</color>
-    <color name="ep_black">#121212</color>
+    <color name="ep_black">#292929</color>
     <color name="ep_yellow">#ECB618</color>
     <color name="ep_pink">#D83671</color>
     <color name="ep_blue">#15CDCD</color>
