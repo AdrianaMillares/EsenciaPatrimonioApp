@@ -44,24 +44,6 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val condiciones = View.inflate(this, R.layout.condiciones, null)
-        val check: CheckBox = condiciones.findViewById(R.id.checkBox)
-        val btnContinuar: Button = condiciones.findViewById(R.id.button)
-        val builder = MaterialAlertDialogBuilder(this).setView(condiciones)
-        val dialog = builder.create()
-        dialog.show()
-
-        condiciones.isFocusable = true
-        btnContinuar.isEnabled = false
-
-        check.setOnCheckedChangeListener { _, isChecked ->
-            btnContinuar.isEnabled = isChecked
-        }
-
-        btnContinuar.setOnClickListener {
-            dialog.dismiss()
-        }
-
 
         //verificar conexion a internet
         if (InternetUtils.isNetworkAvailable(this) == false){

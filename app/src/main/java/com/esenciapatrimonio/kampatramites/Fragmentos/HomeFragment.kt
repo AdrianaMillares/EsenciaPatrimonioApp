@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -17,8 +19,11 @@ import com.esenciapatrimonio.kampatramites.Activities.MainActivity
 import com.esenciapatrimonio.kampatramites.Activities.ViewMoreActivity
 import com.esenciapatrimonio.kampatramites.Modelos.Tramite
 import com.esenciapatrimonio.kampatramites.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.parse.Parse
 import com.parse.ParseException
 import com.parse.ParseQuery
+import com.parse.ParseUser
 
 /**
  * @param listaTramites Lista de [Trámites] que almacena la información de los tramites para evitar duplicidad
@@ -48,6 +53,8 @@ class HomeFragment : Fragment() {
     private lateinit var adapterTramites: CustomAdapter
     private lateinit var tvVerTramites: TextView
     private lateinit var tvVerLeyes: TextView
+    var user: ParseUser = ParseUser.getCurrentUser()
+    var politicas: Boolean = user.getBoolean("politicas")
 
     private var list: ArrayList<String> = ArrayList()
     private val TAG: String = "HomeFragment"
@@ -84,6 +91,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(!politicas) {
+            val condiciones = View.inflate(context, R.layout.condiciones, null)
+            val check: CheckBox = condiciones.findViewById(R.id.checkBox)
+            val btnContinuar: Button = condiciones.findViewById(R.id.button)
+            val builder = MaterialAlertDialogBuilder(requireContext()).setView(condiciones)
+            val dialog = builder.create()
+            dialog.show()
+
+            condiciones.isFocusable = true
+            btnContinuar.isEnabled = false
+
+            check.setOnCheckedChangeListener { _, isChecked ->
+                btnContinuar.isEnabled = isChecked
+            }
+
+            btnContinuar.setOnClickListener {
+                dialog.dismiss()
+                user.put("politicas",true)
+                user.save()
+            }
+        }
 
 
         adapterTramites = CustomAdapter(listaTramites, requireContext()
