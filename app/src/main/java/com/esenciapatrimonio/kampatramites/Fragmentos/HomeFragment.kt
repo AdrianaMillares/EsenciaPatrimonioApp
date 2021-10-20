@@ -173,6 +173,7 @@ class HomeFragment : Fragment() {
             val newActivity = Intent(context, ViewMoreActivity::class.java)
             newActivity.putExtra("categoria", "Leyes")
             newActivity.putExtra("lista", listaLeyes)
+            newActivity.putExtra("imagenes", imgLey)
             (context as MainActivity?)!!.startActivity(newActivity)
         }
 
@@ -180,6 +181,7 @@ class HomeFragment : Fragment() {
             val newActivity = Intent(context, ViewMoreActivity::class.java)
             newActivity.putExtra("categoria", "Trámites")
             newActivity.putExtra("lista", listaTramites)
+            newActivity.putExtra("imagenes", imgTramite)
             (context as MainActivity?)!!.startActivity(newActivity)
         }
     }
@@ -224,9 +226,12 @@ class CustomAdapter(
          */
         override fun onClick(view: View) {
             val textView: TextView = view.findViewById(R.id.textView4)
+            val imageView: ImageView = view.findViewById(R.id.imageView)
             val strTramite = textView.text.toString()
+            val strRnd = imageView.contentDescription
             val intent = Intent(view.context, InformationActivity::class.java)
             intent.putExtra("nombreTramite", strTramite)
+            intent.putExtra("imagenes",strRnd)
             (view.context as MainActivity?)!!.startActivity(intent)
             onItemClicked(strTramite)
         }
@@ -259,15 +264,19 @@ class CustomAdapter(
             "a punto de obtener dataset y wardarlo en viewholder.textview.text"
         )
 
-        when (dataSet2[position]) {
-            1 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite1)
-            2 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite2)
-            3 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite3)
-            4 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite4)
-            5 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite5)
-            6 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite6)
-            7 -> viewHolder.imageView.setImageResource(R.drawable.imgtramite7)
-        }
+       val imagenRnd = when (dataSet2[position]) {
+            1 -> (R.drawable.imgtramite1)
+            2 -> (R.drawable.imgtramite2)
+            3 -> (R.drawable.imgtramite3)
+            4 -> (R.drawable.imgtramite4)
+            5 -> (R.drawable.imgtramite5)
+            6 -> (R.drawable.imgtramite6)
+            7 -> (R.drawable.imgtramite7)
+           else -> (R.drawable.imgtramite1)
+       }
+        viewHolder.imageView.setImageResource(imagenRnd)
+        viewHolder.imageView.contentDescription = dataSet2[position].toString()
+
         viewHolder.bind(dataSet[position].nombre.toString(), contexto)
         viewHolder.textView.text = dataSet[position].nombre.toString()
 

@@ -51,9 +51,12 @@ class ViewMoreActivity : AppCompatActivity() {
 
         val titulo: String
         val lista: ArrayList<Tramite> = ArrayList()
+        var imagenRnd: ArrayList<Int> = ArrayList()
         val list: ArrayList<String> = ArrayList()
         val intent = getIntent()
         val tvTituloVerMas: TextView = findViewById(R.id.tvTituloVerMas)
+
+        imagenRnd = intent.extras?.getIntegerArrayList("imagenes") as ArrayList<Int>
 
         // Recupera la categoría seleccionada
         titulo = intent.extras?.getString("categoria").toString();
@@ -90,7 +93,7 @@ class ViewMoreActivity : AppCompatActivity() {
 
         // Despliega los datos en pantalla
         tvTituloVerMas.text = titulo
-        val adapterViewMore: ViewMoreAdapter = ViewMoreAdapter(lista, this
+        val adapterViewMore: ViewMoreAdapter = ViewMoreAdapter(lista,imagenRnd, this
         ) { position -> onListItemClick(position) }
         val recyclerView: RecyclerView = findViewById(R.id.rvViewMore)
         val manager = GridLayoutManager(this, 2)
@@ -134,6 +137,7 @@ class ViewMoreActivity : AppCompatActivity() {
  */
 class ViewMoreAdapter(
     private val dataSet: ArrayList<Tramite>,
+    private val dataSet2: ArrayList<Int>,
     private val contexto: Context,
     private val onItemClicked: (strTramite: String) -> Unit
 ) :
@@ -143,6 +147,7 @@ class ViewMoreAdapter(
         private val onItemClicked: (strTramite: String) -> Unit
     ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val textView: TextView = view.findViewById(R.id.textView4)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
 
         init {
             view.setOnClickListener(this)
@@ -157,9 +162,11 @@ class ViewMoreAdapter(
         override fun onClick(view: View) {
             val textView: TextView = view.findViewById(R.id.textView4)
             val strTramite = textView.text.toString()
-
+            val imageView: ImageView = view.findViewById(R.id.imageView)
+            val strRnd = imageView.contentDescription
             val intent = Intent(view.context, InformationActivity::class.java)
             intent.putExtra("nombreTramite", strTramite)
+            intent.putExtra("imagenes",strRnd)
 
             (view.context as ViewMoreActivity?)!!.startActivity(intent)
             onItemClicked(strTramite)
@@ -192,6 +199,19 @@ class ViewMoreAdapter(
             "onbindviewholder",
             "a punto de obtener dataset y wardarlo en viewholder.textview.text"
         )
+
+        val imagenRnd = when (dataSet2[position]) {
+            1 -> (R.drawable.imgtramite1)
+            2 -> (R.drawable.imgtramite2)
+            3 -> (R.drawable.imgtramite3)
+            4 -> (R.drawable.imgtramite4)
+            5 -> (R.drawable.imgtramite5)
+            6 -> (R.drawable.imgtramite6)
+            7 -> (R.drawable.imgtramite7)
+            else -> (R.drawable.imgtramite1)
+        }
+        viewHolder.imageView.setImageResource(imagenRnd)
+        viewHolder.imageView.contentDescription = dataSet2[position].toString()
         viewHolder.bind(dataSet[position].nombre.toString(), contexto)
         viewHolder.textView.text = dataSet[position].nombre.toString()
     }

@@ -55,6 +55,8 @@ class InformationActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<*>
     private lateinit var btnCompartirInf: TextView
     private var nombreTramite = "Impermeabilizar"
+    private lateinit var imagenRnd: String
+    private lateinit var ivInfo: ImageView
 
     /**
      * Se ejecuta al crear la vista, despliega la interfaz
@@ -86,10 +88,26 @@ class InformationActivity : AppCompatActivity() {
         etDescripcion = findViewById(com.esenciapatrimonio.kampatramites.R.id.tvSubtitInf)
         ivArrowInf = findViewById(com.esenciapatrimonio.kampatramites.R.id.ivArrowInf)
         btnConsultarFormato = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnConsultarFormato)
+        ivInfo = findViewById(com.esenciapatrimonio.kampatramites.R.id.ivInformation)
+
 
         // Obtiene el nombre del trámite/ley previamente seleccionado
         val intent = intent
         nombreTramite = intent.extras?.getString("nombreTramite").toString()
+        imagenRnd = intent.extras?.getString("imagenes").toString()
+
+        val imagen= when (imagenRnd.toInt()) {
+            1 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite1)
+            2 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite2)
+            3 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite3)
+            4 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite4)
+            5 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite5)
+            6 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite6)
+            7 -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite7)
+            else -> (com.esenciapatrimonio.kampatramites.R.drawable.imgtramite1)
+        }
+        ivInfo.setImageResource(imagen)
+
 
         // Petición a la base de datos para encontrar la información
         val query: ParseQuery<Tramite> = ParseQuery.getQuery(Tramite::class.java)
