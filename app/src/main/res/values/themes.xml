@@ -18,10 +18,21 @@
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:linksClickable">@color/link_blue</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceMediumComponent.EscenciaPatrimonioTramites.Button</item>
+        <item name="textAppearanceButton">@style/TextAppearance.EscenciaPatrimonioTramites.Button</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.EscenciaPatrimonioTramites.SmallComponent</item>
     </style>
 
     <style name="ShapeAppearanceMediumComponent.EscenciaPatrimonioTramites.Button" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="TextAppearance.EscenciaPatrimonioTramites.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/raleway</item>
+        <item name="android:fontFamily">@font/raleway</item>
+    </style>
+    <style name="ShapeAppearance.EscenciaPatrimonioTramites.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
     </style>
 </resources>
