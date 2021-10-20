@@ -58,15 +58,15 @@
 
         <TextView
             android:id="@+id/tvTituloInf"
-            android:layout_width="wrap_content"
+            android:layout_width="328dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="57dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="48dp"
             android:fontFamily="@font/raleway_bold"
             android:text="Título"
             android:textAlignment="textStart"
             android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.554"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivInformation" />
 

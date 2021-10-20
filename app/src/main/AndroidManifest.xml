@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.escenciapatrimoniotramites" >
+    package="com.esenciapatrimonio.kampatramites" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,7 @@
     </queries>
 
     <application
-        android:name=".ParseApplication"
+        android:name="com.esenciapatrimonio.kampatramites.ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ep_appicon96"
         android:label="@string/app_name"
@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscenciaPatrimonioTramites" >
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -34,19 +34,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ViewMoreActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.ViewMoreActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.RegisterActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.InformationActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.InformationActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.ConnectionErrorActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.ConnectionErrorActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.MainActivity"
             android:exported="true" />
 
         <meta-data
@@ -63,7 +63,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name="com.esenciapatrimonio.kampatramites.Activities.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
