@@ -24,10 +24,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:fontFamily="@font/muli"
+                android:fontFamily="@font/montserrat"
                 android:text="Municipio"
-                android:textIsSelectable="true"
                 android:textAlignment="textStart"
+                android:textIsSelectable="true"
+                android:textColor="@color/ep_pink"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
