@@ -72,6 +72,8 @@ class SearchFragment : Fragment() {
         listView.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             val newActivity = Intent(context, InformationActivity::class.java)
             newActivity.putExtra("nombreTramite", listView.getItemAtPosition(position).toString())
+            newActivity.putExtra("imagenes",((1..7).random()).toString())
+
             ( context as MainActivity?)!!.startActivity(newActivity)
         }
 
