@@ -17,8 +17,13 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:background="@drawable/bg_bottom_navigation"
+        android:elevation="2dp"
+        android:foregroundGravity="bottom"
+        app:itemIconSize="30dp"
         app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>
