@@ -4,6 +4,7 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -106,60 +107,66 @@
             android:id="@+id/tvComent"
             android:layout_width="322dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="57dp"
+
+            android:layout_marginTop="44dp"
+
             android:fontFamily="@font/raleway_bold"
             android:text="Comentarios"
             android:textAlignment="textStart"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnConsultarFormato" />
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="349dp"
+            android:layout_width="320dp"
             android:layout_height="200dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/edit_text_border"
             android:divider="@color/light_gray"
             android:dividerHeight="0dp"
             android:horizontalSpacing="6dp"
             android:nestedScrollingEnabled="true"
             android:numColumns="2"
-            android:background="@drawable/edit_text_border"
             android:verticalSpacing="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvComent" />
 
         <EditText
             android:id="@+id/etComentario"
-            android:layout_width="258dp"
-            android:layout_height="50dp"
+            android:layout_width="248dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="112dp"
             android:layout_marginBottom="11dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:fontFamily="@font/raleway"
-            android:hint="Escribe tu comentario"
+            android:hint="Escribe tu comentario            "
             android:inputType="textEmailAddress"
             android:paddingHorizontal="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listView"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/btnComentar"
             android:layout_width="89dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="23dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.285"
             app:layout_constraintStart_toEndOf="@+id/etComentario"
+            app:layout_constraintTop_toBottomOf="@+id/listView"
             app:srcCompat="@drawable/ic_baseline_send_24" />
 
 
