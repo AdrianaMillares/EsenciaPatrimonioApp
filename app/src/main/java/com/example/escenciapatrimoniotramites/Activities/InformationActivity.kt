@@ -80,6 +80,7 @@ class InformationActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(com.example.escenciapatrimoniotramites.R.layout.activity_information)
+
         btnPublish = findViewById(com.example.escenciapatrimoniotramites.R.id.btnComentar)
         btnCompartirInf = findViewById(com.example.escenciapatrimoniotramites.R.id.btnCompartirInf)
         etComment = findViewById(com.example.escenciapatrimoniotramites.R.id.etComentario)
