@@ -16,5 +16,6 @@
         <item name="background">@color/ep_white</item>
         <item name="android:textColor">@color/ep_black</item>
         <item name="android:textColorHint">@color/light_gray</item>
+        <item name="android:linksClickable">@color/link_blue</item>
     </style>
 </resources>

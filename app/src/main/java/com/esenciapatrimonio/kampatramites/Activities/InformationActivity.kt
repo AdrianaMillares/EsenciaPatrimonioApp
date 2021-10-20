@@ -78,7 +78,7 @@ class InformationActivity : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         super.onCreate(savedInstanceState)
-        setContentView(com.esenciapatrimonio.kampatramites.R.layout.activity_information)
+         setContentView(com.esenciapatrimonio.kampatramites.R.layout.activity_information)
         btnPublish = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnComentar)
         btnCompartirInf = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnCompartirInf)
         etComment = findViewById(com.esenciapatrimonio.kampatramites.R.id.etComentario)
