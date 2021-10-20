@@ -15,7 +15,7 @@
     <color name="ep_blue">#15CDCD</color>
     <color name="ep_green">#B9C442</color>
     <color name="light_gray">#b1b1b1</color>
-    <color name="light_gray_transparent">#4d000000</color>
+    <color name="light_gray_transparent">#bfd6d6d6</color>
     <color name="link_blue">#2F1FEF</color>
     <color name="link_blue_darkmode">#8ab4f8</color>
 </resources>

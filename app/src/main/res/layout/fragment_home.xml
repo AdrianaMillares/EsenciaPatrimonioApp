@@ -53,7 +53,6 @@
                 android:layout_width="169dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ivEPMain"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="222dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Leyes"
