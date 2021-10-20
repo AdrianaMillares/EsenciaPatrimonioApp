@@ -9,18 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.esenciapatrimonio.kampatramites.Activities.InformationActivity
-import com.esenciapatrimonio.kampatramites.Activities.MainActivity
-import com.esenciapatrimonio.kampatramites.Activities.ViewMoreActivity
+import com.esenciapatrimonio.kampatramites.Activities.*
 import com.esenciapatrimonio.kampatramites.Modelos.Tramite
 import com.esenciapatrimonio.kampatramites.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.parse.Parse
 import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
@@ -31,6 +30,8 @@ import com.parse.ParseUser
  */
 val listaTramites: ArrayList<Tramite> = ArrayList()
 val listaLeyes: ArrayList<Tramite> = ArrayList()
+val imgTramite: ArrayList<Int> = ArrayList()
+val imgLey: ArrayList<Int> = ArrayList()
 
 /**
  * Despliega la página de inicio donde se puede ver una vista de leyes y tramites
@@ -53,6 +54,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapterTramites: CustomAdapter
     private lateinit var tvVerTramites: TextView
     private lateinit var tvVerLeyes: TextView
+
     var user: ParseUser = ParseUser.getCurrentUser()
     var politicas: Boolean = user.getBoolean("politicas")
 
@@ -113,10 +115,9 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-        adapterTramites = CustomAdapter(listaTramites, requireContext()
+        adapterTramites = CustomAdapter(listaTramites,imgTramite, requireContext()
         ) { position -> onListItemClick(position) }
-        adapterLeyes = CustomAdapter(listaLeyes, requireContext()
+        adapterLeyes = CustomAdapter(listaLeyes,imgLey, requireContext()
         ) { position -> onListItemClick(position) }
 
         // Se realiza una consulta a la base de datos para conseguir la información de [Tramite]
@@ -130,8 +131,10 @@ class HomeFragment : Fragment() {
                     if (tramite.nombre.toString() !in list) {
                         if (tramite.esTramite == true) {
                             listaTramites.add(tramite)
+                            imgTramite.add(randomImg())
                         } else {
                             listaLeyes.add(tramite)
+                            imgLey.add(randomImg())
                         }
                         list.add(tramite.nombre.toString())
                         Log.i("tramite", "$tramite.nombre.toString()")
@@ -182,6 +185,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun randomImg(): Int {
+        return (0..10).random()
+    }
+
     private fun onListItemClick(strTramite: String) {}
 }
 
@@ -193,6 +200,7 @@ class HomeFragment : Fragment() {
  */
 class CustomAdapter(
     private val dataSet: ArrayList<Tramite>,
+    private val dataSet2: ArrayList<Int>,
     private val contexto: Context,
     private val onItemClicked: (strTramite: String) -> Unit
 ) :
@@ -202,6 +210,8 @@ class CustomAdapter(
         private val onItemClicked: (strTramite: String) -> Unit
     ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val textView: TextView = view.findViewById(R.id.textView4)
+        var imageView: ImageView = view.findViewById(R.id.imageView)
+
 
         init {
             view.setOnClickListener(this)
@@ -249,9 +259,12 @@ class CustomAdapter(
             "onbindviewholder",
             "a punto de obtener dataset y wardarlo en viewholder.textview.text"
         )
+
         viewHolder.bind(dataSet[position].nombre.toString(), contexto)
         viewHolder.textView.text = dataSet[position].nombre.toString()
+
     }
 
     override fun getItemCount() = dataSet.size
+
 }
