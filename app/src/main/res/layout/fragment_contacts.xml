@@ -48,6 +48,7 @@
                 android:fontFamily="@font/raleway_medium"
                 android:text="CENTRO INAH QUERÉTARO"
                 android:textAlignment="textStart"
+                android:textColor="@color/ep_pink"
                 android:textIsSelectable="true"
                 android:textSize="20dp" />
 
