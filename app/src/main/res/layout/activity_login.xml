@@ -81,7 +81,7 @@
                 <EditText
                     android:id="@+id/etUserName"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/edit_text_border"
                     android:ems="10"
@@ -97,7 +97,7 @@
                 <EditText
                     android:id="@+id/etPassword"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/edit_text_border"
                     android:ems="10"
