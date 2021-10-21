@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Fragmentos.SearchFragment"
-    android:background="@drawable/search_view_bg">
+    android:background="?background">
 
     <ListView
         android:id="@+id/listView"
