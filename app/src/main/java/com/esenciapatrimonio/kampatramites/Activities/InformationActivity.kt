@@ -40,8 +40,8 @@ import com.parse.ParseUser
 class InformationActivity : AppCompatActivity() {
 
     val TAG = "InformationActivity"
-    private lateinit var etComment: EditText
-    private lateinit var btnPublish: ImageView
+   // private lateinit var etComment: EditText
+  //  private lateinit var btnPublish: ImageView
     private lateinit var btnConsultarFormato: Button
     private lateinit var etTitulo: TextView
     private lateinit var etDescripcion: TextView
@@ -50,7 +50,7 @@ class InformationActivity : AppCompatActivity() {
     private lateinit var TramiteParseObject: ParseObject
     private lateinit var tramiteActualUrl: String
     private lateinit var ivArrowInf: ImageView
-    private lateinit var listView: ListView
+   // private lateinit var listView: ListView
     private lateinit var list: ArrayList<String>
     private lateinit var adapter: ArrayAdapter<*>
     private lateinit var btnCompartirInf: TextView
@@ -81,9 +81,9 @@ class InformationActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
          setContentView(com.esenciapatrimonio.kampatramites.R.layout.activity_information)
-        btnPublish = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnComentar)
+       // btnPublish = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnComentar)
         btnCompartirInf = findViewById(com.esenciapatrimonio.kampatramites.R.id.btnCompartirInf)
-        etComment = findViewById(com.esenciapatrimonio.kampatramites.R.id.etComentario)
+      //  etComment = findViewById(com.esenciapatrimonio.kampatramites.R.id.etComentario)
         etTitulo = findViewById(com.esenciapatrimonio.kampatramites.R.id.tvTituloInf)
         etDescripcion = findViewById(com.esenciapatrimonio.kampatramites.R.id.tvSubtitInf)
         ivArrowInf = findViewById(com.esenciapatrimonio.kampatramites.R.id.ivArrowInf)
@@ -163,13 +163,13 @@ class InformationActivity : AppCompatActivity() {
         }
 
         // Publica los comentarios
-        btnPublish.setOnClickListener {
+    /*    btnPublish.setOnClickListener {
             Log.i(TAG, "onClick login button")
             val comentario = etComment.text.toString()
             val usuario = ParseUser.getCurrentUser().username.toString()
             Log.i(TAG, "username: $usuario comentario: $comentario")
             saveNewComment(comentario, usuario, TramiteParseObject)
-        }
+        }*/
 
         list = ArrayList()
 
@@ -188,13 +188,15 @@ class InformationActivity : AppCompatActivity() {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-
+/*
         // Despliega los comentarios
         listView = findViewById(com.esenciapatrimonio.kampatramites.R.id.listView)
         val appContext = this
         adapter = ArrayAdapter<String>(appContext, R.layout.simple_list_item_1, list)
         listView.adapter = adapter
     }
+
+
 
     /**
      * Inserta los comentarios nuevos en la base de datos
@@ -220,12 +222,12 @@ class InformationActivity : AppCompatActivity() {
         comentar.saveInBackground { error ->
             if (error == null) {
                 Toast.makeText(this, "¡Tu comentario ha sido publicado!", Toast.LENGTH_SHORT).show()
-                etComment.text.clear()
+            //    etComment.text.clear()
                 list = CommentUtils.commentBoxFormat(list, usuario, comentario)
                 adapter.notifyDataSetChanged()
                 Log.d("Salida", "Guardado Correctamente")
             }
-        }
+        }*/
     }
 }
 
