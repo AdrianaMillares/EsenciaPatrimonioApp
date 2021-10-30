@@ -4,6 +4,6 @@ Application developed for Esencia Patrimonio A.C. that allows to know about proc
 
    Worked with:
        [pau-cardoso](https://github.com/pau-cardoso)
-       JulioGmz89
-       Cutberto
-       A01552594 Diego Padilla 
+       [JulioGmz89](https://github.com/JulioGmz89)
+       [Cutberto](https://github.com/Cutberto)
+       [Diego Padilla](https://github.com/A01552594)
