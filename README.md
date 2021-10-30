@@ -3,7 +3,7 @@
 Application developed for Esencia Patrimonio A.C. that allows to know about procedures and laws for the restoration of heritage in Querétaro.
 
    Worked with:
-       * [pau-cardoso](https://github.com/pau-cardoso)
-       * [JulioGmz89](https://github.com/JulioGmz89)
-       * [Cutberto](https://github.com/Cutberto)
-       * [Diego Padilla](https://github.com/A01552594)
+   * [pau-cardoso](https://github.com/pau-cardoso)
+   * [JulioGmz89](https://github.com/JulioGmz89)
+   * [Cutberto](https://github.com/Cutberto)
+   * [Diego Padilla](https://github.com/A01552594)
